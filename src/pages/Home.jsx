@@ -1,21 +1,70 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase"; // Adjust path to your Firebase config
 
 const Home = () => {
-  const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
+  const [creators, setCreators] = useState([]); // State to store fetched creators
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(""); // Error state
+
+  // Fetch creators from Firestore
+  useEffect(() => {
+    const fetchCreators = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "profiles"));
+        const creatorsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCreators(creatorsData);
+      } catch (error) {
+        console.error("Error fetching creators:", error);
+        setError("Failed to load creators. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCreators();
+  }, []);
 
   return (
     <div className="container">
       <h1>Welcome to Crypto Tipping</h1>
       <p>Support your favorite creators with cryptocurrency tips!</p>
-      <Link to="/register">Register as a Creator</Link>
-      <ul>
-        {profiles.map((profile, index) => (
-          <li key={index}>
-            <Link to={`/profile/${profile.username}`}>{profile.username}</Link>{" "}
-            - {profile.bio}
-          </li>
-        ))}
-      </ul>
+      <Link to="/register" className="register-link">
+        Register as a Creator
+      </Link>
+
+      <div style={{ marginTop: "20px" }}>
+        <h2>Featured Creators</h2>
+        {loading ? (
+          <p>Loading creators...</p>
+        ) : error ? (
+          <p className="error">{error}</p>
+        ) : creators.length === 0 ? (
+          <p>No creators found.</p>
+        ) : (
+          <ul className="creators-list">
+            {creators.map((creator) => (
+              <li key={creator.id} className="creator-card">
+                <Link
+                  to={`/profile/${creator.username}`}
+                  className="creator-link"
+                >
+                  <h3>{creator.username}</h3>
+                  <p>{creator.bio}</p>
+                  <p>
+                    <strong>Wallet:</strong> {creator.wallet}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
