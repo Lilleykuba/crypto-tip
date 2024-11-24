@@ -163,3 +163,17 @@ ul li a {
 ul li a:hover {
   text-decoration: underline;
 }
+
+.error {
+  color: #d32f2f; /* Red error color */
+  margin-top: 10px;
+}
+
+.error a {
+  color: #ff5252;
+  text-decoration: none;
+}
+
+.error a:hover {
+  text-decoration: underline;
+}
