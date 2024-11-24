@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase";
 
-const Register = () => {
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("");
-  const [wallet, setWallet] = useState("");
-  const navigate = useNavigate();
+const saveProfile = async (profile) => {
+  try {
+    await addDoc(collection(db, "profiles"), profile);
+    console.log("Profile saved!");
+  } catch (error) {
+    console.error("Error saving profile:", error);
+  }
+};
 
-  const handleRegister = () => {
-    // Save user data to localStorage (for simplicity)
-    const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
-    profiles.push({ username, bio, wallet });
-    localStorage.setItem("profiles", JSON.stringify(profiles));
-
-    // Redirect to the user's profile
-    navigate(`/profile/${username}`);
+const handleRegister = () => {
+  const newProfile = {
+    username,
+    bio,
+    wallet,
   };
+  saveProfile(newProfile);
+};
+
 
   return (
     <div className="container">

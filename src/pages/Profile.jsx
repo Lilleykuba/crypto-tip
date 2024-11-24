@@ -2,22 +2,51 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase"; // Adjust path to your Firebase config
 
 const Profile = () => {
   const { username } = useParams();
-  const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
-  const user = profiles.find((profile) => profile.username === username);
-
+  const [user, setUser] = useState(null); // State to store fetched user
+  const [loading, setLoading] = useState(true); // Loading state for profile fetch
   const [amount, setAmount] = useState("");
   const [status, setStatus] = useState("");
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [totalTips, setTotalTips] = useState(0);
   const [transactionCount, setTransactionCount] = useState(0);
   const [topSupporters, setTopSupporters] = useState([]);
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false);
 
-  // Handle case where profile is not found
+  // Fetch user profile from Firestore
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+        const querySnapshot = await getDocs(collection(db, "profiles"));
+        const profilesData = querySnapshot.docs.map((doc) => doc.data());
+        const matchedUser = profilesData.find(
+          (profile) => profile.username === username
+        );
+        setUser(matchedUser || null);
+      } catch (error) {
+        console.error("Error fetching user from Firestore:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [username]);
+
+  // Handle case where profile is not found or loading
+  if (loading) {
+    return (
+      <div className="container">
+        <h1>Loading profile...</h1>
+      </div>
+    );
+  }
+
   if (!user) {
     return (
       <div className="container">
@@ -56,73 +85,9 @@ const Profile = () => {
     }
   };
 
-  // Fetch transactions from Etherscan
-  const fetchTransactions = async () => {
-    if (!ethers.utils.isAddress(user.wallet)) {
-      setStatus("Invalid wallet address.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://api.etherscan.io/api?module=account&action=txlist&address=${user.wallet}&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_API_KEY}`
-      );
-      const data = await response.json();
-      if (data.status === "1") {
-        setTransactions(data.result);
-        calculateAnalytics(data.result);
-      } else {
-        setStatus("Failed to fetch transaction history.");
-      }
-    } catch (error) {
-      console.error("Error fetching transactions:", error);
-      setStatus("Error fetching transactions.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Calculate analytics from transactions
-  const calculateAnalytics = (txList) => {
-    let total = 0;
-    const supporterMap = {};
-
-    txList.forEach((tx) => {
-      if (tx.to.toLowerCase() === user.wallet.toLowerCase()) {
-        const valueInEth = parseFloat(tx.value) / 10 ** 18;
-        total += valueInEth;
-
-        if (supporterMap[tx.from]) {
-          supporterMap[tx.from] += valueInEth;
-        } else {
-          supporterMap[tx.from] = valueInEth;
-        }
-      }
-    });
-
-    setTotalTips(total);
-    setTransactionCount(
-      txList.filter((tx) => tx.to.toLowerCase() === user.wallet.toLowerCase())
-        .length
-    );
-
-    const sortedSupporters = Object.entries(supporterMap)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([address, amount]) => ({ address, amount }));
-
-    setTopSupporters(sortedSupporters);
-  };
-
-  // Detect MetaMask and fetch transactions on mount
   useEffect(() => {
     setMetaMaskAvailable(typeof window.ethereum !== "undefined");
-    if (typeof window.ethereum === "undefined") {
-      console.error("MetaMask is not available.");
-    }
-    fetchTransactions();
-  }, [user.wallet]);
+  }, []);
 
   return (
     <div className="container">
@@ -159,72 +124,6 @@ const Profile = () => {
             {status}
           </div>
         )}
-
-        {!metaMaskAvailable && (
-          <p className="error">
-            MetaMask is not installed.{" "}
-            <a
-              href="https://metamask.io/download/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Install MetaMask here.
-            </a>
-          </p>
-        )}
-      </div>
-
-      <div className="card" style={{ marginTop: "20px" }}>
-        <h3>Tipping History</h3>
-        {loading && <p>Loading transactions...</p>}
-        {transactions.length === 0 && !loading && (
-          <p>No transactions found for this wallet.</p>
-        )}
-        <ul>
-          {transactions.slice(0, 5).map((tx, index) => (
-            <li key={index}>
-              <p>
-                <strong>From:</strong> {tx.from}
-              </p>
-              <p>
-                <strong>Amount:</strong> {parseFloat(tx.value) / 10 ** 18} ETH
-              </p>
-              <p>
-                <strong>Tx Hash:</strong>{" "}
-                <a
-                  href={`https://etherscan.io/tx/${tx.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {tx.hash}
-                </a>
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="card" style={{ marginTop: "20px" }}>
-        <h3>Analytics</h3>
-        <p>
-          <strong>Total Tips:</strong> {totalTips.toFixed(4)} ETH
-        </p>
-        <p>
-          <strong>Number of Transactions:</strong> {transactionCount}
-        </p>
-        <h4>Top Supporters</h4>
-        <ul>
-          {topSupporters.map((supporter, index) => (
-            <li key={index}>
-              <p>
-                <strong>Address:</strong> {supporter.address}
-              </p>
-              <p>
-                <strong>Amount:</strong> {supporter.amount.toFixed(4)} ETH
-              </p>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
