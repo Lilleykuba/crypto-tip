@@ -17,6 +17,7 @@ const Profile = () => {
   const [topSupporters, setTopSupporters] = useState([]);
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false);
 
+  // Handle case where profile is not found
   if (!user) {
     return (
       <div className="container">
@@ -25,11 +26,20 @@ const Profile = () => {
     );
   }
 
+  // Function to send tips
   const sendTip = async () => {
     if (!metaMaskAvailable) {
       setStatus(
         "MetaMask is not installed! Please install MetaMask to send tips."
       );
+      return;
+    }
+    if (!ethers.utils.isAddress(user.wallet)) {
+      setStatus("Invalid wallet address.");
+      return;
+    }
+    if (!amount || parseFloat(amount) <= 0) {
+      setStatus("Enter a valid amount greater than 0.");
       return;
     }
 
@@ -46,7 +56,13 @@ const Profile = () => {
     }
   };
 
+  // Fetch transactions from Etherscan
   const fetchTransactions = async () => {
+    if (!ethers.utils.isAddress(user.wallet)) {
+      setStatus("Invalid wallet address.");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(
@@ -67,6 +83,7 @@ const Profile = () => {
     }
   };
 
+  // Calculate analytics from transactions
   const calculateAnalytics = (txList) => {
     let total = 0;
     const supporterMap = {};
@@ -98,8 +115,12 @@ const Profile = () => {
     setTopSupporters(sortedSupporters);
   };
 
+  // Detect MetaMask and fetch transactions on mount
   useEffect(() => {
     setMetaMaskAvailable(typeof window.ethereum !== "undefined");
+    if (typeof window.ethereum === "undefined") {
+      console.error("MetaMask is not available.");
+    }
     fetchTransactions();
   }, [user.wallet]);
 
@@ -121,14 +142,19 @@ const Profile = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <button onClick={sendTip} disabled={!metaMaskAvailable}>
+          <button
+            onClick={sendTip}
+            disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
+          >
             {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
           </button>
         </div>
 
         {status && (
           <div
-            className={`status ${status.startsWith("Error") ? "error" : ""}`}
+            className={`status ${
+              status.startsWith("Error") ? "error" : "success"
+            }`}
           >
             {status}
           </div>
