@@ -45,7 +45,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.etherscan.io/api?module=account&action=txlist&address=${user.wallet}&startblock=0&endblock=99999999&sort=desc&apikey=SSB9FU8TSMAR4FH69JBBGD1GQ412RTR36G`
+        `https://api.etherscan.io/api?module=account&action=txlist&address=${user.wallet}&startblock=0&endblock=99999999&sort=desc&apikey=${process.env.REACT_APP_ETHERSCAN_API_KEY}`
       );
       const data = await response.json();
       if (data.status === "1") {
