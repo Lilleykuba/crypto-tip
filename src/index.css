@@ -7,79 +7,124 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Inter", Arial, sans-serif;
-  background-color: #121212; /* Dark mode background */
-  color: #e0e0e0; /* Light text */
+  background: linear-gradient(
+    135deg,
+    #121212,
+    #1a1a1a
+  ); /* Subtle gradient for background */
+  color: #e0e0e0;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* Headings */
 h1,
 h2,
 h3 {
-  color: #ffffff; /* Brighter text for headings */
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle glow */
 }
 
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Links */
 a {
-  color: #00ffcc; /* Neon link color */
+  color: #00ffcc;
   text-decoration: none;
-  position: relative; /* Required for glow effect */
-  transition: color 0.3s ease; /* Smooth color change */
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 a:hover {
-  color: #00ffff; /* Brighter neon glow */
-  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; /* Glow effect */
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
 }
 
+/* Buttons */
 button {
-  background-color: #1e88e5; /* Vibrant blue */
+  background: linear-gradient(135deg, #1e88e5, #2196f3); /* Gradient effect */
   color: white;
   border: none;
-  font-family: "Inter", Arial, sans-serif;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-  background-color: #1565c0; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly increase size */
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(21, 101, 192, 0.6);
 }
 
+/* Inputs and Textareas */
 input,
 textarea {
-  background-color: #1d1d1d; /* Dark input background */
-  color: #e0e0e0; /* Light text */
+  background-color: #1d1d1d;
+  color: #e0e0e0;
   border: 1px solid #333333;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   width: 100%;
   margin-bottom: 15px;
+  font-size: 1rem;
   box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #00ffcc; /* Highlight color */
+  border-color: #00ffcc;
+  box-shadow: 0px 0px 8px #00ffcc;
 }
 
+/* Containers */
 .container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 20px;
 }
 
+/* Cards */
 .card {
-  background-color: #1d1d1d; /* Dark card background */
-  padding: 20px;
+  background: linear-gradient(
+    145deg,
+    #1f1f1f,
+    #232323
+  ); /* Gradient effect for depth */
+  border: 1px solid #333;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+  padding: 20px;
   margin-bottom: 20px;
-  opacity: 0; /* Start invisible */
-  transform: translateY(20px); /* Start slightly below */
-  animation: fadeIn 0.8s ease-in-out forwards; /* Apply animation */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.8s ease-in-out forwards;
+  transform-origin: top;
+}
+
+/* Glow on hover */
+.card:hover {
+  box-shadow: 0px 10px 25px rgba(0, 255, 204, 0.3);
 }
 
 /* Keyframes for fade-in effect */
@@ -94,40 +139,66 @@ textarea:focus {
   }
 }
 
+/* Status Messages */
 .status {
-  background-color: #2e7d32; /* Success green */
-  color: white;
-  padding: 10px;
+  padding: 12px 20px;
   border-radius: 5px;
-  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 15px;
   display: inline-block;
 }
 
+.status.success {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(46, 125, 50, 0.5);
+}
+
 .status.error {
-  background-color: #d32f2f; /* Error red */
-}
-h1 {
-  font-size: 2rem; /* Adjust as needed */
-}
-
-h2 {
-  font-size: 1.5rem;
+  background: linear-gradient(135deg, #d32f2f, #f44336);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(211, 47, 47, 0.5);
 }
 
-h3 {
-  font-size: 1.25rem;
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.8;
+ul li {
+  background: linear-gradient(145deg, #1f1f1f, #232323);
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-button {
-  font-size: 1rem;
+ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0, 255, 204, 0.3);
+}
+
+ul li a {
+  color: #00ffcc;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+  color: #00ffff;
+}
+
+/* QR Code Animation */
+.qr-code {
+  transition: transform 0.2s ease;
 }
 
 .qr-code:hover {
+  transform: scale(1.1);
   animation: bounce 0.6s infinite;
 }
 
@@ -138,34 +209,14 @@ button {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px); /* Move up slightly */
+    transform: translateY(-10px);
   }
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  background-color: #1d1d1d;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
-}
-
-ul li a {
-  color: #00ffcc;
-  text-decoration: none;
-}
-
-ul li a:hover {
-  text-decoration: underline;
-}
-
+/* Error Messages */
 .error {
-  color: #d32f2f; /* Red error color */
+  color: #d32f2f;
+  font-weight: bold;
   margin-top: 10px;
 }
 
@@ -176,4 +227,5 @@ ul li a:hover {
 
 .error a:hover {
   text-decoration: underline;
+  color: #ff7575;
 }
