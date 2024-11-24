@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase"; // Adjust the path to your Firebase config
+import { db } from "../firebase"; // Adjust the path if needed
 
 const Register = () => {
   const [username, setUsername] = useState("");
