@@ -19,24 +19,28 @@ const Profile = () => {
 
   // Fetch user profile from Firestore
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchProfile = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
         const querySnapshot = await getDocs(collection(db, "profiles"));
         const profilesData = querySnapshot.docs.map((doc) => doc.data());
         const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
-        setUser(matchedUser || null);
+        setUser(matchedUser);
+        if (!matchedUser) {
+          setStatus("Profile not found");
+        }
       } catch (error) {
-        console.error("Error fetching user from Firestore:", error);
+        console.error("Error fetching profile:", error);
+        setStatus("Error fetching profile data.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUser();
-  }, [username]);
+    if (username) fetchProfile();
+  }, [username]); // Add username to dependency array
 
   // Handle case where profile is not found or loading
   if (loading) {
