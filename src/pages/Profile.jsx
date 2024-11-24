@@ -22,8 +22,10 @@ const Profile = () => {
   }
 
   const sendTip = async () => {
-    if (!window.ethereum) {
-      setStatus("MetaMask is not installed!");
+    if (!metaMaskAvailable) {
+      setStatus(
+        "MetaMask is not installed! Please install MetaMask to send tips."
+      );
       return;
     }
 
@@ -39,6 +41,11 @@ const Profile = () => {
       setStatus(`Error: ${error.message}`);
     }
   };
+
+  useEffect(() => {
+    // Check if MetaMask is installed
+    setMetaMaskAvailable(typeof window.ethereum !== "undefined");
+  }, []);
 
   // Fetch Transaction History from Etherscan API
   const fetchTransactions = async () => {
@@ -83,7 +90,9 @@ const Profile = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <button onClick={sendTip}>Send Tip</button>
+          <button onClick={sendTip} disabled={!metaMaskAvailable}>
+            {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
+          </button>
         </div>
 
         {status && (
@@ -92,6 +101,19 @@ const Profile = () => {
           >
             {status}
           </div>
+        )}
+
+        {!metaMaskAvailable && (
+          <p className="error">
+            MetaMask is not installed.{" "}
+            <a
+              href="https://metamask.io/download/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Install MetaMask here.
+            </a>
+          </p>
         )}
       </div>
 
