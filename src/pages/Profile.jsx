@@ -12,6 +12,10 @@ const Profile = () => {
   const [status, setStatus] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [totalTips, setTotalTips] = useState(0);
+  const [transactionCount, setTransactionCount] = useState(0);
+  const [topSupporters, setTopSupporters] = useState([]);
+  const [metaMaskAvailable, setMetaMaskAvailable] = useState(false);
 
   if (!user) {
     return (
@@ -42,12 +46,6 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    // Check if MetaMask is installed
-    setMetaMaskAvailable(typeof window.ethereum !== "undefined");
-  }, []);
-
-  // Fetch Transaction History from Etherscan API
   const fetchTransactions = async () => {
     setLoading(true);
     try {
@@ -57,6 +55,7 @@ const Profile = () => {
       const data = await response.json();
       if (data.status === "1") {
         setTransactions(data.result);
+        calculateAnalytics(data.result);
       } else {
         setStatus("Failed to fetch transaction history.");
       }
@@ -68,7 +67,39 @@ const Profile = () => {
     }
   };
 
+  const calculateAnalytics = (txList) => {
+    let total = 0;
+    const supporterMap = {};
+
+    txList.forEach((tx) => {
+      if (tx.to.toLowerCase() === user.wallet.toLowerCase()) {
+        const valueInEth = parseFloat(tx.value) / 10 ** 18;
+        total += valueInEth;
+
+        if (supporterMap[tx.from]) {
+          supporterMap[tx.from] += valueInEth;
+        } else {
+          supporterMap[tx.from] = valueInEth;
+        }
+      }
+    });
+
+    setTotalTips(total);
+    setTransactionCount(
+      txList.filter((tx) => tx.to.toLowerCase() === user.wallet.toLowerCase())
+        .length
+    );
+
+    const sortedSupporters = Object.entries(supporterMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([address, amount]) => ({ address, amount }));
+
+    setTopSupporters(sortedSupporters);
+  };
+
   useEffect(() => {
+    setMetaMaskAvailable(typeof window.ethereum !== "undefined");
     fetchTransactions();
   }, [user.wallet]);
 
@@ -141,6 +172,29 @@ const Profile = () => {
                 >
                   {tx.hash}
                 </a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="card" style={{ marginTop: "20px" }}>
+        <h3>Analytics</h3>
+        <p>
+          <strong>Total Tips:</strong> {totalTips.toFixed(4)} ETH
+        </p>
+        <p>
+          <strong>Number of Transactions:</strong> {transactionCount}
+        </p>
+        <h4>Top Supporters</h4>
+        <ul>
+          {topSupporters.map((supporter, index) => (
+            <li key={index}>
+              <p>
+                <strong>Address:</strong> {supporter.address}
+              </p>
+              <p>
+                <strong>Amount:</strong> {supporter.amount.toFixed(4)} ETH
               </p>
             </li>
           ))}
