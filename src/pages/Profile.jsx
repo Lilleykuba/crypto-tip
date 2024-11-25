@@ -16,16 +16,20 @@ import {
 import { toast } from "react-toastify";
 
 <Helmet>
-  <title>{user.username} - Profile</title>
-  <meta
-    name="description"
-    content={`Support ${user.username} by tipping with crypto.`}
-  />
-  <meta property="og:title" content={`${user.username}'s Profile`} />
-  <meta
-    property="og:description"
-    content={`Help ${user.username} by tipping ETH.`}
-  />
+  <title>{user ? `${user.username} - Profile` : "Loading Profile..."}</title>
+  {user && (
+    <>
+      <meta
+        name="description"
+        content={`Support ${user.username} by tipping with crypto.`}
+      />
+      <meta property="og:title" content={`${user.username}'s Profile`} />
+      <meta
+        property="og:description"
+        content={`Help ${user.username} by tipping ETH.`}
+      />
+    </>
+  )}
 </Helmet>;
 
 const Profile = () => {
