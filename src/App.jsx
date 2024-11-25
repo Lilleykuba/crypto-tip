@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from ".components/ThemeToggle";
 
 function App() {
   return (

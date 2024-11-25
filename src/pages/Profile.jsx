@@ -5,7 +5,8 @@ import { ethers } from "ethers";
 import { isAddress } from "ethers";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from ".components/ThemeToggle";
+import Loader from ".components/Loader";
 
 const Profile = () => {
   const { username } = useParams();
