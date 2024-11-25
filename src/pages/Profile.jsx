@@ -40,7 +40,7 @@ const Profile = () => {
           ...doc.data(),
         }));
         const matchedUser = profilesData.find(
-          (profile) => profile.username === username
+          (user) => user.username === username
         );
 
         if (!matchedUser) {
