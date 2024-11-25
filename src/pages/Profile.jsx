@@ -27,10 +27,10 @@ const Profile = () => {
         const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
-        setUser(matchedUser);
-        if (!matchedUser) {
-          setStatus("Profile not found");
+        if (!matchedUser || !matchedUser.wallet) {
+          setStatus("Profile not found or wallet missing.");
         }
+        setUser(matchedUser);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setStatus("Error fetching profile data.");
@@ -138,6 +138,11 @@ const Profile = () => {
 
       await window.ethereum.request({ method: "eth_requestAccounts" }); // Request MetaMask connection
 
+      if (!user || !user.wallet) {
+        setStatus("Wallet address is missing or invalid.");
+        return;
+      }
+
       if (!ethers.utils.isAddress(user.wallet)) {
         setStatus("Invalid wallet address.");
         return;
@@ -171,7 +176,11 @@ const Profile = () => {
         <p>
           <strong>Wallet Address:</strong> {user.wallet}
         </p>
-        <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
+        {user && user.wallet ? (
+          <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
+        ) : (
+          <p>Wallet address not available</p>
+        )}
 
         {/* Tip Form */}
         <div style={{ marginTop: "20px" }}>
