@@ -292,7 +292,9 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-        <button onClick={handleFavorite}>Favorite</button>;{/* Tip Form */}
+        <button onClick={handleFavorite}>Favorite</button>
+
+        {/* Tip Form */}
         <div style={{ marginTop: "20px" }}>
           <h3>Send a Tip</h3>
           <input
