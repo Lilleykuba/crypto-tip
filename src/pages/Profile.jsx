@@ -17,6 +17,8 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { username } = useParams();
+  const { user } = useAuth();
+  const isOwner = user?.uid === profileOwnerId; // Check ownership
   const [user, setUser] = useState(null); // Fetched user
   const [loadingProfile, setLoadingProfile] = useState(true); // Profile loading state
   const [loadingTransactions, setLoadingTransactions] = useState(false); // Transactions loading state
@@ -213,6 +215,10 @@ const Profile = () => {
               Copy
             </button>
           </p>
+        </div>
+        <div>
+          {/* Show edit button only to the owner */}
+          {isOwner && <button>Edit Profile</button>}
         </div>
 
         {user && user.wallet ? (

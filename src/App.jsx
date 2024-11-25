@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import ThemeToggle from "./components/ThemeToggle";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
 
@@ -28,7 +30,16 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/register"
+            element={
+              <PrivateRoute>
+                <Register />
+              </PrivateRoute>
+            }
+          />
           <Route path="/profile/:username" element={<Profile />} />
         </Routes>
       </Router>
