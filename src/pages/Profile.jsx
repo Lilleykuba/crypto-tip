@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
+import { isAddress } from "ethers";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
 
@@ -138,13 +139,9 @@ const Profile = () => {
 
       await window.ethereum.request({ method: "eth_requestAccounts" }); // Request MetaMask connection
 
-      if (!user || !user.wallet) {
-        setStatus("Wallet address is missing or invalid.");
-        return;
-      }
-
-      if (!ethers.utils.isAddress(user.wallet)) {
-        setStatus("Invalid wallet address.");
+      if (!user.wallet || !isAddress(user.wallet)) {
+        setStatus("Invalid or missing wallet address.");
+        console.error("Invalid wallet address:", user.wallet);
         return;
       }
 
@@ -153,14 +150,14 @@ const Profile = () => {
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new ethers.BrowserProvider(window.ethereum); // Ethers v6 updated provider
+      const signer = await provider.getSigner();
       const transaction = await signer.sendTransaction({
         to: user.wallet,
-        value: ethers.utils.parseEther(amount), // Convert ETH to Wei
+        value: ethers.parseEther(amount), // Updated parseEther in v6
       });
 
-      setStatus(`Transaction sent! Hash: ${transaction.hash}`);
+      setStatus(`Transaction sent successfully! Hash: ${transaction.hash}`);
     } catch (error) {
       console.error("Error sending transaction:", error);
       setStatus(`Error: ${error.message}`);
