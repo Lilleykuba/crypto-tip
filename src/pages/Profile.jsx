@@ -182,6 +182,35 @@ const Profile = () => {
     }
   };
 
+  const handleFavorite = async () => {
+    if (!authUser) {
+      toast.error("You need to log in to favorite creators.");
+      return;
+    }
+    try {
+      const userRef = doc(db, "users", authUser.uid);
+      const userDoc = await getDoc(userRef);
+
+      const favorites = userDoc.exists() ? userDoc.data().favorites || [] : [];
+
+      if (favorites.includes(user.id)) {
+        toast.info("This creator is already in your favorites.");
+        return;
+      }
+
+      await setDoc(
+        userRef,
+        { favorites: [...favorites, user.id] },
+        { merge: true }
+      );
+
+      toast.success("Creator added to your favorites!");
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      toast.error("Failed to add to favorites.");
+    }
+  };
+
   return (
     <div className="container">
       <Helmet>
@@ -227,26 +256,25 @@ const Profile = () => {
           {/* Show edit button only to the owner */}
           {isOwner && <button>Edit Profile</button>}
         </div>
-
         {user && user.wallet ? (
           <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
         ) : (
           <p>Wallet address not available</p>
         )}
-
-        <div className="social-share">
-          <FacebookShareButton url={window.location.href}>
-            <button className="share-btn">Share on Facebook</button>
-          </FacebookShareButton>
-          <TwitterShareButton url={window.location.href}>
-            <button className="share-btn">Share on Twitter</button>
-          </TwitterShareButton>
-          <LinkedinShareButton url={window.location.href}>
-            <button className="share-btn">Share on LinkedIn</button>
-          </LinkedinShareButton>
-        </div>
-
-        {/* Tip Form */}
+        {isOwner && (
+          <div className="social-share">
+            <FacebookShareButton url={window.location.href}>
+              <button className="share-btn">Share on Facebook</button>
+            </FacebookShareButton>
+            <TwitterShareButton url={window.location.href}>
+              <button className="share-btn">Share on Twitter</button>
+            </TwitterShareButton>
+            <LinkedinShareButton url={window.location.href}>
+              <button className="share-btn">Share on LinkedIn</button>
+            </LinkedinShareButton>
+          </div>
+        )}
+        <button onClick={handleFavorite}>Favorite</button>;{/* Tip Form */}
         <div style={{ marginTop: "20px" }}>
           <h3>Send a Tip</h3>
           <input
@@ -262,7 +290,6 @@ const Profile = () => {
             {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
           </button>
         </div>
-
         {status && (
           <div
             className={`status ${
