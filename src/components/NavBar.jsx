@@ -81,6 +81,9 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item">
+                <ThemeToggle />
+              </li>
+              <li className="nav-item">
                 <button className="nav-link logout-btn" onClick={handleLogout}>
                   Logout
                 </button>
@@ -109,9 +112,6 @@ const NavBar = () => {
             </>
           )}
         </ul>
-        <header style={{ padding: "10px", textAlign: "right" }}>
-          <ThemeToggle />
-        </header>
       </div>
     </nav>
   );
