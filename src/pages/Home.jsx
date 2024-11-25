@@ -6,6 +6,8 @@ import { useAuth } from "../services/AuthContext"; // Import AuthContext
 
 const Home = () => {
   const [creators, setCreators] = useState([]); // State to store fetched creators
+  const [filteredCreators, setFilteredCreators] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(""); // Error state
   const { user, logout } = useAuth(); // Auth Context
@@ -22,6 +24,7 @@ const Home = () => {
           ...doc.data(),
         }));
         setCreators(creatorsData);
+        setFilteredCreators(creatorsData);
       } catch (error) {
         console.error("Error fetching creators:", error);
         setError("Failed to load creators. Please try again later.");
@@ -33,13 +36,15 @@ const Home = () => {
     fetchCreators();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/login");
-    } catch (error) {
-      console.error("Failed to logout:", error);
-    }
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    const filtered = creators.filter(
+      (creator) =>
+        creator.username.toLowerCase().includes(query) ||
+        creator.bio.toLowerCase().includes(query)
+    );
+    setFilteredCreators(filtered);
   };
 
   return (
@@ -48,7 +53,7 @@ const Home = () => {
       <p>Support your favorite creators with cryptocurrency tips!</p>
       {user && (
         <Link to="/register" className="register-link">
-          Register as a Creator
+          Register as a Creator Now
         </Link>
       )}
 
@@ -62,6 +67,28 @@ const Home = () => {
           <p>No creators found.</p>
         ) : (
           <ul className="creators-list">
+            <input
+              type="text"
+              placeholder="Search creators by username or bio"
+              value={searchQuery}
+              onChange={handleSearch}
+            />
+            {loading ? (
+              <p>Loading...</p>
+            ) : filteredCreators.length === 0 ? (
+              <p>No creators found.</p>
+            ) : (
+              <ul>
+                {filteredCreators.map((creator) => (
+                  <li key={creator.id}>
+                    <Link to={`/profile/${creator.username}`}>
+                      <h3>{creator.username}</h3>
+                      <p>{creator.bio}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
             {creators.map((creator) => (
               <li key={creator.id} className="creator-card">
                 <Link
