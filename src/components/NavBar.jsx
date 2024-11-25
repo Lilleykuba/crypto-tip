@@ -45,7 +45,7 @@ const NavBar = () => {
       <div className="nav-container">
         {/* Logo */}
         <Link to="/" className="nav-logo">
-          Crypto Tipping
+          CrypTip
         </Link>
 
         {/* Hamburger Menu */}
