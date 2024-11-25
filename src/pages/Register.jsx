@@ -6,7 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { user, signUp } = useAuth(); // Access authenticated user and signup function
+  const { user } = useAuth(); // Fetch authenticated user from context
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [wallet, setWallet] = useState("");
