@@ -6,8 +6,26 @@ import { ethers } from "ethers";
 import { isAddress } from "ethers";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
-import ThemeToggle from "../components/ThemeToggle";
 import Loader from "../components/Loader";
+import { Helmet } from "react-helmet";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+} from "react-share";
+
+<Helmet>
+  <title>{user.username} - Profile</title>
+  <meta
+    name="description"
+    content={`Support ${user.username} by tipping with crypto.`}
+  />
+  <meta property="og:title" content={`${user.username}'s Profile`} />
+  <meta
+    property="og:description"
+    content={`Help ${user.username} by tipping ETH.`}
+  />
+</Helmet>;
 
 const Profile = () => {
   const { username } = useParams();
@@ -182,6 +200,18 @@ const Profile = () => {
         ) : (
           <p>Wallet address not available</p>
         )}
+
+        <div className="social-share">
+          <FacebookShareButton url={window.location.href}>
+            Share on Facebook
+          </FacebookShareButton>
+          <TwitterShareButton url={window.location.href}>
+            Share on Twitter
+          </TwitterShareButton>
+          <LinkedinShareButton url={window.location.href}>
+            Share on LinkedIn
+          </LinkedinShareButton>
+        </div>
 
         {/* Tip Form */}
         <div style={{ marginTop: "20px" }}>
