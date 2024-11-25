@@ -15,23 +15,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 
-<Helmet>
-  <title>{user ? `${user.username} - Profile` : "Loading Profile..."}</title>
-  {user && (
-    <>
-      <meta
-        name="description"
-        content={`Support ${user.username} by tipping with crypto.`}
-      />
-      <meta property="og:title" content={`${user.username}'s Profile`} />
-      <meta
-        property="og:description"
-        content={`Help ${user.username} by tipping ETH.`}
-      />
-    </>
-  )}
-</Helmet>;
-
 const Profile = () => {
   const { username } = useParams();
   const [user, setUser] = useState(null); // Fetched user
@@ -189,9 +172,26 @@ const Profile = () => {
 
   return (
     <div className="container">
-      {/* Show loader for transactions */}
+      <Helmet>
+        <title>
+          {user ? `${user.username} - Profile` : "Loading Profile..."}
+        </title>
+        {user && (
+          <>
+            <meta
+              name="description"
+              content={`Support ${user.username} by tipping with crypto.`}
+            />
+            <meta property="og:title" content={`${user.username}'s Profile`} />
+            <meta
+              property="og:description"
+              content={`Help ${user.username} by tipping ETH.`}
+            />
+          </>
+        )}
+      </Helmet>
+      ;{/* Show loader for transactions */}
       {loadingTransactions && <Loader />}
-
       {/* User Profile Card */}
       <div className="card">
         <h1>{user.username}'s Profile</h1>
@@ -244,7 +244,6 @@ const Profile = () => {
           </div>
         )}
       </div>
-
       {/* Tipping History */}
       <div className="card" style={{ marginTop: "20px" }}>
         <h3>Tipping History</h3>
@@ -276,7 +275,6 @@ const Profile = () => {
           </ul>
         )}
       </div>
-
       {/* Analytics */}
       <div className="card" style={{ marginTop: "20px" }}>
         <h3>Analytics</h3>
