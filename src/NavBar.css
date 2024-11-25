@@ -71,7 +71,6 @@
 .nav-item {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -181,7 +180,10 @@
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
-    flex-wrap: wrap;
+  }
+
+  .navbar-links {
+    display: none;
   }
 
   .nav-menu {
