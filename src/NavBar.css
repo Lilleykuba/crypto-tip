@@ -32,6 +32,7 @@
   color: #00ffcc;
   text-decoration: none;
   transition: color 0.3s ease;
+  text-wrap: none;
 }
 
 .nav-logo:hover {
