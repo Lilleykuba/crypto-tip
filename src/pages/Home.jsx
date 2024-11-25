@@ -68,10 +68,14 @@ const Home = () => {
   return (
     <div className="container">
       <h1>Welcome to CrypTip</h1>
-      <p>Support your favorite creators with cryptocurrency tips!</p>
+      <p>
+        Discover and support creative individuals using secure cryptocurrency
+        transactions. Your tips can make a difference!
+      </p>
+
       {user && (
         <Link to="/register" className="register-link">
-          Register as a Creator Now
+          Become a Creator Now
         </Link>
       )}
 

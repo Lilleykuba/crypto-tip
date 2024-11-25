@@ -51,7 +51,12 @@ const Register = () => {
 
   return (
     <div className="container">
-      <h1>Register as a Creator</h1>
+      <h1>Become a Creator</h1>
+      <p>
+        Share your passion and connect with supporters worldwide. Sign up and
+        start receiving tips in cryptocurrency.
+      </p>
+
       <form onSubmit={handleRegister}>
         <input
           type="text"
