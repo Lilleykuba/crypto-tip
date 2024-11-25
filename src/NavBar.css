@@ -32,7 +32,7 @@
   color: #00ffcc;
   text-decoration: none;
   transition: color 0.3s ease;
-  text-wrap: none;
+  width: auto;
 }
 
 .nav-logo:hover {
@@ -82,6 +82,7 @@
   font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
   justify-self: center;
+  transform: scale(0.6);
 }
 
 .logout-btn:hover {
@@ -95,6 +96,7 @@
   font-size: 1.5rem; /* Adjust size of the icon */
   cursor: pointer;
   transition: transform 0.2s ease;
+  transform: scale(0.6);
 }
 
 .theme-toggle-btn:hover {
