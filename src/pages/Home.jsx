@@ -44,26 +44,7 @@ const Home = () => {
 
   return (
     <div className="container">
-      <header>
-        {!user ? (
-          <div className="auth-buttons">
-            <Link to="/login" className="btn">
-              Login
-            </Link>
-            <Link to="/signup" className="btn">
-              Signup
-            </Link>
-          </div>
-        ) : (
-          <div className="auth-buttons">
-            <button onClick={handleLogout} className="btn">
-              Logout
-            </button>
-          </div>
-        )}
-      </header>
-
-      <h1>Welcome to Crypto Tipping</h1>
+      <h1>Welcome to CrypTip</h1>
       <p>Support your favorite creators with cryptocurrency tips!</p>
       {user && (
         <Link to="/register" className="register-link">

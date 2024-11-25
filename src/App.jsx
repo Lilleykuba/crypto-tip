@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import ThemeToggle from "./components/ThemeToggle";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
@@ -27,9 +26,6 @@ function App() {
       />
 
       <Router>
-        <header style={{ padding: "10px", textAlign: "right" }}>
-          <ThemeToggle />
-        </header>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />

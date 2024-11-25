@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
+import ThemeToggle from "./components/ThemeToggle";
 import { db } from "../firebase";
 import "../NavBar.css";
 
@@ -108,6 +109,9 @@ const NavBar = () => {
             </>
           )}
         </ul>
+        <header style={{ padding: "10px", textAlign: "right" }}>
+          <ThemeToggle />
+        </header>
       </div>
     </nav>
   );
