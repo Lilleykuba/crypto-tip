@@ -1,11 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
-import "../NavBar.css"; // Add styles for the navbar
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import "../NavBar.css";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false); // Toggle hamburger menu
+  const [username, setUsername] = useState(""); // Store fetched username
   const { user, logOut } = useAuth(); // Auth context
+
+  // Fetch username from Firestore when the user is logged in
+  useEffect(() => {
+    const fetchUsername = async () => {
+      if (user) {
+        try {
+          const userDoc = await getDoc(doc(db, "profiles", user.uid));
+          if (userDoc.exists()) {
+            const profileData = userDoc.data();
+            setUsername(profileData.username || "");
+          } else {
+            console.error("User profile not found.");
+          }
+        } catch (error) {
+          console.error("Error fetching username:", error);
+        }
+      }
+    };
+    fetchUsername();
+  }, [user]);
 
   const handleLogout = async () => {
     try {
@@ -49,7 +72,7 @@ const NavBar = () => {
             <>
               <li className="nav-item">
                 <Link
-                  to={`/profile/${user?.username || "myprofile"}`}
+                  to={`/profile/${username || "myprofile"}`}
                   className="nav-link"
                   onClick={() => setIsOpen(false)}
                 >
