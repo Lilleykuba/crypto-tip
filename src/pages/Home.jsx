@@ -76,7 +76,7 @@ const Home = () => {
       )}
 
       <div style={{ marginTop: "20px" }}>
-        <h2>Featured Creators</h2>
+        <h2>Search Creators</h2>
         <input
           type="text"
           placeholder="Search creators by username or bio"
@@ -99,6 +99,7 @@ const Home = () => {
             ))}
           </ul>
         )}
+        <h2>Featured creators</h2>
         <select onChange={(e) => handleSort(e.target.value)}>
           <option value="default">Sort By</option>
           <option value="popularity">Most Tipped</option>
