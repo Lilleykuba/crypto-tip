@@ -13,6 +13,12 @@
   max-height: 5vh;
 }
 
+.navbar .nav-logo {
+  font-family: "Orbitron", Arial, sans-serif;
+  font-size: 1.8rem;
+  color: #00ffcc;
+}
+
 .nav-container {
   display: flex;
   align-items: center;

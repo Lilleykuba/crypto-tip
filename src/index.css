@@ -83,15 +83,16 @@ a:hover {
 
 /* Buttons */
 button {
+  font-family: "Orbitron", Arial, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
   background: linear-gradient(135deg, #1e88e5, #2196f3);
   color: white;
-  border: none;
-  padding: 12px 25px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
@@ -103,14 +104,14 @@ button:hover {
 /* Inputs and Textareas */
 input,
 textarea {
-  background-color: #121212;
-  border: 1px solid #333333;
-  padding: 12px;
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #1d1d1d;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  padding: 10px;
   border-radius: 5px;
-  width: 80%;
-  margin-bottom: 15px;
   font-size: 1rem;
-  color: white;
+  width: 100%;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
