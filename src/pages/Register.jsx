@@ -35,6 +35,8 @@ const Register = () => {
         bio,
         wallet,
         email: user.email,
+        registrationDate: serverTimestamp(),
+        totalTips: 0,
       });
 
       toast.success("Profile registered successfully!");

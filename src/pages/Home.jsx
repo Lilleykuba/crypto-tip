@@ -48,17 +48,21 @@ const Home = () => {
   };
 
   const handleSort = (criteria) => {
-    let sortedCreators;
+    let sortedCreators = [...filteredCreators]; // Copy the filtered list for sorting
+
     if (criteria === "popularity") {
-      sortedCreators = [...filteredCreators].sort(
-        (a, b) => b.totalTips - a.totalTips // Assuming totalTips exists
-      );
+      // Sort by totalTips (assuming it exists)
+      sortedCreators.sort((a, b) => (b.totalTips || 0) - (a.totalTips || 0));
     } else if (criteria === "recent") {
-      sortedCreators = [...filteredCreators].sort(
-        (a, b) => b.registrationDate - a.registrationDate
-      );
+      // Sort by registrationDate (assuming it exists as a timestamp)
+      sortedCreators.sort((a, b) => {
+        const dateA = new Date(a.registrationDate || 0);
+        const dateB = new Date(b.registrationDate || 0);
+        return dateB - dateA;
+      });
     }
-    setFilteredCreators(sortedCreators);
+
+    setFilteredCreators(sortedCreators); // Update filtered list with sorted results
   };
 
   return (
