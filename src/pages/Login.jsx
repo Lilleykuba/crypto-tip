@@ -5,13 +5,13 @@ import { useAuth } from "../services/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { logIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await logIn(email, password);
       navigate("/");
     } catch (error) {
       console.error("Failed to log in:", error.message);
