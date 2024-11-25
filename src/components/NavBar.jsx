@@ -38,7 +38,7 @@ const NavBar = () => {
     } catch (error) {
       console.error("Logout failed:", error);
     }
-  };}
+  };
 
   return (
     <nav className="navbar">
@@ -55,66 +55,62 @@ const NavBar = () => {
           <span className="line"></span>
         </button>
         <ul className={`nav-menu ${isOpen ? "open" : ""}`}>
-          <div className="nav-start">
+          <li className="nav-item">
+            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/register"
+              className="nav-link"
+              onClick={() => setIsOpen(false)}
+            >
+              Register
+            </Link>
+          </li>
+          {user ? (
+            <>
               <li className="nav-item">
-                <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
-                  Home
+                <Link
+                  to={`/profile/${username || "myprofile"}`}
+                  className="nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <ThemeToggle />
+              </li>
+              <li className="nav-item">
+                <button className="nav-link logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link
+                  to="/login"
+                  className="nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  to="/register"
+                  to="/signup"
                   className="nav-link"
                   onClick={() => setIsOpen(false)}
                 >
-                  Register
+                  Signup
                 </Link>
               </li>
-              {user ? (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      to={`/profile/${username || "myprofile"}`}
-                      className="nav-link"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Profile
-                    </Link>
-                  </li>
-          </div>
-              <div className="nav-end">
-                  <li className="nav-item">
-                    <ThemeToggle />
-                  </li>
-                  <li className="nav-item">
-                    <button className="nav-link logout-btn" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                              </>
-                            ) : (
-                              <>
-                  <li className="nav-item">
-                    <Link
-                      to="/login"
-                      className="nav-link"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      to="/signup"
-                      className="nav-link"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Signup
-                    </Link>
-                  </li>
-                </>
+            </>
           )}
-          </div>
         </ul>
       </div>
     </nav>
