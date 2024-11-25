@@ -87,6 +87,22 @@
   transform: scale(1.05);
 }
 
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem; /* Adjust size of the icon */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.2); /* Add a zoom effect */
+}
+
+.theme-toggle-btn:focus {
+  outline: none; /* Remove focus outline */
+}
+
 /* Hamburger menu */
 .hamburger {
   display: none;
