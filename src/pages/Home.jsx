@@ -73,56 +73,49 @@ const Home = () => {
 
       <div style={{ marginTop: "20px" }}>
         <h2>Featured Creators</h2>
+        <input
+          type="text"
+          placeholder="Search creators by username or bio"
+          value={searchQuery}
+          onChange={handleSearch}
+        />
         {loading ? (
-          <p>Loading creators...</p>
-        ) : error ? (
-          <p className="error">{error}</p>
-        ) : creators.length === 0 ? (
+          <p>Loading...</p>
+        ) : filteredCreators.length === 0 ? (
           <p>No creators found.</p>
         ) : (
-            <input
-              type="text"
-              placeholder="Search creators by username or bio"
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-            {loading ? (
-                <p>Loading...</p>
-            ) : filteredCreators.length === 0 ? (
-                <p>No creators found.</p>
-            ) : (
-                <ul className="filter-list">
-                {filteredCreators.map((creator) => (
-                    <li key={creator.id}>
-                    <Link to={`/profile/${creator.username}`}>
-                    <h3>{creator.username}</h3>
-                    <p>{creator.bio}</p>
-                    </Link>
-                    </li>
-                ))}
-                </ul>
-            )}
-            <select onChange={(e) => handleSort(e.target.value)}>
-            <option value="default">Sort By</option>
-            <option value="popularity">Most Tipped</option>
-            <option value="recent">Recently Registered</option>
-            </select>
-            <ul className="creators-list">
-            {creators.map((creator) => (
-              <li key={creator.id} className="creator-card">
-              <Link
-              to={`/profile/${creator.username}`}
-                  className="creator-link"
-                >
+          <ul className="filter-list">
+            {filteredCreators.map((creator) => (
+              <li key={creator.id}>
+                <Link to={`/profile/${creator.username}`}>
                   <h3>{creator.username}</h3>
                   <p>{creator.bio}</p>
-                  <p>
-                    <strong>Wallet:</strong> {creator.wallet}
-                  </p>
                 </Link>
               </li>
             ))}
           </ul>
+        )}
+        <select onChange={(e) => handleSort(e.target.value)}>
+          <option value="default">Sort By</option>
+          <option value="popularity">Most Tipped</option>
+          <option value="recent">Recently Registered</option>
+        </select>
+        <ul className="creators-list">
+          {creators.map((creator) => (
+            <li key={creator.id} className="creator-card">
+              <Link
+                to={`/profile/${creator.username}`}
+                className="creator-link"
+              >
+                <h3>{creator.username}</h3>
+                <p>{creator.bio}</p>
+                <p>
+                  <strong>Wallet:</strong> {creator.wallet}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
         )}
       </div>
     </div>
