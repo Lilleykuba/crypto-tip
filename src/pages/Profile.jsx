@@ -40,11 +40,14 @@ const Profile = () => {
 
         if (!matchedUser) {
           toast.error("Profile not found.");
+          setUser(null);
           return;
         }
-        setUser(matchedUser || null);
+        setUser(matchedUser);
       } catch (error) {
         toast.error("Error fetching profile data.");
+      } finally {
+        setLoadingProfile(false);
       }
     };
 
