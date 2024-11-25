@@ -279,7 +279,7 @@ const Profile = () => {
         {transactions.length === 0 ? (
           <p>No transactions found for this wallet.</p>
         ) : (
-          <ul>
+          <ul className="card-list">
             {transactions.slice(0, 5).map((tx, index) => (
               <li key={index}>
                 <p>
@@ -314,7 +314,7 @@ const Profile = () => {
           <strong>Number of Transactions:</strong> {transactionCount}
         </p>
         <h4>Top Supporters</h4>
-        <ul>
+        <ul className="supp-list">
           {topSupporters.map((supporter, index) => (
             <li key={index}>
               <p>

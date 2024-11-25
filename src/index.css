@@ -179,12 +179,12 @@ textarea:focus {
 }
 
 /* Lists */
-ul {
+.creators-list {
   list-style: none;
   padding: 0;
 }
 
-ul li {
+.creators-list li {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 5px;
@@ -194,17 +194,23 @@ ul li {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-ul li:hover {
+.creators-list,
+.card-list,
+.supp-list li:hover {
   transform: translateY(-2px);
   box-shadow: 0px 6px 15px rgba(0, 255, 204, 0.3);
 }
 
-ul li a {
+.creators-list,
+.card-list,
+.supp-list li a {
   color: #00ffcc;
   text-decoration: none;
 }
 
-ul li a:hover {
+.creators-list,
+.card-list,
+.supp-list li a:hover {
   text-decoration: underline;
   color: #00ffff;
 }
