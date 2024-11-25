@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
 import PrivateRoute from "./services/PrivateRoute";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <header style={{ padding: "10px", textAlign: "right" }}>
           <ThemeToggle />
         </header>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
