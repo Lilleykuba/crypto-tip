@@ -47,6 +47,20 @@ const Home = () => {
     setFilteredCreators(filtered);
   };
 
+  const handleSort = (criteria) => {
+    let sortedCreators;
+    if (criteria === "popularity") {
+      sortedCreators = [...filteredCreators].sort(
+        (a, b) => b.totalTips - a.totalTips // Assuming totalTips exists
+      );
+    } else if (criteria === "recent") {
+      sortedCreators = [...filteredCreators].sort(
+        (a, b) => b.registrationDate - a.registrationDate
+      );
+    }
+    setFilteredCreators(sortedCreators);
+  };
+
   return (
     <div className="container">
       <h1>Welcome to CrypTip</h1>
@@ -66,7 +80,6 @@ const Home = () => {
         ) : creators.length === 0 ? (
           <p>No creators found.</p>
         ) : (
-          <ul className="creators-list">
             <input
               type="text"
               placeholder="Search creators by username or bio"
@@ -74,25 +87,31 @@ const Home = () => {
               onChange={handleSearch}
             />
             {loading ? (
-              <p>Loading...</p>
+                <p>Loading...</p>
             ) : filteredCreators.length === 0 ? (
-              <p>No creators found.</p>
+                <p>No creators found.</p>
             ) : (
-              <ul>
+                <ul>
                 {filteredCreators.map((creator) => (
-                  <li key={creator.id}>
+                    <li key={creator.id}>
                     <Link to={`/profile/${creator.username}`}>
-                      <h3>{creator.username}</h3>
-                      <p>{creator.bio}</p>
+                    <h3>{creator.username}</h3>
+                    <p>{creator.bio}</p>
                     </Link>
-                  </li>
+                    </li>
                 ))}
-              </ul>
+                </ul>
             )}
+            <select onChange={(e) => handleSort(e.target.value)}>
+            <option value="default">Sort By</option>
+            <option value="popularity">Most Tipped</option>
+            <option value="recent">Recently Registered</option>
+            </select>
+            <ul className="creators-list">
             {creators.map((creator) => (
               <li key={creator.id} className="creator-card">
-                <Link
-                  to={`/profile/${creator.username}`}
+              <Link
+              to={`/profile/${creator.username}`}
                   className="creator-link"
                 >
                   <h3>{creator.username}</h3>
