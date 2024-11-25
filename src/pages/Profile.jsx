@@ -130,24 +130,24 @@ const Profile = () => {
 
   // Send a tip to the user's wallet
   const sendTip = async () => {
-    if (!metaMaskAvailable) {
-      setStatus(
-        "MetaMask is not installed! Please install MetaMask to send tips."
-      );
-      return;
-    }
-
-    if (!ethers.utils.isAddress(user.wallet)) {
-      setStatus("Invalid wallet address.");
-      return;
-    }
-
-    if (!amount || parseFloat(amount) <= 0) {
-      setStatus("Enter a valid amount greater than 0.");
-      return;
-    }
-
     try {
+      if (!window.ethereum) {
+        setStatus("MetaMask is not installed. Please install MetaMask.");
+        return;
+      }
+
+      await window.ethereum.request({ method: "eth_requestAccounts" }); // Request MetaMask connection
+
+      if (!ethers.utils.isAddress(user.wallet)) {
+        setStatus("Invalid wallet address.");
+        return;
+      }
+
+      if (!amount || parseFloat(amount) <= 0) {
+        setStatus("Enter a valid amount greater than 0.");
+        return;
+      }
+
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const transaction = await signer.sendTransaction({
