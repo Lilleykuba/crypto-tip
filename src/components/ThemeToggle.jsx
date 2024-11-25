@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark"
+    localStorage.getItem("theme") || "dark" // Default to dark theme
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.body.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -15,8 +15,12 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button onClick={toggleTheme} className="theme-toggle">
-      {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+    <button
+      className="theme-toggle-btn"
+      onClick={toggleTheme}
+      aria-label="Toggle Theme"
+    >
+      {theme === "light" ? "🌞" : "🌙"}
     </button>
   );
 };
