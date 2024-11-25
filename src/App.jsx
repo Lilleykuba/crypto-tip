@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
+import PrivateRoute from "./services/PrivateRoute";
 
 function App() {
   return (
