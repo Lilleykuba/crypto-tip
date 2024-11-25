@@ -4,6 +4,7 @@
   color: var(--text-color);
   padding: 10px 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   position: sticky;
@@ -21,6 +22,7 @@
 
 .nav-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   justify-content: space-between;
@@ -29,6 +31,7 @@
 
 .nav-sections {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   justify-content: space-between; /* Separate left and right */
@@ -50,6 +53,7 @@
 
 .nav-menu {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -67,6 +71,7 @@
 .nav-item {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -152,6 +157,7 @@
 
 .nav-menu.open {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   position: absolute;
   top: 60px;
@@ -175,6 +181,7 @@
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .nav-menu {
