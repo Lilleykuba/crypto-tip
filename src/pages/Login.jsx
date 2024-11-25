@@ -1,42 +1,44 @@
-import { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../services/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      setError(err.message);
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to log in:", error.message);
     }
   };
 
   return (
     <div className="container">
       <h1>Login</h1>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
         <button type="submit">Login</button>
       </form>
+      <p>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </p>
     </div>
   );
 };
