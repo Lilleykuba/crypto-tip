@@ -5,6 +5,7 @@ import { ethers } from "ethers";
 import { isAddress } from "ethers";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
+import ThemeToggle from "./ThemeToggle";
 
 const Profile = () => {
   const { username } = useParams();
@@ -179,6 +180,9 @@ const Profile = () => {
 
   return (
     <div className="container">
+      <header>
+        <ThemeToggle />
+      </header>
       {/* User Profile Card */}
       <div className="card">
         <h1>{user.username}'s Profile</h1>
