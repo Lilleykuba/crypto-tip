@@ -255,6 +255,15 @@ const Profile = () => {
       <div className="card">
         <h1>{user.username}'s Profile</h1>
         <p>{user.bio}</p>
+        <div>
+          {/* Show edit button only to the owner */}
+          {isOwner && <button>Edit Profile</button>}
+        </div>
+        {user && user.wallet ? (
+          <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
+        ) : (
+          <p>Wallet address not available</p>
+        )}
         <div className="wallet-address">
           <p>
             <strong>Wallet Address:</strong>
@@ -270,15 +279,6 @@ const Profile = () => {
             </button>
           </p>
         </div>
-        <div>
-          {/* Show edit button only to the owner */}
-          {isOwner && <button>Edit Profile</button>}
-        </div>
-        {user && user.wallet ? (
-          <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
-        ) : (
-          <p>Wallet address not available</p>
-        )}
         {isOwner && (
           <div className="social-share">
             <FacebookShareButton url={window.location.href}>
@@ -295,23 +295,24 @@ const Profile = () => {
         <button className="favorite-btn" onClick={handleFavorite}>
           Favorite
         </button>
-      </div>
-      {/* Tip Form */}
-      <div style={{ marginTop: "20px" }}>
-        <h3>Send a Tip</h3>
-        <input
-          type="number"
-          placeholder="Amount in ETH"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button
-          className="sendTip-btn"
-          onClick={sendTip}
-          disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
-        >
-          {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
-        </button>
+
+        {/* Tip Form */}
+        <div style={{ marginTop: "20px" }}>
+          <h3>Send a Tip</h3>
+          <input
+            type="number"
+            placeholder="Amount in ETH"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <button
+            className="sendTip-btn"
+            onClick={sendTip}
+            disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
+          >
+            {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
+          </button>
+        </div>
       </div>
 
       {/* Tipping History */}
