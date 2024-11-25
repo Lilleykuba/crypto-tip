@@ -292,26 +292,28 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-        <button className="favorite-btn" onClick={handleFavorite}>Favorite</button>
+        <button className="favorite-btn" onClick={handleFavorite}>
+          Favorite
+        </button>
+      </div>
+      {/* Tip Form */}
+      <div style={{ marginTop: "20px" }}>
+        <h3>Send a Tip</h3>
+        <input
+          type="number"
+          placeholder="Amount in ETH"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <button
+          className="sendTip-btn"
+          onClick={sendTip}
+          disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
+        >
+          {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
+        </button>
+      </div>
 
-        {/* Tip Form */}
-        <div style={{ marginTop: "20px" }}>
-          <h3>Send a Tip</h3>
-          <input
-            type="number"
-            placeholder="Amount in ETH"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <button
-            className="sendTip-btn"
-            onClick={sendTip}
-            disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
-          >
-            {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
-          </button>
-        </div>
-        
       {/* Tipping History */}
       <div className="card" style={{ marginTop: "20px" }}>
         <h3>Tipping History</h3>
