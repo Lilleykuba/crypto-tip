@@ -18,8 +18,7 @@ import { useAuth } from "../services/AuthContext";
 
 const Profile = () => {
   const { username } = useParams();
-  const { authUser } = useAuth();
-  const isOwner = authUser?.uid === profileOwnerId; // Check ownership
+  const { user: authUser } = useAuth();
   const [user, setUser] = useState(null); // Fetched user
   const [loadingProfile, setLoadingProfile] = useState(true); // Profile loading state
   const [loadingTransactions, setLoadingTransactions] = useState(false); // Transactions loading state
@@ -36,7 +35,10 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "profiles"));
-        const profilesData = querySnapshot.docs.map((doc) => doc.data());
+        const profilesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id, // Include Firestore document ID
+          ...doc.data(),
+        }));
         const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
@@ -56,6 +58,10 @@ const Profile = () => {
 
     fetchProfile();
   }, [username]);
+
+  // Define `profileOwnerId` based on fetched profile
+  const profileOwnerId = user?.id; // Assuming `id` is the unique identifier in Firestore
+  const isOwner = authUser?.uid === profileOwnerId; // Check if logged-in user is the owner
 
   // Fetch transactions and calculate analytics
   useEffect(() => {
