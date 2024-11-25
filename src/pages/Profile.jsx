@@ -29,6 +29,8 @@ const Profile = () => {
   const [transactionCount, setTransactionCount] = useState(0); // Total transaction count
   const [topSupporters, setTopSupporters] = useState([]); // Top supporters list
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false); // MetaMask detection
+  const [selectedCurrency, setSelectedCurrency] = useState("ETH");
+  const [exchangeRate, setExchangeRate] = useState(1);
 
   // Fetch user profile from Firestore
   useEffect(() => {
@@ -62,6 +64,21 @@ const Profile = () => {
   // Define `profileOwnerId` based on fetched profile
   const profileOwnerId = user?.id; // Assuming `id` is the unique identifier in Firestore
   const isOwner = authUser?.uid === profileOwnerId; // Check if logged-in user is the owner
+
+  useEffect(() => {
+    const fetchRate = async () => {
+      if (selectedCurrency !== "ETH") {
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency}&vs_currencies=usd`
+        );
+        const data = await response.json();
+        setExchangeRate(data[selectedCurrency].usd / data.ethereum.usd);
+      } else {
+        setExchangeRate(1);
+      }
+    };
+    fetchRate();
+  }, [selectedCurrency]);
 
   // Fetch transactions and calculate analytics
   useEffect(() => {
@@ -150,6 +167,7 @@ const Profile = () => {
   // Send a tip to the user's wallet
 
   const sendTip = async () => {
+    const convertedAmount = (amount * exchangeRate).toFixed(8);
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed. Please install MetaMask.");
@@ -163,7 +181,7 @@ const Profile = () => {
         return;
       }
 
-      if (!amount || parseFloat(amount) <= 0) {
+      if (!convertedAmount || parseFloat(convertedAmount) <= 0) {
         toast.warn("Please enter a valid amount greater than 0.");
         return;
       }
@@ -172,7 +190,7 @@ const Profile = () => {
       const signer = await provider.getSigner();
       const transaction = await signer.sendTransaction({
         to: user.wallet,
-        value: ethers.parseEther(amount),
+        value: ethers.parseEther(convertedAmount),
       });
 
       toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
