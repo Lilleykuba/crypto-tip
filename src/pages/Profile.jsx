@@ -21,17 +21,16 @@ const Profile = () => {
   // Fetch user profile from Firestore
   useEffect(() => {
     const fetchProfile = async () => {
-      setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "profiles"));
         const profilesData = querySnapshot.docs.map((doc) => doc.data());
         const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
+        setUser(matchedUser || null);
         if (!matchedUser || !matchedUser.wallet) {
           setStatus("Profile not found or wallet missing.");
         }
-        setUser(matchedUser);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setStatus("Error fetching profile data.");
@@ -42,6 +41,20 @@ const Profile = () => {
 
     if (username) fetchProfile();
   }, [username]);
+
+  // Show loader while loading
+  if (loading) {
+    return <Loader />;
+  }
+
+  // Handle profile not found
+  if (!user) {
+    return (
+      <div className="container">
+        <h1>Profile not found</h1>
+      </div>
+    );
+  }
 
   // Fetch transactions and calculate analytics
   useEffect(() => {

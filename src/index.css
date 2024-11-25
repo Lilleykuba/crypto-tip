@@ -279,3 +279,41 @@ ul li a:hover {
 .register-link:hover {
   background-color: #1565c0;
 }
+
+/* index.css */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* index.css */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+  }
+}
