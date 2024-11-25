@@ -13,6 +13,7 @@ import {
   TwitterShareButton,
   LinkedinShareButton,
 } from "react-share";
+import { toast } from "react-toastify";
 
 <Helmet>
   <title>{user.username} - Profile</title>
@@ -49,19 +50,18 @@ const Profile = () => {
         const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
-        setUser(matchedUser || null);
-        if (!matchedUser || !matchedUser.wallet) {
-          setStatus("Profile not found or wallet missing.");
+
+        if (!matchedUser) {
+          toast.error("Profile not found.");
+          return;
         }
+        setUser(matchedUser);
       } catch (error) {
-        console.error("Error fetching profile:", error);
-        setStatus("Error fetching profile data.");
-      } finally {
-        setLoadingProfile(false);
+        toast.error("Error fetching profile data.");
       }
     };
 
-    if (username) fetchProfile();
+    fetchProfile();
   }, [username]);
 
   // Fetch transactions and calculate analytics
@@ -149,37 +149,37 @@ const Profile = () => {
   }
 
   // Send a tip to the user's wallet
+
   const sendTip = async () => {
     try {
       if (!window.ethereum) {
-        setStatus("MetaMask is not installed. Please install MetaMask.");
+        toast.error("MetaMask is not installed. Please install MetaMask.");
         return;
       }
 
-      await window.ethereum.request({ method: "eth_requestAccounts" }); // Request MetaMask connection
+      await window.ethereum.request({ method: "eth_requestAccounts" });
 
       if (!user.wallet || !isAddress(user.wallet)) {
-        setStatus("Invalid or missing wallet address.");
-        console.error("Invalid wallet address:", user.wallet);
+        toast.error("Invalid or missing wallet address.");
         return;
       }
 
       if (!amount || parseFloat(amount) <= 0) {
-        setStatus("Enter a valid amount greater than 0.");
+        toast.warn("Please enter a valid amount greater than 0.");
         return;
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum); // Ethers v6 updated provider
+      const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const transaction = await signer.sendTransaction({
         to: user.wallet,
-        value: ethers.parseEther(amount), // Updated parseEther in v6
+        value: ethers.parseEther(amount),
       });
 
-      setStatus(`Transaction sent successfully! Hash: ${transaction.hash}`);
+      toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
     } catch (error) {
       console.error("Error sending transaction:", error);
-      setStatus(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     }
   };
 

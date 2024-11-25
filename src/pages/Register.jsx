@@ -32,22 +32,12 @@ const Register = () => {
     }
 
     try {
-      // Save the profile to Firestore
-      await addDoc(collection(db, "profiles"), {
-        username,
-        bio,
-        wallet,
-      });
-
-      setStatus("Registration successful!");
-      setLoading(false);
-
-      // Redirect to the user's profile page
+      await addDoc(collection(db, "profiles"), { username, bio, wallet });
+      toast.success("Registration successful!");
       navigate(`/profile/${username}`);
     } catch (error) {
-      console.error("Error saving profile to Firestore:", error);
-      setStatus("An error occurred while saving your profile.");
-      setLoading(false);
+      toast.error("Error registering profile. Try again.");
+      console.error(error);
     }
   };
 

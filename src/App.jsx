@@ -3,19 +3,36 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import ThemeToggle from "./components/ThemeToggle";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import default styles
 
 function App() {
   return (
-    <Router>
-      <header style={{ padding: "10px", textAlign: "right" }}>
-        <ThemeToggle />
-      </header>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile/:username" element={<Profile />} />
-      </Routes>
-    </Router>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark" // or "light" to match the theme toggle
+      />
+
+      <Router>
+        <header style={{ padding: "10px", textAlign: "right" }}>
+          <ThemeToggle />
+        </header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile/:username" element={<Profile />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
