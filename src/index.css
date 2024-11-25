@@ -25,10 +25,10 @@ body {
 }
 
 [data-theme="light"] {
-  --bg-color: #ffffff; /* Light background */
-  --text-color: #000000; /* Light text color */
-  --card-bg: #f9f9f9;
-  --card-border: #ddd;
+  --bg-color: #b39be6; /* Light background */
+  --text-color: #161515; /* Light text color */
+  --card-bg: #8b5bb6;
+  --card-border: #7827bba2;
   --button-bg: linear-gradient(135deg, #ffa726, #ff9800);
   --button-hover-bg: linear-gradient(135deg, #fb8c00, #f57c00);
 }
