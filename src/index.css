@@ -16,8 +16,8 @@ body {
 
 /* Theme Variables */
 :root {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
+  --bg-color: #121212; /* Default dark background */
+  --text-color: #e0e0e0; /* Default dark text color */
   --card-bg: #1f1f1f;
   --card-border: #333;
   --button-bg: linear-gradient(135deg, #1e88e5, #2196f3);
@@ -25,12 +25,105 @@ body {
 }
 
 [data-theme="light"] {
-  --bg-color: #ffffff;
-  --text-color: #000000;
+  --bg-color: #ffffff; /* Light background */
+  --text-color: #000000; /* Light text color */
   --card-bg: #f9f9f9;
   --card-border: #ddd;
   --button-bg: linear-gradient(135deg, #ffa726, #ff9800);
   --button-hover-bg: linear-gradient(135deg, #fb8c00, #f57c00);
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+  color: var(--text-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Links */
+a {
+  color: #00ffcc;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #1e88e5, #2196f3);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(21, 101, 192, 0.6);
+}
+
+/* Inputs and Textareas */
+input,
+textarea {
+  background-color: #121212;
+  border: 1px solid #333333;
+  padding: 12px;
+  border-radius: 5px;
+  width: 80%;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: #777777;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #00ffcc;
+  box-shadow: 0px 0px 8px #00ffcc;
+}
+
+/* Containers */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
 }
 
 /* Cards */
@@ -39,18 +132,87 @@ body {
   border: 1px solid var(--card-border);
   border-radius: 10px;
   padding: 20px;
-  margin: 30px 0;
+  margin-bottom: 20px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  animation: fadeIn 0.8s ease-in-out forwards;
+  transform-origin: top;
+  margin-top: 30px;
 }
 
+/* Glow on hover */
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 10px 30px rgba(0, 255, 204, 0.5);
+  box-shadow: 0px 10px 25px rgba(0, 255, 204, 0.3);
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Status Messages */
+.status {
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.status.success {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(46, 125, 50, 0.5);
+}
+
+.status.error {
+  background: linear-gradient(135deg, #d32f2f, #f44336);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(211, 47, 47, 0.5);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0, 255, 204, 0.3);
+}
+
+ul li a {
+  color: #00ffcc;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+  color: #00ffff;
 }
 
 /* QR Code Animation */
 .qr-code {
+  display: block;
+  margin: 20px auto;
   border: 2px solid #00ffcc;
   border-radius: 10px;
   padding: 10px;
@@ -63,30 +225,108 @@ body {
   box-shadow: 0px 0px 25px rgba(0, 255, 204, 0.6);
 }
 
-/* Buttons */
-button {
-  background: var(--button-bg);
+.wallet-address {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.address-text {
+  font-family: monospace;
+  color: #00ffcc;
+  background: #1d1d1d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  user-select: all;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
   color: white;
+  padding: 5px 10px;
+  margin-left: 10px;
   border: none;
-  padding: 12px 25px;
-  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background: var(--button-hover-bg);
-  transform: translateY(-3px);
+.copy-btn:hover {
+  background: linear-gradient(135deg, #388e3c, #2e7d32);
+  transform: scale(1.1);
+}
+
+/* Keyframes for bounce effect */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Error Messages */
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error a {
+  color: #ff5252;
+  text-decoration: none;
+}
+
+.error a:hover {
+  text-decoration: underline;
+  color: #ff7575;
+}
+
+.register-link {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.register-link:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.share-btn {
+  background: linear-gradient(135deg, #1877f2, #0056d6); /* Facebook colors */
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.share-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #0056d6, #0042ad);
 }
 
 .social-share {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
     padding: 10px;
@@ -94,5 +334,16 @@ button:hover {
 
   .social-share {
     flex-direction: column;
+  }
+
+  .qr-code {
+    width: 100px;
+    height: 100px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+    width: 100%;
   }
 }
