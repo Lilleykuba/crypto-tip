@@ -36,6 +36,8 @@
   margin: 0;
   padding: 0;
   gap: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-item {
