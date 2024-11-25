@@ -252,7 +252,7 @@ const Profile = () => {
       {/* Show loader for transactions */}
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
-      <!-- <div className="card">
+      <div className="card">
         <h1>{user.username}'s Profile</h1>
         <p>{user.bio}</p>
         <div className="wallet-address">
