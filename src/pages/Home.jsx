@@ -18,6 +18,7 @@ const Home = () => {
           id: doc.id,
           ...doc.data(),
         }));
+        console.log("Fetched Creators:", creatorsData); // Debugging
         setCreators(creatorsData);
       } catch (error) {
         console.error("Error fetching creators:", error);
@@ -48,20 +49,24 @@ const Home = () => {
           <p>No creators found.</p>
         ) : (
           <ul className="creators-list">
-            {creators.map((creator) => (
-              <li key={creator.id} className="creator-card">
-                <Link
-                  to={`/profile/${creator.username}`}
-                  className="creator-link"
-                >
-                  <h3>{creator.username}</h3>
-                  <p>{creator.bio}</p>
-                  <p>
-                    <strong>Wallet:</strong> {creator.wallet}
-                  </p>
-                </Link>
-              </li>
-            ))}
+            {creators.map((creator) => {
+              console.log("Creator Data:", creator); // Debugging
+              return (
+                <li key={creator.id} className="creator-card">
+                  <Link
+                    to={`/profile/${creator.username || "unknown"}`}
+                    className="creator-link"
+                  >
+                    <h3>{creator.username || "Unnamed Creator"}</h3>
+                    <p>{creator.bio || "No bio available."}</p>
+                    <p>
+                      <strong>Wallet:</strong>{" "}
+                      {creator.wallet || "No wallet provided."}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
