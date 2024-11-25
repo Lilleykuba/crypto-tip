@@ -91,7 +91,7 @@ const Home = () => {
             ) : filteredCreators.length === 0 ? (
                 <p>No creators found.</p>
             ) : (
-                <ul>
+                <ul className="filter-list">
                 {filteredCreators.map((creator) => (
                     <li key={creator.id}>
                     <Link to={`/profile/${creator.username}`}>
