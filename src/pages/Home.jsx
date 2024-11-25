@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
+import { useAuth } from "../services/AuthContext"; // Import AuthContext
 
 const Home = () => {
   const [creators, setCreators] = useState([]); // State to store fetched creators
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(""); // Error state
+  const { user, logout } = useAuth(); // Auth Context
+  const navigate = useNavigate();
 
   // Fetch creators from Firestore
   useEffect(() => {
@@ -18,7 +21,6 @@ const Home = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("Fetched Creators:", creatorsData); // Debugging
         setCreators(creatorsData);
       } catch (error) {
         console.error("Error fetching creators:", error);
@@ -31,13 +33,43 @@ const Home = () => {
     fetchCreators();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    }
+  };
+
   return (
     <div className="container">
+      <header>
+        {!user ? (
+          <div className="auth-buttons">
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+            <Link to="/signup" className="btn">
+              Signup
+            </Link>
+          </div>
+        ) : (
+          <div className="auth-buttons">
+            <button onClick={handleLogout} className="btn">
+              Logout
+            </button>
+          </div>
+        )}
+      </header>
+
       <h1>Welcome to Crypto Tipping</h1>
       <p>Support your favorite creators with cryptocurrency tips!</p>
-      <Link to="/register" className="register-link">
-        Register as a Creator
-      </Link>
+      {user && (
+        <Link to="/register" className="register-link">
+          Register as a Creator
+        </Link>
+      )}
 
       <div style={{ marginTop: "20px" }}>
         <h2>Featured Creators</h2>
@@ -49,24 +81,20 @@ const Home = () => {
           <p>No creators found.</p>
         ) : (
           <ul className="creators-list">
-            {creators.map((creator) => {
-              console.log("Creator Data:", creator); // Debugging
-              return (
-                <li key={creator.id} className="creator-card">
-                  <Link
-                    to={`/profile/${creator.username || "unknown"}`}
-                    className="creator-link"
-                  >
-                    <h3>{creator.username || "Unnamed Creator"}</h3>
-                    <p>{creator.bio || "No bio available."}</p>
-                    <p>
-                      <strong>Wallet:</strong>{" "}
-                      {creator.wallet || "No wallet provided."}
-                    </p>
-                  </Link>
-                </li>
-              );
-            })}
+            {creators.map((creator) => (
+              <li key={creator.id} className="creator-card">
+                <Link
+                  to={`/profile/${creator.username}`}
+                  className="creator-link"
+                >
+                  <h3>{creator.username}</h3>
+                  <p>{creator.bio}</p>
+                  <p>
+                    <strong>Wallet:</strong> {creator.wallet}
+                  </p>
+                </Link>
+              </li>
+            ))}
           </ul>
         )}
       </div>
