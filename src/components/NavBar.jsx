@@ -43,9 +43,12 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
+        {/* Logo */}
         <Link to="/" className="nav-logo">
           Crypto Tipping
         </Link>
+
+        {/* Hamburger Menu */}
         <button
           className={`hamburger ${isOpen ? "open" : ""}`}
           onClick={() => setIsOpen(!isOpen)}
@@ -54,23 +57,30 @@ const NavBar = () => {
           <span className="line"></span>
           <span className="line"></span>
         </button>
-        <ul className={`nav-menu ${isOpen ? "open" : ""}`}>
-          <li className="nav-item">
-            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/register"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Register
-            </Link>
-          </li>
-          {user ? (
-            <>
+
+        {/* Nav Menu */}
+        <div className="nav-sections">
+          {/* Left Aligned Menu */}
+          <ul className={`nav-menu nav-start ${isOpen ? "open" : ""}`}>
+            <li className="nav-item">
+              <Link
+                to="/"
+                className="nav-link"
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/register"
+                className="nav-link"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
+            </li>
+            {user && (
               <li className="nav-item">
                 <Link
                   to={`/profile/${username || "myprofile"}`}
@@ -80,38 +90,45 @@ const NavBar = () => {
                   Profile
                 </Link>
               </li>
-              <li className="nav-item">
-                <ThemeToggle />
-              </li>
+            )}
+            {!user && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    to="/login"
+                    className="nav-link"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/signup"
+                    className="nav-link"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+
+          {/* Right Aligned Menu */}
+          <ul className="nav-menu nav-end">
+            {user && (
               <li className="nav-item">
                 <button className="nav-link logout-btn" onClick={handleLogout}>
                   Logout
                 </button>
               </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link
-                  to="/login"
-                  className="nav-link"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/signup"
-                  className="nav-link"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Signup
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
+            )}
+            <li className="nav-item">
+              <ThemeToggle />
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );
