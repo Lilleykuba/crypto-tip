@@ -14,6 +14,7 @@ import {
   LinkedinShareButton,
 } from "react-share";
 import { toast } from "react-toastify";
+import { useAuth } from "../services/AuthContext";
 
 const Profile = () => {
   const { username } = useParams();
