@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
 import { isAddress } from "ethers";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet";
@@ -18,8 +18,8 @@ import { useAuth } from "../services/AuthContext";
 
 const Profile = () => {
   const { username } = useParams();
-  const { user: authUser } = useAuth(); // Current logged-in user
-  const [profile, setProfile] = useState(null); // Fetched profile data
+  const { user: authUser } = useAuth();
+  const [user, setUser] = useState(null); // Fetched user
   const [loadingProfile, setLoadingProfile] = useState(true); // Profile loading state
   const [loadingTransactions, setLoadingTransactions] = useState(false); // Transactions loading state
   const [amount, setAmount] = useState(""); // Tip amount
@@ -33,27 +33,23 @@ const Profile = () => {
   // Fetch user profile from Firestore
   useEffect(() => {
     const fetchProfile = async () => {
-      setLoadingProfile(true);
       try {
-        // Query Firestore for profiles matching the username
         const querySnapshot = await getDocs(collection(db, "profiles"));
-        const profiles = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
+        const profilesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id, // Include Firestore document ID
           ...doc.data(),
         }));
-
-        const matchedProfile = profiles.find(
+        const matchedUser = profilesData.find(
           (profile) => profile.username === username
         );
 
-        if (!matchedProfile) {
+        if (!matchedUser) {
           toast.error("Profile not found.");
-          setProfile(null);
-        } else {
-          setProfile(matchedProfile);
+          setUser(null);
+          return;
         }
+        setUser(matchedUser);
       } catch (error) {
-        console.error("Error fetching profile:", error);
         toast.error("Error fetching profile data.");
       } finally {
         setLoadingProfile(false);
@@ -63,19 +59,19 @@ const Profile = () => {
     fetchProfile();
   }, [username]);
 
-  // Determine if logged-in user is the profile owner
-  const isOwner = authUser && profile && profile.id === authUser.uid;
+  // Define `profileOwnerId` based on fetched profile
+  const profileOwnerId = user?.id; // Assuming `id` is the unique identifier in Firestore
+  const isOwner = authUser?.uid === profileOwnerId; // Check if logged-in user is the owner
 
   // Fetch transactions and calculate analytics
   useEffect(() => {
     const fetchTransactions = async () => {
-      if (!profile?.wallet) return;
-
+      if (!user?.wallet) return;
       setLoadingTransactions(true);
       try {
         const response = await fetch(
           `https://api.etherscan.io/api?module=account&action=txlist&address=${
-            profile.wallet
+            user.wallet
           }&startblock=0&endblock=99999999&sort=desc&apikey=${
             import.meta.env.VITE_APP_ETHERSCAN_API_KEY
           }`
@@ -97,8 +93,8 @@ const Profile = () => {
       }
     };
 
-    if (profile?.wallet) fetchTransactions();
-  }, [profile]);
+    if (user?.wallet) fetchTransactions();
+  }, [user]);
 
   // Calculate total tips, transaction count, and top supporters
   const calculateAnalytics = (txList) => {
@@ -106,7 +102,7 @@ const Profile = () => {
     const supporterMap = {};
 
     txList.forEach((tx) => {
-      if (tx.to.toLowerCase() === profile.wallet.toLowerCase()) {
+      if (tx.to.toLowerCase() === user.wallet.toLowerCase()) {
         const valueInEth = parseFloat(tx.value) / 10 ** 18;
         total += valueInEth;
 
@@ -120,9 +116,8 @@ const Profile = () => {
 
     setTotalTips(total);
     setTransactionCount(
-      txList.filter(
-        (tx) => tx.to.toLowerCase() === profile.wallet.toLowerCase()
-      ).length
+      txList.filter((tx) => tx.to.toLowerCase() === user.wallet.toLowerCase())
+        .length
     );
 
     const sortedSupporters = Object.entries(supporterMap)
@@ -138,13 +133,13 @@ const Profile = () => {
     setMetaMaskAvailable(typeof window.ethereum !== "undefined");
   }, []);
 
-  // Show loader while loading
+  // Show loader for profile loading
   if (loadingProfile) {
     return <Loader />;
   }
 
   // Handle profile not found
-  if (!profile) {
+  if (!user) {
     return (
       <div className="container">
         <h1>Profile not found</h1>
@@ -153,6 +148,7 @@ const Profile = () => {
   }
 
   // Send a tip to the user's wallet
+
   const sendTip = async () => {
     try {
       if (!window.ethereum) {
@@ -162,7 +158,7 @@ const Profile = () => {
 
       await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      if (!profile.wallet || !isAddress(profile.wallet)) {
+      if (!user.wallet || !isAddress(user.wallet)) {
         toast.error("Invalid or missing wallet address.");
         return;
       }
@@ -175,7 +171,7 @@ const Profile = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const transaction = await signer.sendTransaction({
-        to: profile.wallet,
+        to: user.wallet,
         value: ethers.parseEther(amount),
       });
 
@@ -190,21 +186,18 @@ const Profile = () => {
     <div className="container">
       <Helmet>
         <title>
-          {profile ? `${profile.username} - Profile` : "Loading Profile..."}
+          {user ? `${user.username} - Profile` : "Loading Profile..."}
         </title>
-        {profile && (
+        {user && (
           <>
             <meta
               name="description"
-              content={`Support ${profile.username} by tipping with crypto.`}
+              content={`Support ${user.username} by tipping with crypto.`}
             />
-            <meta
-              property="og:title"
-              content={`${profile.username}'s Profile`}
-            />
+            <meta property="og:title" content={`${user.username}'s Profile`} />
             <meta
               property="og:description"
-              content={`Help ${profile.username} by tipping ETH.`}
+              content={`Help ${user.username} by tipping ETH.`}
             />
           </>
         )}
@@ -213,16 +206,16 @@ const Profile = () => {
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
       <div className="card">
-        <h1>{profile.username}'s Profile</h1>
-        <p>{profile.bio}</p>
+        <h1>{user.username}'s Profile</h1>
+        <p>{user.bio}</p>
         <div className="wallet-address">
           <p>
             <strong>Wallet Address:</strong>
-            <span className="address-text">{profile.wallet}</span>
+            <span className="address-text">{user.wallet}</span>
             <button
               className="copy-btn"
               onClick={() => {
-                navigator.clipboard.writeText(profile.wallet);
+                navigator.clipboard.writeText(user.wallet);
                 toast.success("Wallet address copied!");
               }}
             >
@@ -236,7 +229,7 @@ const Profile = () => {
         </div>
 
         {user && user.wallet ? (
-          <QRCodeCanvas className="qr-code" value={profile.wallet} size={128} />
+          <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
         ) : (
           <p>Wallet address not available</p>
         )}
