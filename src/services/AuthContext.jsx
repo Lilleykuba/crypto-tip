@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase"; // Firebase instance
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase"; // Ensure auth is correctly initialized
 
 const AuthContext = createContext();
 
@@ -21,12 +27,12 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return unsubscribe; // Cleanup on unmount
+    return unsubscribe; // Cleanup subscription
   }, []);
 
   const signUp = async (email, password) => {
     try {
-      const userCredential = await auth.createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
@@ -41,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const logIn = async (email, password) => {
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
