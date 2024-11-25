@@ -38,7 +38,7 @@ const NavBar = () => {
     } catch (error) {
       console.error("Logout failed:", error);
     }
-  };
+  };}
 
   return (
     <nav className="navbar">
@@ -112,9 +112,9 @@ const NavBar = () => {
                       Signup
                     </Link>
                   </li>
-                              </>
-              </div>
+                </>
           )}
+          </div>
         </ul>
       </div>
     </nav>
