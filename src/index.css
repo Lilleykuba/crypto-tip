@@ -76,7 +76,7 @@ a:hover {
 
 /* Buttons */
 button {
-  background: var(--button-bg);
+  background: linear-gradient(135deg, #1e88e5, #2196f3);
   color: white;
   border: none;
   padding: 12px 25px;
@@ -88,7 +88,7 @@ button {
 }
 
 button:hover {
-  background: var(--button-hover-bg);
+  background: linear-gradient(135deg, #1565c0, #1976d2);
   transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(21, 101, 192, 0.6);
 }
@@ -96,16 +96,19 @@ button:hover {
 /* Inputs and Textareas */
 input,
 textarea {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  border: 1px solid var(--card-border);
+  background-color: #121212;
+  border: 1px solid #333333;
   padding: 12px;
   border-radius: 5px;
-  width: 100%;
+  width: 80%;
   margin-bottom: 15px;
   font-size: 1rem;
-  box-sizing: border-box;
+  color: white;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: #777777;
 }
 
 input:focus,
@@ -120,6 +123,7 @@ textarea:focus {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
+  text-align: center;
 }
 
 /* Cards */
@@ -132,6 +136,7 @@ textarea:focus {
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.8s ease-in-out forwards;
   transform-origin: top;
+  margin-top: 30px;
 }
 
 /* Glow on hover */
@@ -206,12 +211,51 @@ ul li a:hover {
 
 /* QR Code Animation */
 .qr-code {
-  transition: transform 0.2s ease;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #00ffcc;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 255, 204, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .qr-code:hover {
   transform: scale(1.1);
-  animation: bounce 0.6s infinite;
+  box-shadow: 0px 0px 25px rgba(0, 255, 204, 0.6);
+}
+
+.wallet-address {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.address-text {
+  font-family: monospace;
+  color: #00ffcc;
+  background: #1d1d1d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  user-select: all;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: white;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: linear-gradient(135deg, #388e3c, #2e7d32);
+  transform: scale(1.1);
 }
 
 /* Keyframes for bounce effect */
@@ -258,18 +302,48 @@ ul li a:hover {
   background-color: var(--button-hover-bg);
 }
 
+.share-btn {
+  background: linear-gradient(135deg, #1877f2, #0056d6); /* Facebook colors */
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.share-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #0056d6, #0042ad);
+}
+
+.social-share {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
 /* Responsive Adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
     padding: 10px;
   }
 
-  h1 {
-    font-size: 1.5rem;
+  .social-share {
+    flex-direction: column;
+  }
+
+  .qr-code {
+    width: 100px;
+    height: 100px;
   }
 
   input,
   button {
     font-size: 14px;
+    width: 100%;
   }
 }

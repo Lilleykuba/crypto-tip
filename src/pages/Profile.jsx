@@ -193,15 +193,28 @@ const Profile = () => {
           </>
         )}
       </Helmet>
-      ;{/* Show loader for transactions */}
+      {/* Show loader for transactions */}
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
       <div className="card">
         <h1>{user.username}'s Profile</h1>
         <p>{user.bio}</p>
-        <p>
-          <strong>Wallet Address:</strong> {user.wallet}
-        </p>
+        <div className="wallet-address">
+          <p>
+            <strong>Wallet Address:</strong>
+            <span className="address-text">{user.wallet}</span>
+            <button
+              className="copy-btn"
+              onClick={() => {
+                navigator.clipboard.writeText(user.wallet);
+                toast.success("Wallet address copied!");
+              }}
+            >
+              Copy
+            </button>
+          </p>
+        </div>
+
         {user && user.wallet ? (
           <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
         ) : (
@@ -210,13 +223,13 @@ const Profile = () => {
 
         <div className="social-share">
           <FacebookShareButton url={window.location.href}>
-            Share on Facebook
+            <button className="share-btn">Share on Facebook</button>
           </FacebookShareButton>
           <TwitterShareButton url={window.location.href}>
-            Share on Twitter
+            <button className="share-btn">Share on Twitter</button>
           </TwitterShareButton>
           <LinkedinShareButton url={window.location.href}>
-            Share on LinkedIn
+            <button className="share-btn">Share on LinkedIn</button>
           </LinkedinShareButton>
         </div>
 
