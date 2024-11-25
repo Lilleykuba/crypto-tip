@@ -91,6 +91,10 @@ const NavBar = () => {
                 </Link>
               </li>
             )}
+          </ul>
+
+          {/* Right Aligned Menu */}
+          <ul className="nav-menu nav-end">
             {!user && (
               <>
                 <li className="nav-item">
@@ -113,10 +117,6 @@ const NavBar = () => {
                 </li>
               </>
             )}
-          </ul>
-
-          {/* Right Aligned Menu */}
-          <ul className="nav-menu nav-end">
             {user && (
               <li className="nav-item">
                 <button className="nav-link logout-btn" onClick={handleLogout}>
