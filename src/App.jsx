@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
 import PrivateRoute from "./services/PrivateRoute";
-import NavBar from "../components/NavBar";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
