@@ -17,8 +17,8 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { username } = useParams();
-  const { user } = useAuth();
-  const isOwner = user?.uid === profileOwnerId; // Check ownership
+  const { authUser } = useAuth();
+  const isOwner = authUser?.uid === profileOwnerId; // Check ownership
   const [user, setUser] = useState(null); // Fetched user
   const [loadingProfile, setLoadingProfile] = useState(true); // Profile loading state
   const [loadingTransactions, setLoadingTransactions] = useState(false); // Transactions loading state
