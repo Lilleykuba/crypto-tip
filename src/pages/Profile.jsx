@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// Profile.jsx
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
@@ -10,8 +11,9 @@ import Loader from "../components/Loader";
 
 const Profile = () => {
   const { username } = useParams();
-  const [user, setUser] = useState(null); // State to store fetched user
-  const [loading, setLoading] = useState(true); // Loading state for profile fetch
+  const [user, setUser] = useState(null); // Fetched user
+  const [loadingProfile, setLoadingProfile] = useState(true); // Profile loading state
+  const [loadingTransactions, setLoadingTransactions] = useState(false); // Transactions loading state
   const [amount, setAmount] = useState(""); // Tip amount
   const [status, setStatus] = useState(""); // Status message
   const [transactions, setTransactions] = useState([]); // Transaction history
@@ -37,32 +39,18 @@ const Profile = () => {
         console.error("Error fetching profile:", error);
         setStatus("Error fetching profile data.");
       } finally {
-        setLoading(false);
+        setLoadingProfile(false);
       }
     };
 
     if (username) fetchProfile();
   }, [username]);
 
-  // Show loader while loading
-  if (loading) {
-    return <Loader />;
-  }
-
-  // Handle profile not found
-  if (!user) {
-    return (
-      <div className="container">
-        <h1>Profile not found</h1>
-      </div>
-    );
-  }
-
   // Fetch transactions and calculate analytics
   useEffect(() => {
     const fetchTransactions = async () => {
       if (!user?.wallet) return;
-
+      setLoadingTransactions(true);
       try {
         const response = await fetch(
           `https://api.etherscan.io/api?module=account&action=txlist&address=${
@@ -83,6 +71,8 @@ const Profile = () => {
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setStatus("Error fetching transactions.");
+      } finally {
+        setLoadingTransactions(false);
       }
     };
 
@@ -126,13 +116,9 @@ const Profile = () => {
     setMetaMaskAvailable(typeof window.ethereum !== "undefined");
   }, []);
 
-  // Handle loading state
-  if (loading) {
-    return (
-      <div className="container">
-        <h1>Loading profile...</h1>
-      </div>
-    );
+  // Show loader for profile loading
+  if (loadingProfile) {
+    return <Loader />;
   }
 
   // Handle profile not found
@@ -184,6 +170,10 @@ const Profile = () => {
       <header>
         <ThemeToggle />
       </header>
+
+      {/* Show loader for transactions */}
+      {loadingTransactions && <Loader />}
+
       {/* User Profile Card */}
       <div className="card">
         <h1>{user.username}'s Profile</h1>
