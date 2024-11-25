@@ -1,8 +1,9 @@
-// ThemeToggle.jsx
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "dark"
+  );
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -10,12 +11,12 @@ const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (
-    <button onClick={toggleTheme}>
-      {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+    <button onClick={toggleTheme} className="theme-toggle">
+      {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
     </button>
   );
 };

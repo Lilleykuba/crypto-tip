@@ -167,10 +167,6 @@ const Profile = () => {
 
   return (
     <div className="container">
-      <header>
-        <ThemeToggle />
-      </header>
-
       {/* Show loader for transactions */}
       {loadingTransactions && <Loader />}
 
