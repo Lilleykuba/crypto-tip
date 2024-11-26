@@ -409,6 +409,10 @@ li a:hover {
     flex-direction: column;
   }
 
+  .share-btn {
+    width: 20%;
+  }
+
   .qr-code {
     width: 100px;
     height: 100px;
@@ -422,6 +426,9 @@ li a:hover {
 
   .wallet-address {
     flex-direction: column;
+  }
+
+  .address-text {
     max-width: 600px;
   }
 
