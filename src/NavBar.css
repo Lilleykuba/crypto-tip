@@ -79,6 +79,9 @@
   padding: 8px 16px;
   border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-link:hover {
