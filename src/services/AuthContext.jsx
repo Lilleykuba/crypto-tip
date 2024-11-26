@@ -1,3 +1,4 @@
+// AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   getAuth,
@@ -6,7 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase"; // Ensure auth is correctly initialized
+import { auth, db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -18,27 +20,55 @@ export const useAuth = () => {
   return context;
 };
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Existing useEffect for auth state change
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+
+        // Fetch the user's role from Firestore
+        const userDoc = await getDoc(doc(db, "profiles", currentUser.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUserRole(userData.role || "user");
+        } else {
+          setUserRole("user"); // Default role if not found
+        }
+      } else {
+        setUser(null);
+        setUserRole(null);
+      }
       setLoading(false);
     });
-    return unsubscribe; // Cleanup subscription
+
+    return () => unsubscribe();
   }, []);
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, username, role) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      setUser(userCredential.user);
-      return userCredential.user;
+      const newUser = userCredential.user;
+
+      // Create a profile document in Firestore
+      await setDoc(doc(db, "profiles", newUser.uid), {
+        username,
+        bio: "",
+        wallet: "",
+        role,
+      });
+
+      setUser(newUser);
+      setUserRole(role); // Set the user role in the state
+      return newUser;
     } catch (error) {
       console.error("Error signing up:", error);
       throw error;
@@ -68,9 +98,10 @@ const AuthProvider = ({ children }) => {
       console.error("Error logging out:", error);
     }
   };
-
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, logIn, logOut }}>
+    <AuthContext.Provider
+      value={{ user, userRole, loading, signUp, logIn, logOut }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   );
