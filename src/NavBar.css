@@ -160,7 +160,6 @@
 .hamburger {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
   height: 20px;
   cursor: pointer;
   background: none;
@@ -177,7 +176,7 @@
 }
 
 .hamburger.open .line:nth-child(1) {
-  transform: rotate(45deg) translateY(10px);
+  transform: rotate(45deg) translateY(12px);
 }
 
 .hamburger.open .line:nth-child(2) {
@@ -185,18 +184,17 @@
 }
 
 .hamburger.open .line:nth-child(3) {
-  transform: rotate(-45deg) translateY(-10px);
+  transform: rotate(-45deg) translateY(-12px);
 }
 
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
-    justify-content: space-between;
   }
 
   button .hamburger.open {
-    justify-self: flex-end;
+    align-self: flex-end;
   }
 
   .nav-menu {
@@ -217,7 +215,7 @@
     z-index: 10;
   }
 
-  .nav-item.nav-item-right {
+  .nav-item .nav-item-right {
     margin-left: 0;
   }
 
