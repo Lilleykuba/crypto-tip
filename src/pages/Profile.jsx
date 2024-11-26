@@ -25,6 +25,11 @@ import {
 import { toast } from "react-toastify";
 import { useAuth } from "../services/AuthContext";
 
+// Import Font Awesome components
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
+
 const Profile = () => {
   const { username } = useParams();
   const { user: authUser } = useAuth();
@@ -288,7 +293,6 @@ const Profile = () => {
     );
   }
 
-  // Rest of your component's code (e.g., JSX rendering)
   return (
     <div className="container">
       <Helmet>
@@ -313,7 +317,18 @@ const Profile = () => {
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
       <div className="card">
-        <h1>{user.username}'s Profile</h1>
+        <div className="profile-header">
+          <h1>{user.username}'s Profile</h1>
+          {/* Favorite Heart Icon */}
+          {!isOwner && (
+            <button className="favorite-btn" onClick={handleFavoriteToggle}>
+              <FontAwesomeIcon
+                icon={isFavorite ? solidHeart : regularHeart}
+                className="favorite-icon"
+              />
+            </button>
+          )}
+        </div>
         <p>{user.bio}</p>
         <div>
           {isOwner && (
