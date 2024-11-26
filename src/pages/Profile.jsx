@@ -210,7 +210,10 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (!authUser) return;
+      if (!authUser || !user) {
+        setFavorites(false); // Reset the state if conditions are not met
+        return;
+      }
 
       try {
         const favSnapshot = await getDocs(
