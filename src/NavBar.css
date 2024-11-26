@@ -59,12 +59,9 @@
   gap: 20px;
   font-family: "Roboto", Arial, sans-serif;
 }
-¨ .nav-menu.nav-start {
-  flex: 1; /* Push items on the left to the left */
-}
 
-.nav-menu.nav-end {
-  justify-content: flex-end; /* Align items to the right */
+.nav-item-right {
+  justify-self: flex-end; /* Align items to the right */
 }
 
 .nav-item {
@@ -196,7 +193,7 @@
 
   .nav-container {
     display: flex;
-    justify-content: space-between;
+    align-items: space-between;
   }
 
   .nav-menu {

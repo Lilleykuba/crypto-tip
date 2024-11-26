@@ -99,7 +99,7 @@ const NavBar = () => {
                   Login
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-item-right">
                 <Link
                   to="/signup"
                   className="nav-link"
@@ -117,7 +117,7 @@ const NavBar = () => {
               </button>
             </li>
           )}
-          <li className="nav-item">
+          <li className="nav-item nav-item-right">
             <ThemeToggle />
           </li>
         </ul>
