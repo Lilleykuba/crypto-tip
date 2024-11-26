@@ -401,6 +401,14 @@ li a:hover {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  body {
+    position: relative;
+  }
+
   .container {
     padding: 10px;
   }
