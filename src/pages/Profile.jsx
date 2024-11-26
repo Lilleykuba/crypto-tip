@@ -381,10 +381,6 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-        <button className="favorite-btn" onClick={handleFavoriteToggle}>
-          {isFavorite ? "Unfavorite" : "Add to Favorites"}
-        </button>
-
         {/* Tip Form */}
         <div style={{ marginTop: "20px" }}>
           <h3>Send a Tip</h3>

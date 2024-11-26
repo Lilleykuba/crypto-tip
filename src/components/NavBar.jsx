@@ -22,10 +22,14 @@ const NavBar = () => {
             setUsername(profileData.username || "");
           } else {
             console.error("User profile not found.");
+            setUsername(""); // Reset the username state
           }
         } catch (error) {
           console.error("Error fetching username:", error);
+          setUsername(""); // Reset the username state on error
         }
+      } else {
+        setUsername(""); // Reset the username when user is null
       }
     };
     fetchUsername();
@@ -35,6 +39,7 @@ const NavBar = () => {
     try {
       await logOut();
       setIsOpen(false);
+      setUsername(""); // Reset the username state on logout
     } catch (error) {
       console.error("Logout failed:", error);
     }
