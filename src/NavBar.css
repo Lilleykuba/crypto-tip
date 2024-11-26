@@ -11,13 +11,15 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-  max-height: 5vh;
 }
 
 .navbar .nav-logo {
   font-family: "Orbitron", Arial, sans-serif;
   font-size: 1.8rem;
+  font-weight: bold;
   color: #00ffcc;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .nav-container {
@@ -25,7 +27,6 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  max-height: 5vh;
 }
 
 .nav-sections {
@@ -204,7 +205,6 @@
 
   .nav-menu {
     display: none;
-    max-height: 0;
   }
 
   .nav-menu.open {
@@ -224,7 +224,8 @@
     margin-left: 0;
   }
 
-  .nav-menu .nav-item {
+  .nav-menu.open .nav-item {
+    width: 100%;
     margin-bottom: 10px;
   }
 
