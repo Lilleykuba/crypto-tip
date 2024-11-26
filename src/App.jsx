@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
 import PrivateRoute from "./services/PrivateRoute";
 import NavBar from "./components/NavBar";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
