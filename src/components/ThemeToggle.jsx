@@ -11,7 +11,7 @@ const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => (prevTheme === "bubblegum" ? "dark" : "bubblegum"));
   };
 
   return (
@@ -20,7 +20,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
-      {theme === "light" ? "🌞" : "🌙"}
+      {theme === "bubblegum" ? "🌞" : "🌙"}
     </button>
   );
 };
