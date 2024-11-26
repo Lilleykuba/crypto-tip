@@ -220,7 +220,7 @@
     z-index: 10;
   }
 
-  .nav-item .nav-item-right {
+  .nav-item.nav-item-right {
     margin-left: 0;
   }
 
