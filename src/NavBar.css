@@ -177,7 +177,7 @@
 }
 
 .hamburger.open .line:nth-child(1) {
-  transform: rotate(45deg) translateY(7px);
+  transform: rotate(45deg) translateY(10px);
 }
 
 .hamburger.open .line:nth-child(2) {
@@ -185,18 +185,19 @@
 }
 
 .hamburger.open .line:nth-child(3) {
-  transform: rotate(-45deg) translateY(-7px);
+  transform: rotate(-45deg) translateY(-10px);
 }
 
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+    justify-content: space-between;
   }
 
   .nav-container {
     display: flex;
-    align-items: space-between;
+    justify-content: space-between;
   }
 
   .nav-menu {
