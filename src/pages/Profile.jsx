@@ -226,6 +226,7 @@ const Profile = () => {
         setFavorites(favoritesList); // Update your state with fetched favorites
       } catch (error) {
         console.error("Error fetching favorites:", error);
+        setFavorites(false); // Assume not a favorite if there's an error
       }
     };
 
