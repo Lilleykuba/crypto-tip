@@ -208,31 +208,6 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      if (!authUser || !user) {
-        setFavorites(false); // Reset the state if conditions are not met
-        return;
-      }
-
-      try {
-        const favSnapshot = await getDocs(
-          collection(db, `profiles/${authUser.uid}/favorites`)
-        );
-        const favoritesList = favSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setFavorites(favoritesList); // Update your state with fetched favorites
-      } catch (error) {
-        console.error("Error fetching favorites:", error);
-        setFavorites(false); // Assume not a favorite if there's an error
-      }
-    };
-
-    fetchFavorites();
-  }, [authUser]);
-
   const handleFavoriteToggle = async () => {
     if (!authUser || !user) {
       setFavorites(false); // Reset the state if conditions are not met
@@ -400,6 +375,19 @@ const Profile = () => {
               <p>
                 <strong>Amount:</strong> {supporter.amount.toFixed(4)} ETH
               </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3>Your Favorite Creators</h3>
+        <ul>
+          {favorites.map((fav) => (
+            <li key={fav.id}>
+              <Link to={`/profile/${fav.username}`}>
+                <h4>{fav.username}</h4>
+                <p>{fav.bio}</p>
+              </Link>
             </li>
           ))}
         </ul>
