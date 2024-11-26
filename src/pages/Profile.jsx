@@ -326,7 +326,7 @@ const Profile = () => {
         )}
         <div className="wallet-address">
           <p>
-            <strong>Wallet Address:</strong>
+            <strong className="wallet-address-text">Wallet Address:</strong>
             <span className="address-text">{user.wallet}</span>
             <button
               className="copy-btn"
