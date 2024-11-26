@@ -70,7 +70,7 @@ const EditProfile = () => {
   return (
     <div className="container">
       <h1>Edit Profile</h1>
-      <form onSubmit={handleUpdate}>
+      <form className="edit-form" onSubmit={handleUpdate}>
         <input
           type="text"
           placeholder="Username"

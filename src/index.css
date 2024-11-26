@@ -284,7 +284,8 @@ textarea:focus {
 }
 
 .login-form,
-.signup-form {
+.signup-form,
+.edit-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
