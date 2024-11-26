@@ -144,7 +144,6 @@ textarea {
   font-size: 1rem;
   width: 60%;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
 }
 
 input::placeholder,
@@ -418,7 +417,7 @@ li a:hover {
   input,
   button {
     font-size: 14px;
-    width: 100%;
+    width: 80%;
   }
 
   .wallet-address {
