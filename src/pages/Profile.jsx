@@ -404,19 +404,6 @@ const Profile = () => {
           ))}
         </ul>
       </div>
-      <div>
-        <h3>Your Favorite Creators</h3>
-        <ul>
-          {favorites.map((fav) => (
-            <li key={fav.id}>
-              <Link to={`/profile/${fav.username}`}>
-                <h4>{fav.username}</h4>
-                <p>{fav.bio}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
