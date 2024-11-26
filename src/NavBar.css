@@ -194,8 +194,15 @@
     display: flex;
   }
 
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .nav-menu {
     display: none;
+    max-height: 0;
+    overflow: hidden;
   }
 
   .nav-menu.open {
@@ -209,6 +216,7 @@
     border-radius: 5px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
+    transition: max-height 0.3s ease-in-out;
   }
 
   .nav-item.nav-item-right {
