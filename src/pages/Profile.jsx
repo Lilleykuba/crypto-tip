@@ -4,7 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { ethers } from "ethers";
 import { isAddress } from "ethers";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet";
@@ -31,6 +37,7 @@ const Profile = () => {
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false); // MetaMask detection
   const [selectedCurrency, setSelectedCurrency] = useState("ETH");
   const [exchangeRate, setExchangeRate] = useState(1);
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
   // Fetch user profile from Firestore
@@ -201,32 +208,39 @@ const Profile = () => {
     }
   };
 
-  const handleFavorite = async () => {
-    if (!authUser) {
-      toast.error("You need to log in to favorite creators.");
-      return;
-    }
+  useEffect(() => {
+    const checkFavorite = async () => {
+      if (!authUser || !user) return;
+
+      const favRef = doc(db, "profiles", authUser.uid, "favorites", user.id);
+      const favDoc = await getDoc(favRef);
+      setIsFavorite(favDoc.exists());
+    };
+
+    checkFavorite();
+  }, [authUser, user]);
+
+  const handleFavoriteToggle = async () => {
+    if (!authUser || !user) return;
+
+    const favRef = doc(db, "profiles", authUser.uid, "favorites", user.id);
+
     try {
-      const userRef = doc(db, "users", authUser.uid);
-      const userDoc = await getDoc(userRef);
-
-      const favorites = userDoc.exists() ? userDoc.data().favorites || [] : [];
-
-      if (favorites.includes(user.id)) {
-        toast.info("This creator is already in your favorites.");
-        return;
+      if (isFavorite) {
+        await deleteDoc(favRef);
+        setIsFavorite(false);
+      } else {
+        await setDoc(favRef, {
+          id: user.id,
+          username: user.username,
+          bio: user.bio,
+          wallet: user.wallet,
+        });
+        setIsFavorite(true);
       }
-
-      await setDoc(
-        userRef,
-        { favorites: [...favorites, user.id] },
-        { merge: true }
-      );
-
-      toast.success("Creator added to your favorites!");
     } catch (error) {
-      console.error("Error adding to favorites:", error);
-      toast.error("Failed to add to favorites.");
+      console.error("Error updating favorites:", error);
+      toast.error("Failed to update favorites.");
     }
   };
 
@@ -296,8 +310,8 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-        <button className="favorite-btn" onClick={handleFavorite}>
-          Favorite
+        <button className="favorite-btn" onClick={handleFavoriteToggle}>
+          {isFavorite ? "Unfavorite" : "Add to Favorites"}
         </button>
 
         {/* Tip Form */}
@@ -369,6 +383,19 @@ const Profile = () => {
               <p>
                 <strong>Amount:</strong> {supporter.amount.toFixed(4)} ETH
               </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3>Your Favorite Creators</h3>
+        <ul>
+          {favorites.map((fav) => (
+            <li key={fav.id}>
+              <Link to={`/profile/${fav.username}`}>
+                <h4>{fav.username}</h4>
+                <p>{fav.bio}</p>
+              </Link>
             </li>
           ))}
         </ul>
