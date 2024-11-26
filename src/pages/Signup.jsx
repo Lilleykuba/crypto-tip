@@ -25,14 +25,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const userCredential = await signUp(email, password);
-      const user = userCredential.user;
-      await setDoc(doc(db, "profiles", user.uid), {
-        username,
-        bio: "",
-        wallet: "",
-        role: selectedRole,
-      });
+      await signUp(email, password, username, selectedRole);
       toast.success("Sign up successful! Redirecting...");
       navigate("/"); // Redirect to homepage or dashboard
     } catch (error) {
