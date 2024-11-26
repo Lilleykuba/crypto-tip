@@ -31,6 +31,7 @@ const Profile = () => {
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false); // MetaMask detection
   const [selectedCurrency, setSelectedCurrency] = useState("ETH");
   const [exchangeRate, setExchangeRate] = useState(1);
+  const navigate = useNavigate();
 
   // Fetch user profile from Firestore
   useEffect(() => {
