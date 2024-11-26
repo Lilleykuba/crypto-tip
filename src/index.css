@@ -414,11 +414,14 @@ li a:hover {
   }
 
   .social-share {
-    flex-direction: column;
+    flex-direction: row;
+    max-width: 100%;
+    justify-content: space-evenly;
   }
 
   .share-btn {
-    width: 20%;
+    max-width: 30%;
+    font-size: 0.8rem;
   }
 
   .qr-code {
@@ -441,11 +444,11 @@ li a:hover {
   }
 
   .wallet-address-text {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   }
 
   .address-text {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   }
 
   .copy-btn {
