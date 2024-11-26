@@ -38,6 +38,7 @@ const Profile = () => {
   const [selectedCurrency, setSelectedCurrency] = useState("ETH");
   const [exchangeRate, setExchangeRate] = useState(1);
   const [favorites, setFavorites] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
   // Fetch user profile from Firestore
@@ -211,7 +212,8 @@ const Profile = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!authUser || !user) {
-        setFavorites(false); // Reset the state if conditions are not met
+        setFavorites([]); // Reset the state if conditions are not met
+        setIsFavorite(false);
         return;
       }
 
@@ -224,14 +226,62 @@ const Profile = () => {
           ...doc.data(),
         }));
         setFavorites(favoritesList); // Update your state with fetched favorites
+
+        // Check if the current user is in the favorites list
+        const favoriteExists = favoritesList.some((fav) => fav.id === user.id);
+        setIsFavorite(favoriteExists);
       } catch (error) {
         console.error("Error fetching favorites:", error);
-        setFavorites(false); // Assume not a favorite if there's an error
+        setFavorites([]); // Reset on error
+        setIsFavorite(false);
       }
     };
 
     fetchFavorites();
-  }, [authUser]);
+  }, [authUser, user, db]); // Include all dependencies
+
+  const handleFavoriteToggle = async () => {
+    if (!authUser || !user) {
+      setFavorites([]); // Reset the state if conditions are not met
+      setIsFavorite(false);
+      return;
+    }
+
+    const favRef = doc(db, `profiles/${authUser.uid}/favorites/${user.id}`);
+
+    try {
+      if (isFavorite) {
+        await deleteDoc(favRef);
+        setIsFavorite(false);
+        // Remove from favorites list
+        setFavorites((prevFavorites) =>
+          prevFavorites.filter((fav) => fav.id !== user.id)
+        );
+      } else {
+        await setDoc(favRef, {
+          id: user.id,
+          username: user.username,
+          bio: user.bio,
+          wallet: user.wallet,
+        });
+        setIsFavorite(true);
+        // Add to favorites list
+        setFavorites((prevFavorites) => [
+          ...prevFavorites,
+          {
+            id: user.id,
+            username: user.username,
+            bio: user.bio,
+            wallet: user.wallet,
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error updating favorites:", error);
+      toast.error("Failed to update favorites.");
+      setIsFavorite(!isFavorite); // Revert state on error
+    }
+  };
 
   return (
     <div className="container">
