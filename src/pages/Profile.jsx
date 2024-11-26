@@ -74,6 +74,7 @@ const Profile = () => {
   const profileOwnerId = user?.id; // Assuming `id` is the unique identifier in Firestore
   const isOwner = authUser?.uid === profileOwnerId; // Check if logged-in user is the owner
 
+  // Fetch exchange rate
   useEffect(() => {
     const fetchRate = async () => {
       if (selectedCurrency !== "ETH") {
@@ -159,56 +160,7 @@ const Profile = () => {
     setMetaMaskAvailable(typeof window.ethereum !== "undefined");
   }, []);
 
-  // Show loader for profile loading
-  if (loadingProfile) {
-    return <Loader />;
-  }
-
-  // Handle profile not found
-  if (!user) {
-    return (
-      <div className="container">
-        <h1>Profile not found</h1>
-      </div>
-    );
-  }
-
-  // Send a tip to the user's wallet
-
-  const sendTip = async () => {
-    const convertedAmount = (amount * exchangeRate).toFixed(8);
-    try {
-      if (!window.ethereum) {
-        toast.error("MetaMask is not installed. Please install MetaMask.");
-        return;
-      }
-
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-
-      if (!user.wallet || !isAddress(user.wallet)) {
-        toast.error("Invalid or missing wallet address.");
-        return;
-      }
-
-      if (!convertedAmount || parseFloat(convertedAmount) <= 0) {
-        toast.warn("Please enter a valid amount greater than 0.");
-        return;
-      }
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const transaction = await signer.sendTransaction({
-        to: user.wallet,
-        value: ethers.parseEther(convertedAmount),
-      });
-
-      toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
-    } catch (error) {
-      console.error("Error sending transaction:", error);
-      toast.error(`Error: ${error.message}`);
-    }
-  };
-
+  // Fetch favorites
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!authUser || !user) {
@@ -239,6 +191,41 @@ const Profile = () => {
 
     fetchFavorites();
   }, [authUser, user, db]); // Include all dependencies
+
+  // Event handlers
+  const sendTip = async () => {
+    const convertedAmount = (amount * exchangeRate).toFixed(8);
+    try {
+      if (!window.ethereum) {
+        toast.error("MetaMask is not installed. Please install MetaMask.");
+        return;
+      }
+
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+
+      if (!user.wallet || !isAddress(user.wallet)) {
+        toast.error("Invalid or missing wallet address.");
+        return;
+      }
+
+      if (!convertedAmount || parseFloat(convertedAmount) <= 0) {
+        toast.warn("Please enter a valid amount greater than 0.");
+        return;
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const transaction = await signer.sendTransaction({
+        to: user.wallet,
+        value: ethers.utils.parseEther(convertedAmount),
+      });
+
+      toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
+    } catch (error) {
+      console.error("Error sending transaction:", error);
+      toast.error(`Error: ${error.message}`);
+    }
+  };
 
   const handleFavoriteToggle = async () => {
     if (!authUser || !user) {
@@ -283,6 +270,22 @@ const Profile = () => {
     }
   };
 
+  // Move early returns after all hooks
+  // Show loader for profile loading
+  if (loadingProfile) {
+    return <Loader />;
+  }
+
+  // Handle profile not found
+  if (!user) {
+    return (
+      <div className="container">
+        <h1>Profile not found</h1>
+      </div>
+    );
+  }
+
+  // Rest of your component's code (e.g., JSX rendering)
   return (
     <div className="container">
       <Helmet>
@@ -316,7 +319,7 @@ const Profile = () => {
             </button>
           )}
         </div>
-        {user && user.wallet ? (
+        {user.wallet ? (
           <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
         ) : (
           <p>Wallet address not available</p>
