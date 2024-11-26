@@ -20,7 +20,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
