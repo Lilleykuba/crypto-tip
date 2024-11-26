@@ -234,14 +234,17 @@ const Profile = () => {
   }, [authUser]);
 
   const handleFavoriteToggle = async () => {
-    if (!authUser || !user) return;
+    if (!authUser || !user) {
+      setFavorites(false); // Reset the state if conditions are not met
+      return;
+    }
 
     const favRef = doc(db, `profiles/${authUser.uid}/favorites/${user.id}`);
 
     try {
       if (isFavorite) {
         await deleteDoc(favRef);
-        setIsFavorite(false);
+        setFavorites(false);
       } else {
         await setDoc(favRef, {
           id: user.id,
@@ -249,11 +252,12 @@ const Profile = () => {
           bio: user.bio,
           wallet: user.wallet,
         });
-        setIsFavorite(true);
+        setFavorites(true);
       }
     } catch (error) {
       console.error("Error updating favorites:", error);
       toast.error("Failed to update favorites.");
+      setFavorites(false);
     }
   };
 
