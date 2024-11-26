@@ -40,6 +40,7 @@ function App() {
             }
           />
           <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Routes>
       </Router>
     </>

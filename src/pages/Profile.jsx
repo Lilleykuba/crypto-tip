@@ -256,8 +256,11 @@ const Profile = () => {
         <h1>{user.username}'s Profile</h1>
         <p>{user.bio}</p>
         <div>
-          {/* Show edit button only to the owner */}
-          {isOwner && <button>Edit Profile</button>}
+          {isOwner && (
+            <button onClick={() => navigate(`/edit-profile`)}>
+              Edit Profile
+            </button>
+          )}
         </div>
         {user && user.wallet ? (
           <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
