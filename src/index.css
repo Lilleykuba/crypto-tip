@@ -433,6 +433,10 @@ li a:hover {
   }
 
   .wallet-address {
+    display: flex;
+  }
+
+  .wallet-container {
     flex-direction: column;
   }
 

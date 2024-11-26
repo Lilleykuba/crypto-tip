@@ -325,7 +325,7 @@ const Profile = () => {
           <p>Wallet address not available</p>
         )}
         <div className="wallet-address">
-          <p>
+          <p className="wallet-container">
             <strong className="wallet-address-text">Wallet Address:</strong>
             <span className="address-text">{user.wallet}</span>
             <button
