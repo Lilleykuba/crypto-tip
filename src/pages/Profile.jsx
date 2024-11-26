@@ -37,7 +37,7 @@ const Profile = () => {
   const [metaMaskAvailable, setMetaMaskAvailable] = useState(false); // MetaMask detection
   const [selectedCurrency, setSelectedCurrency] = useState("ETH");
   const [exchangeRate, setExchangeRate] = useState(1);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
 
   // Fetch user profile from Firestore
@@ -209,21 +209,30 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const checkFavorite = async () => {
-      if (!authUser || !user) return;
+    const fetchFavorites = async () => {
+      if (!authUser) return;
 
-      const favRef = doc(db, "profiles", authUser.uid, "favorites", user.id);
-      const favDoc = await getDoc(favRef);
-      setIsFavorite(favDoc.exists());
+      try {
+        const favSnapshot = await getDocs(
+          collection(db, `profiles/${authUser.uid}/favorites`)
+        );
+        const favoritesList = favSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFavorites(favoritesList); // Update your state with fetched favorites
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
     };
 
-    checkFavorite();
-  }, [authUser, user]);
+    fetchFavorites();
+  }, [authUser]);
 
   const handleFavoriteToggle = async () => {
     if (!authUser || !user) return;
 
-    const favRef = doc(db, "profiles", authUser.uid, "favorites", user.id);
+    const favRef = doc(db, `profiles/${authUser.uid}/favorites/${user.id}`);
 
     try {
       if (isFavorite) {
