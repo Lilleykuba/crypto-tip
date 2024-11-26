@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark" // Default to dark theme
+    localStorage.getItem("theme") || "cryptobro" // Default to dark theme
   );
 
   useEffect(() => {
@@ -11,7 +11,9 @@ const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "bubblegum" ? "dark" : "bubblegum"));
+    setTheme((prevTheme) =>
+      prevTheme === "bubblegum" ? "cryptobro" : "bubblegum"
+    );
   };
 
   return (
@@ -20,7 +22,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
-      {theme === "bubblegum" ? "🌞" : "🌙"}
+      {theme === "bubblegum" ? "😎" : "🫧"}
     </button>
   );
 };
