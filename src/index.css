@@ -398,6 +398,14 @@ li a:hover {
   transform: translateY(-2px);
 }
 
+/* Icon Styles */
+.share-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   html,
@@ -421,7 +429,6 @@ li a:hover {
     width: 35px;
     height: 35px;
   }
-}
 
   .qr-code {
     width: 100px;

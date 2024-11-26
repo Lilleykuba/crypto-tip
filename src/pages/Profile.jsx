@@ -18,6 +18,9 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
 } from "react-share";
 import { toast } from "react-toastify";
 import { useAuth } from "../services/AuthContext";
@@ -341,14 +344,25 @@ const Profile = () => {
         </div>
         {isOwner && (
           <div className="social-share">
-            <FacebookShareButton url={window.location.href}>
-              <button className="share-btn">Share on Facebook</button>
+            <FacebookShareButton
+              url={window.location.href}
+              className="share-btn"
+            >
+              <FacebookIcon size={40} round className="share-icon" />
             </FacebookShareButton>
-            <TwitterShareButton url={window.location.href}>
-              <button className="share-btn">Share on Twitter</button>
+
+            <TwitterShareButton
+              url={window.location.href}
+              className="share-btn"
+            >
+              <TwitterIcon size={40} round className="share-icon" />
             </TwitterShareButton>
-            <LinkedinShareButton url={window.location.href}>
-              <button className="share-btn">Share on LinkedIn</button>
+
+            <LinkedinShareButton
+              url={window.location.href}
+              className="share-btn"
+            >
+              <LinkedinIcon size={40} round className="share-icon" />
             </LinkedinShareButton>
           </div>
         )}
