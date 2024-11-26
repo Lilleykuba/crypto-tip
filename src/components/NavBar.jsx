@@ -7,9 +7,9 @@ import { db } from "../firebase";
 import "../NavBar.css";
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Toggle hamburger menu
-  const [username, setUsername] = useState(""); // Store fetched username
-  const { user, logOut } = useAuth(); // Auth context
+  const [isOpen, setIsOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const { user, logOut } = useAuth();
 
   // Fetch username from Firestore when the user is logged in
   useEffect(() => {
@@ -34,7 +34,7 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      setIsOpen(false); // Close menu after logout
+      setIsOpen(false);
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -58,77 +58,69 @@ const NavBar = () => {
           <span className="line"></span>
         </button>
 
-        {/* Nav Menu */}
-        <div className="nav-sections">
-          {/* Left Aligned Menu */}
-          <ul className={`nav-menu nav-start ${isOpen ? "open" : ""}`}>
+        {/* Navigation Menu */}
+        <ul className={`nav-menu ${isOpen ? "open" : ""}`}>
+          {/* Left Aligned Items */}
+          <li className="nav-item">
+            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/register"
+              className="nav-link"
+              onClick={() => setIsOpen(false)}
+            >
+              Register
+            </Link>
+          </li>
+          {user && (
             <li className="nav-item">
               <Link
-                to="/"
+                to={`/profile/${username || "myprofile"}`}
                 className="nav-link"
                 onClick={() => setIsOpen(false)}
               >
-                Home
+                Profile
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/register"
-                className="nav-link"
-                onClick={() => setIsOpen(false)}
-              >
-                Register
-              </Link>
-            </li>
-            {user && (
-              <li className="nav-item">
+          )}
+
+          {/* Right Aligned Items */}
+          {!user && (
+            <>
+              <li className="nav-item nav-item-right">
                 <Link
-                  to={`/profile/${username || "myprofile"}`}
+                  to="/login"
                   className="nav-link"
                   onClick={() => setIsOpen(false)}
                 >
-                  Profile
+                  Login
                 </Link>
               </li>
-            )}
-          </ul>
-
-          {/* Right Aligned Menu */}
-          <ul className="nav-menu nav-end">
-            {!user && (
-              <>
-                <li className="nav-item">
-                  <Link
-                    to="/login"
-                    className="nav-link"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/signup"
-                    className="nav-link"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Signup
-                  </Link>
-                </li>
-              </>
-            )}
-            {user && (
               <li className="nav-item">
-                <button className="nav-link logout-btn" onClick={handleLogout}>
-                  Logout
-                </button>
+                <Link
+                  to="/signup"
+                  className="nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Signup
+                </Link>
               </li>
-            )}
-            <li className="nav-item">
-              <ThemeToggle />
+            </>
+          )}
+          {user && (
+            <li className="nav-item nav-item-right">
+              <button className="nav-link logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
-          </ul>
-        </div>
+          )}
+          <li className="nav-item">
+            <ThemeToggle />
+          </li>
+        </ul>
       </div>
     </nav>
   );
