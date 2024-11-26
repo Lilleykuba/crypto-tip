@@ -279,8 +279,14 @@ textarea:focus {
 }
 
 .favorite-btn,
-.sendTip-btn {
+.sendTip-btn,
+.login-btn {
   margin: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Keyframes for bounce effect */
