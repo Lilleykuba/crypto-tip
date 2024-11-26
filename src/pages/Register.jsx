@@ -57,7 +57,7 @@ const Register = () => {
         start receiving tips in cryptocurrency.
       </p>
 
-      <form onSubmit={handleRegister}>
+      <form className="register-form" onSubmit={handleRegister}>
         <input
           type="text"
           placeholder="Username"
