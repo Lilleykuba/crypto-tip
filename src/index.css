@@ -373,30 +373,29 @@ li a:hover {
 }
 
 /* Share Buttons */
+.social-share {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .share-btn {
-  background: linear-gradient(135deg, #1877f2, #0056d6); /* Facebook colors */
-  color: white;
-  padding: 10px 20px;
-  margin-right: 10px;
-  border-radius: 5px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none; /* Remove default background */
   border: none;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.2s ease;
 }
 
 .share-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #0056d6, #0042ad);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.social-share {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
 }
 
 /* Responsive Adjustments */
@@ -414,15 +413,15 @@ li a:hover {
   }
 
   .social-share {
-    flex-direction: row;
-    max-width: 100%;
-    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    justify-content: space-around;
   }
 
-  .share-btn {
-    max-width: 30%;
-    font-size: 0.8rem;
+  .share-icon {
+    width: 35px;
+    height: 35px;
   }
+}
 
   .qr-code {
     width: 100px;
