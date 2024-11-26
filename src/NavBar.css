@@ -60,8 +60,11 @@
   font-family: "Roboto", Arial, sans-serif;
 }
 
+.nav-item-left {
+  justify-self: flex-start;
+}
 .nav-item-right {
-  justify-self: flex-end; /* Align items to the right */
+  justify-self: flex-end;
 }
 
 .nav-item {

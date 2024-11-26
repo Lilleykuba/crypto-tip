@@ -61,12 +61,12 @@ const NavBar = () => {
         {/* Navigation Menu */}
         <ul className={`nav-menu ${isOpen ? "open" : ""}`}>
           {/* Left Aligned Items */}
-          <li className="nav-item">
+          <li className="nav-item nav-item-left">
             <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
               Home
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item nav-item-left">
             <Link
               to="/register"
               className="nav-link"
@@ -76,7 +76,7 @@ const NavBar = () => {
             </Link>
           </li>
           {user && (
-            <li className="nav-item">
+            <li className="nav-item nav-item-left">
               <Link
                 to={`/profile/${username || "myprofile"}`}
                 className="nav-link"

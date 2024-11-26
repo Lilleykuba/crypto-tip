@@ -422,11 +422,13 @@ li a:hover {
 
   .wallet-address {
     flex-direction: column;
+    max-width: 600px;
   }
 
   .copy-btn {
     margin-left: 0;
     margin-top: 10px;
+    width: 60%;
   }
 
   .login-form input,
