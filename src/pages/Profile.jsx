@@ -431,7 +431,7 @@ const Profile = () => {
       </div>
       <div>
         <h3>Your Favorite Creators</h3>
-        <ul>
+        <ul className="fav-list">
           {favorites.map((fav) => (
             <li key={fav.id}>
               <Link to={`/profile/${fav.username}`}>

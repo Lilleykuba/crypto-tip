@@ -6,7 +6,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", Arial, sans-serif; /* For body text */
+  font-family: "Roboto", Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -16,32 +16,55 @@ body {
 
 /* Theme Variables */
 :root {
-  --bg-color: #121212; /* Default dark background */
-  --text-color: #e0e0e0; /* Default dark text color */
-  --card-bg: #1f1f1f;
+  /* Cryptobro Theme */
+  --bg-color: #0d0d0d;
+  --text-color: #e0e0e0;
+  --card-bg: #1a1a1a;
   --card-border: #333;
+  --accent-color: #00ffcc;
+  --accent-hover: #00ffff;
   --button-bg: linear-gradient(135deg, #1e88e5, #2196f3);
   --button-hover-bg: linear-gradient(135deg, #1565c0, #1976d2);
+  --input-bg: #1d1d1d;
+  --input-border: #333;
+}
+
+[data-theme="bubblegum"] {
+  /* Bubblegum Theme */
+  --bg-color: #ffe4e1;
+  --text-color: #4b0082;
+  --card-bg: #ffb6c1;
+  --card-border: #ff69b4;
+  --accent-color: #ff69b4;
+  --accent-hover: #ff1493;
+  --button-bg: linear-gradient(135deg, #ff69b4, #ff1493);
+  --button-hover-bg: linear-gradient(135deg, #ff1493, #db0066);
+  --input-bg: #fff0f5;
+  --input-border: #ff69b4;
 }
 
 [data-theme="light"] {
-  --bg-color: #b39be6; /* Light background */
-  --text-color: #161515; /* Light text color */
-  --card-bg: #8b5bb6;
-  --card-border: #7827bba2;
+  /* Default Light Theme */
+  --bg-color: #ffffff;
+  --text-color: #161515;
+  --card-bg: #f5f5f5;
+  --card-border: #cccccc;
+  --accent-color: #007bff;
+  --accent-hover: #0056b3;
   --button-bg: linear-gradient(135deg, #ffa726, #ff9800);
   --button-hover-bg: linear-gradient(135deg, #fb8c00, #f57c00);
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
 }
 
 /* Headings */
 h1,
 h2,
 h3 {
-  font-family: "Orbitron", Arial, sans-serif; /* For headings */
-  color: var(--text-color);
+  font-family: "Orbitron", Arial, sans-serif;
+  color: var(--accent-color);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #00ffcc;
   text-shadow: 0px 2px 8px rgba(0, 255, 204, 0.5);
   margin: 0 0 15px 0;
 }
@@ -65,20 +88,20 @@ p {
   font-size: 1rem;
   line-height: 1.8;
   margin-bottom: 20px;
-  color: #b0b0b0; /* Softer text color */
+  color: var(--text-color);
 }
 
 /* Links */
 a {
-  color: #00ffcc;
+  color: var(--accent-color);
   text-decoration: none;
   position: relative;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 a:hover {
-  color: #00ffff;
-  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  color: var(--accent-hover);
+  text-shadow: 0 0 10px var(--accent-hover), 0 0 20px var(--accent-hover);
 }
 
 /* Buttons */
@@ -90,24 +113,32 @@ button {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background: linear-gradient(135deg, #1e88e5, #2196f3);
+  background: var(--button-bg);
   color: white;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #1565c0, #1976d2);
+  background: var(--button-hover-bg);
   transform: translateY(-2px);
-  box-shadow: 0px 4px 10px rgba(21, 101, 192, 0.6);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus States */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.5);
 }
 
 /* Inputs and Textareas */
 input,
 textarea {
   font-family: "Roboto", Arial, sans-serif;
-  background-color: #1d1d1d;
-  color: #e0e0e0;
-  border: 1px solid #333;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
   padding: 10px;
   border-radius: 5px;
   font-size: 1rem;
@@ -115,15 +146,15 @@ textarea {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: #777777;
 }
 
 input:focus,
 textarea:focus {
-  outline: none;
-  border-color: #00ffcc;
-  box-shadow: 0px 0px 8px #00ffcc;
+  border-color: var(--accent-color);
+  box-shadow: 0px 0px 8px var(--accent-color);
 }
 
 /* Containers */
@@ -147,7 +178,6 @@ textarea:focus {
   margin-top: 30px;
 }
 
-/* Glow on hover */
 .card:hover {
   box-shadow: 0px 10px 25px rgba(0, 255, 204, 0.3);
 }
@@ -187,14 +217,12 @@ textarea:focus {
 }
 
 /* Lists */
-.creators-list,
-.filter-list {
+ul {
   list-style: none;
   padding: 0;
 }
 
-.creators-list,
-.filter-list li {
+li {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 5px;
@@ -204,35 +232,26 @@ textarea:focus {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.creators-list,
-.card-list,
-.supp-list,
-.filter-list li:hover {
+li:hover {
   transform: translateY(-2px);
   box-shadow: 0px 6px 15px rgba(0, 255, 204, 0.3);
 }
 
-.creators-list,
-.card-list,
-.supp-list,
-.filter-list li a {
-  color: #00ffcc;
+li a {
+  color: var(--accent-color);
   text-decoration: none;
 }
 
-.creators-list,
-.card-list,
-.supp-list,
-.filter-list li a:hover {
+li a:hover {
   text-decoration: underline;
-  color: #00ffff;
+  color: var(--accent-hover);
 }
 
 /* QR Code Animation */
 .qr-code {
   display: block;
   margin: 20px auto;
-  border: 2px solid #00ffcc;
+  border: 2px solid var(--accent-color);
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0px 0px 15px rgba(0, 255, 204, 0.4);
@@ -244,27 +263,29 @@ textarea:focus {
   box-shadow: 0px 0px 25px rgba(0, 255, 204, 0.6);
 }
 
+/* Wallet Address */
 .wallet-address {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 10px;
 }
 
 .address-text {
   font-family: monospace;
-  color: #00ffcc;
-  background: #1d1d1d;
+  color: var(--accent-color);
+  background: var(--input-bg);
   padding: 5px 10px;
   border-radius: 5px;
   user-select: all;
+  margin-bottom: 10px;
 }
 
 .copy-btn {
   background: linear-gradient(135deg, #4caf50, #388e3c);
   color: white;
-  padding: 5px 10px;
+  padding: 10px 15px;
   margin-left: 10px;
   border: none;
   border-radius: 5px;
@@ -275,14 +296,17 @@ textarea:focus {
 
 .copy-btn:hover {
   background: linear-gradient(135deg, #388e3c, #2e7d32);
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Specific Buttons */
 .favorite-btn,
 .sendTip-btn {
   margin: 20px;
 }
 
+/* Forms */
 .login-form,
 .signup-form,
 .edit-form {
@@ -293,15 +317,19 @@ textarea:focus {
   gap: 20px;
 }
 
-/* Keyframes for bounce effect */
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.login-form input,
+.signup-form input,
+.edit-form input,
+.login-form textarea,
+.signup-form textarea,
+.edit-form textarea {
+  width: 80%;
+}
+
+.login-form button,
+.signup-form button,
+.edit-form button {
+  width: 50%;
 }
 
 /* Error Messages */
@@ -321,22 +349,26 @@ textarea:focus {
   color: #ff7575;
 }
 
+/* Register Link */
 .register-link {
   display: inline-block;
   margin-top: 10px;
-  background-color: var(--button-bg);
-  color: var(--text-color);
+  background: var(--button-bg);
+  color: white;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .register-link:hover {
-  background-color: var(--button-hover-bg);
+  background: var(--button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Share Buttons */
 .share-btn {
   background: linear-gradient(135deg, #1877f2, #0056d6); /* Facebook colors */
   color: white;
@@ -350,8 +382,9 @@ textarea:focus {
 }
 
 .share-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
   background: linear-gradient(135deg, #0056d6, #0042ad);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .social-share {
@@ -365,8 +398,7 @@ textarea:focus {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
   }
 
   .social-share {
@@ -381,6 +413,30 @@ textarea:focus {
   input,
   button {
     font-size: 14px;
+    width: 100%;
+  }
+
+  .wallet-address {
+    flex-direction: column;
+  }
+
+  .copy-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .login-form input,
+  .signup-form input,
+  .edit-form input,
+  .login-form textarea,
+  .signup-form textarea,
+  .edit-form textarea {
+    width: 100%;
+  }
+
+  .login-form button,
+  .signup-form button,
+  .edit-form button {
     width: 100%;
   }
 }
