@@ -564,26 +564,6 @@ li a:hover {
   margin: 0;
 }
 
-.favorite-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  top: 0;
-}
-
-.favorite-icon {
-  font-size: 2rem;
-  color: var(--accent-color);
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.favorite-btn:hover .favorite-icon {
-  color: var(--accent-hover);
-  transform: scale(1.1);
-}
-
 /* Forms */
 .login-form,
 .signup-form,
