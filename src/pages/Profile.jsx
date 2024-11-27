@@ -317,26 +317,45 @@ const Profile = () => {
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
       <div className="card">
-        <div className="profile-header">
-          <h1>{user.username}'s Profile</h1>
-          {/* Favorite Heart Icon */}
-          {!isOwner && (
-            <button className="favorite-btn" onClick={handleFavoriteToggle}>
-              <FontAwesomeIcon
-                icon={isFavorite ? solidHeart : regularHeart}
-                className="favorite-icon"
-              />
-            </button>
-          )}
+        <div className="profile-container">
+          <div className="profile-header">
+            <div className="profile-photo">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt={`${user.username}'s profile`} />
+              ) : (
+                <div className="placeholder-photo">
+                  <span>{user.username.charAt(0).toUpperCase()}</span>
+                </div>
+              )}
+            </div>
+            <div className="profile-info">
+              <h1>{user.username}</h1>
+              <p>{user.bio}</p>
+              <div className="profile-actions">
+                {!isOwner && (
+                  <button
+                    className="favorite-btn"
+                    onClick={handleFavoriteToggle}
+                  >
+                    <FontAwesomeIcon
+                      icon={isFavorite ? solidHeart : regularHeart}
+                      className="favorite-icon"
+                    />
+                  </button>
+                )}
+                {isOwner && (
+                  <button
+                    className="edit-profile-btn"
+                    onClick={() => navigate(`/edit-profile`)}
+                  >
+                    Edit Profile
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <p>{user.bio}</p>
-        <div>
-          {isOwner && (
-            <button onClick={() => navigate(`/edit-profile`)}>
-              Edit Profile
-            </button>
-          )}
-        </div>
+
         {user.wallet ? (
           <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
         ) : (
