@@ -475,6 +475,8 @@ li a:hover {
 .favorite-btn:hover,
 .edit-profile-btn:hover {
   background-color: #e68900;
+  border: none;
+  box-shadow: none;
 }
 
 .favorite-icon {
