@@ -400,17 +400,30 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-        {/* Tip Form */}
-        <div style={{ marginTop: "20px" }}>
-          <h3>Send a Tip</h3>
+      </div>
+      {/* Tip Section */}
+      <div className="tip-section">
+        <h2>Support {user.username}</h2>
+        <div className="tip-buttons">
+          {[0.01, 0.05, 0.1].map((tipAmount) => (
+            <button
+              key={tipAmount}
+              className="tip-button"
+              onClick={() => setAmount(tipAmount.toString())}
+            >
+              {tipAmount} ETH
+            </button>
+          ))}
+        </div>
+        <div className="custom-tip">
           <input
             type="number"
-            placeholder="Amount in ETH"
+            placeholder="Custom amount in ETH"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
           <button
-            className="sendTip-btn"
+            className="send-tip-btn"
             onClick={sendTip}
             disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
           >
