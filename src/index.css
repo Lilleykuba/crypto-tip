@@ -315,7 +315,9 @@ textarea:focus {
   height: 150px;
   overflow: hidden;
   background-color: #450654;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .creator-photo img {
@@ -326,7 +328,7 @@ textarea:focus {
 
 .placeholder-photo {
   background-image: url("../public/ProfilePic.webp");
-  background-size: cover;
+  background-size: contain;
   display: flex;
   align-items: center;
   justify-content: center;
