@@ -145,7 +145,6 @@ const Home = () => {
                         ) : (
                           <p>Wallet address not available</p>
                         )}
-                        <span>{creator.username.charAt(0).toUpperCase()}</span>
                       </div>
                     )}
                   </div>
@@ -167,15 +166,34 @@ const Home = () => {
       </select>
       <ul className="creators-list">
         {creators.map((creator) => (
-          <li key={creator.id} className="creator-card">
+          <div key={creator.id} className="creator-card">
             <Link to={`/profile/${creator.username}`} className="creator-link">
-              <h3>{creator.username}</h3>
-              <p>{creator.bio}</p>
-              <p>
-                <strong>Wallet:</strong> {creator.wallet}
-              </p>
+              <div className="creator-photo">
+                {creator.photoURL ? (
+                  <img
+                    src={creator.photoURL}
+                    alt={`${creator.username}'s profile`}
+                  />
+                ) : (
+                  <div className="placeholder-photo">
+                    {creator.wallet ? (
+                      <QRCodeCanvas
+                        className="qr-code"
+                        value={creator.wallet}
+                        size={128}
+                      />
+                    ) : (
+                      <p>Wallet address not available</p>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="creator-info">
+                <h3>{creator.username}</h3>
+                <p>{creator.bio}</p>
+              </div>
             </Link>
-          </li>
+          </div>
         ))}
       </ul>
     </div>

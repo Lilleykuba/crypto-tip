@@ -318,6 +318,7 @@ textarea:focus {
 
 .placeholder-photo {
   background-image: url("../public/ProfilePic.webp");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
