@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
 import { useAuth } from "../services/AuthContext"; // Import AuthContext
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Home = () => {
   const [creators, setCreators] = useState([]); // State to store fetched creators
