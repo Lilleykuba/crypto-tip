@@ -323,9 +323,7 @@ const Profile = () => {
               {user.photoURL ? (
                 <img src={user.photoURL} alt={`${user.username}'s profile`} />
               ) : (
-                <div className="placeholder-photo">
-                  <span>{user.username.charAt(0).toUpperCase()}</span>
-                </div>
+                <div className="placeholder-photo"></div>
               )}
             </div>
             <div className="profile-info">

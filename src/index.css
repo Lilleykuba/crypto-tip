@@ -440,18 +440,6 @@ li a:hover {
   object-fit: cover;
 }
 
-.placeholder-photo {
-  background-image: url("../public/ProfilePic.webp");
-  background-size: cover;
-  display: flex;
-  border-radius: 50px;
-  max-width: 100px;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  color: white;
-}
-
 .profile-info {
   flex: 1;
   margin-left: 30px;
@@ -465,7 +453,7 @@ li a:hover {
 .profile-info p {
   margin-top: 10px;
   font-size: 1.2rem;
-  color: #555555;
+  color: #bbbbbb;
 }
 
 .profile-actions {
