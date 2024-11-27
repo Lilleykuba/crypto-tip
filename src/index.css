@@ -331,6 +331,7 @@ textarea:focus {
 .creator-info {
   padding: 15px;
   text-align: left;
+  color: white;
 }
 
 .creator-info h3 {
