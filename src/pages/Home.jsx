@@ -67,17 +67,30 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1>Welcome to CrypTip</h1>
-      <p>
-        Discover and support creative individuals using secure cryptocurrency
-        transactions. Your tips can make a difference!
-      </p>
-
-      {user && (
-        <Link to="/register" className="register-link">
-          Become a Creator Now
-        </Link>
-      )}
+      <section className="hero">
+        <div className="hero-content">
+          <h1>Support Creators with Crypto Tips</h1>
+          <p>
+            Discover and support creative individuals using secure
+            cryptocurrency transactions. Your tips can make a difference!
+          </p>
+          <div className="hero-buttons">
+            {!user && (
+              <Link to="/signup" className="btn primary-btn">
+                Get Started
+              </Link>
+            )}
+            {user && (
+              <Link to="/register" className="btn primary-btn">
+                Become a Creator Now
+              </Link>
+            )}
+            <Link to="#creators" className="btn secondary-btn">
+              Explore Creators
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <div style={{ marginTop: "20px" }}>
         <h2>Search Creators</h2>
