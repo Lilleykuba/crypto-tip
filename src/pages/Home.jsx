@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path to your Firebase config
 import { useAuth } from "../services/AuthContext"; // Import AuthContext
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { QRCodeCanvas } from "qrcode.react";
 
 const Home = () => {
   const [creators, setCreators] = useState([]); // State to store fetched creators
@@ -135,6 +136,15 @@ const Home = () => {
                       />
                     ) : (
                       <div className="placeholder-photo">
+                        {creator.wallet ? (
+                          <QRCodeCanvas
+                            className="qr-code"
+                            value={creator.wallet}
+                            size={128}
+                          />
+                        ) : (
+                          <p>Wallet address not available</p>
+                        )}
                         <span>{creator.username.charAt(0).toUpperCase()}</span>
                       </div>
                     )}
