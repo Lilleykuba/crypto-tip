@@ -3,13 +3,6 @@ html {
   scroll-behavior: smooth;
 }
 
-:target:before {
-  content: "";
-  display: block;
-  height: 100px;
-  margin: -100px 0 0;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -298,6 +291,13 @@ textarea:focus {
   margin-bottom: 20px;
   animation: fadeIn 0.8s ease-in-out forwards;
   transform-origin: top;
+}
+
+#creators:target:before {
+  content: "";
+  display: block;
+  height: 100px;
+  margin: -100px 0 0;
 }
 
 .creator-card:hover {
