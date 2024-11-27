@@ -184,9 +184,6 @@ textarea:focus {
 
 /* Hero Section */
 .hero {
-  background-image: url("../public/Hero.webp");
-  background-size: cover;
-  background-position: center;
   padding: 100px 20px;
   color: white;
   text-align: center;
