@@ -315,6 +315,7 @@ textarea:focus {
   height: 150px;
   overflow: hidden;
   background-color: #450654;
+  align-items: center;
 }
 
 .creator-photo img {
