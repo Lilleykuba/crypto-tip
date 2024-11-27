@@ -546,9 +546,66 @@ li a:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific Buttons */
-.sendTip-btn {
-  margin: 20px;
+/* Tip Section */
+.tip-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.tip-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.tip-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tip-button {
+  padding: 10px 20px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tip-button:hover {
+  background-color: #e68900;
+}
+
+.custom-tip {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.custom-tip input {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.send-tip-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-tip-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.send-tip-btn:hover:not(:disabled) {
+  background-color: #43a047;
 }
 
 /* Profile Header */
