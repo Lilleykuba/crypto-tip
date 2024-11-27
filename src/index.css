@@ -475,6 +475,12 @@ li a:hover {
   cursor: pointer;
 }
 
+.favorite-btn {
+  background-color: transparent;
+  position: relative;
+  float: right;
+}
+
 .favorite-btn:hover,
 .edit-profile-btn:hover {
   background-color: #e68900;
