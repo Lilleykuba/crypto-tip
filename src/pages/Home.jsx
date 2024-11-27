@@ -121,12 +121,29 @@ const Home = () => {
         ) : (
           <ul className="filter-list">
             {filteredCreators.map((creator) => (
-              <li key={creator.id}>
-                <Link to={`/profile/${creator.username}`}>
-                  <h3>{creator.username}</h3>
-                  <p>{creator.bio}</p>
+              <div key={creator.id} className="creator-card">
+                <Link
+                  to={`/profile/${creator.username}`}
+                  className="creator-link"
+                >
+                  <div className="creator-photo">
+                    {creator.photoURL ? (
+                      <img
+                        src={creator.photoURL}
+                        alt={`${creator.username}'s profile`}
+                      />
+                    ) : (
+                      <div className="placeholder-photo">
+                        <span>{creator.username.charAt(0).toUpperCase()}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="creator-info">
+                    <h3>{creator.username}</h3>
+                    <p>{creator.bio}</p>
+                  </div>
                 </Link>
-              </li>
+              </div>
             ))}
           </ul>
         )}
