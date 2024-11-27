@@ -87,9 +87,9 @@ const Home = () => {
                 Become a Creator Now
               </Link>
             )}
-            <Link to="#creators" className="btn secondary-btn">
+            <a href="#creators" className="btn secondary-btn">
               Explore Creators
-            </Link>
+            </a>
           </div>
         </div>
       </section>
