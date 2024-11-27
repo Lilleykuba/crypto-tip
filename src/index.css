@@ -475,7 +475,7 @@ li a:hover {
   margin-top: 20px;
   display: flex;
   gap: 10px;
-  position: relative;
+  position: absolute;
   top: 0;
   right: 0;
 }
