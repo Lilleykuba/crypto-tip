@@ -158,12 +158,14 @@ const Home = () => {
           </ul>
         )}
       </section>
-      <h2>Featured creators</h2>
-      <select onChange={(e) => handleSort(e.target.value)}>
-        <option value="default">Sort By</option>
-        <option value="popularity">Most Tipped</option>
-        <option value="recent">Recently Registered</option>
-      </select>
+      <h2>Explore creators</h2>
+      <div className="sorting-options">
+        <select onChange={(e) => handleSort(e.target.value)}>
+          <option value="default">Sort By</option>
+          <option value="popularity">Most Tipped</option>
+          <option value="recent">Recently Registered</option>
+        </select>
+      </div>
       <ul className="creators-list">
         {creators.map((creator) => (
           <div key={creator.id} className="creator-card">

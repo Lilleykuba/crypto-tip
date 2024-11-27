@@ -699,4 +699,8 @@ li a:hover {
     font-size: 1rem;
     padding: 10px 20px;
   }
+
+  .search-bar .search-btn {
+    max-width: 20%;
+  }
 }
