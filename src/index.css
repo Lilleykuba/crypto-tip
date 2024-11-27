@@ -213,7 +213,7 @@ textarea:focus {
 }
 
 .primary-btn {
-  background-color: #ff9800;
+  background-color: transparent;
   color: white;
   border: none;
   border-radius: 5px;

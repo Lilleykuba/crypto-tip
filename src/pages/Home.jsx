@@ -158,7 +158,7 @@ const Home = () => {
           </ul>
         )}
       </section>
-      <h2>Explore creators</h2>
+      <h2 id="creators">Explore creators</h2>
       <div className="sorting-options">
         <select onChange={(e) => handleSort(e.target.value)}>
           <option value="default">Sort By</option>
