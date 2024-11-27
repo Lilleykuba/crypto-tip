@@ -92,14 +92,28 @@ const Home = () => {
         </div>
       </section>
 
-      <div style={{ marginTop: "20px" }}>
-        <h2>Search Creators</h2>
+      <section className="search-section">
+        <h2>Discover Creators</h2>
+        <div className="search-bar">
         <input
-          type="text"
-          placeholder="Search creators by username or bio"
-          value={searchQuery}
-          onChange={handleSearch}
-        />
+      type="text"
+      placeholder="Search creators by username or bio"
+      value={searchQuery}
+      onChange={handleSearch}
+    />
+    <button className="search-btn">
+      <i className="fas fa-search"></i>
+    </button>
+  </div>
+  
+  {/* Sorting Options */}
+  <div className="sorting-options">
+    <select onChange={(e) => handleSort(e.target.value)}>
+      <option value="default">Sort By</option>
+      <option value="popularity">Most Tipped</option>
+      <option value="recent">Recently Registered</option>
+    </select>
+  </div>
         {loading ? (
           <p>Loading...</p>
         ) : filteredCreators.length === 0 ? (
@@ -116,6 +130,7 @@ const Home = () => {
             ))}
           </ul>
         )}
+        </section>
         <h2>Featured creators</h2>
         <select onChange={(e) => handleSort(e.target.value)}>
           <option value="default">Sort By</option>

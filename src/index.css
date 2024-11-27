@@ -233,6 +233,50 @@ textarea:focus {
   opacity: 0.9;
 }
 
+/* Search Section */
+.search-section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.search-bar {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.search-bar input {
+  width: 300px;
+  padding: 10px 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 1rem;
+}
+
+.search-bar .search-btn {
+  background-color: #ff9800;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-bar .search-btn i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.sorting-options {
+  margin-bottom: 30px;
+}
+
+.sorting-options select {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
 /* Keyframes for fade-in effect */
 @keyframes fadeIn {
   from {

@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import default styles
 import PrivateRoute from "./services/PrivateRoute";
 import NavBar from "./components/NavBar";
 import EditProfile from "./pages/EditProfile";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
