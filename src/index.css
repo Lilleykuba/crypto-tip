@@ -434,6 +434,19 @@ li a:hover {
   margin: 0 auto;
   padding: 20px;
 }
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+.profile-header h1 {
+  margin: 0;
+}
 
 .profile-photo img,
 .placeholder-photo {
@@ -441,8 +454,6 @@ li a:hover {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  position: relative;
-  float: right;
 }
 
 .profile-info {
@@ -464,8 +475,6 @@ li a:hover {
   margin-top: 20px;
   display: flex;
   gap: 10px;
-  position: relative;
-  float: left;
 }
 
 .favorite-btn,
@@ -606,19 +615,6 @@ li a:hover {
 
 .send-tip-btn:hover:not(:disabled) {
   background-color: #43a047;
-}
-
-/* Profile Header */
-.profile-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.profile-header h1 {
-  margin: 0;
 }
 
 /* Forms */
