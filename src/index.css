@@ -441,8 +441,8 @@ li a:hover {
 }
 
 .placeholder-photo {
-  background-color: #cccccc;
-  background-size: contain;
+  background-image: url("../public/ProfilePic.webp");
+  background-size: cover;
   display: flex;
   border-radius: 50px;
   max-width: 100px;
