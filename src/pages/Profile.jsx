@@ -467,12 +467,14 @@ const Profile = () => {
           </table>
         )}
       </div>
-      <AnalyticsSection
-        totalTips={totalTips}
-        transactionCount={transactionCount}
-        topSupporters={topSupporters}
-      />
-      <div>
+      <div className="analytics-section">
+        <AnalyticsSection
+          totalTips={totalTips}
+          transactionCount={transactionCount}
+          topSupporters={topSupporters}
+        />
+      </div>
+      <div className="favorites-section">
         <h3>Your Favorite Creators</h3>
         <ul className="fav-list">
           {favorites.map((fav) => (

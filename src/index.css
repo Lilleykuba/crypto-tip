@@ -492,12 +492,13 @@ li a:hover {
 }
 
 .favorite-btn {
+  color: --button-bg;
   background-color: transparent;
 }
 
 .favorite-btn:hover,
 .edit-profile-btn:hover {
-  background-color: #e68900;
+  background-color: transparent;
   border: none;
   box-shadow: none;
 }
@@ -737,6 +738,14 @@ li a:hover {
   color: #ff7575;
 }
 
+.card,
+.tip-section,
+.tipping-history,
+.analytics-section,
+.favorites-section {
+  margin-top: 40px;
+}
+
 /* Register Link */
 .register-link {
   display: inline-block;
@@ -833,7 +842,7 @@ li a:hover {
   .tip-buttons {
     flex-direction: column;
     max-width: 70%;
-    justify-content: center;
+    align-items: center;
   }
 
   .custom-tip {
