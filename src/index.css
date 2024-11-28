@@ -650,7 +650,7 @@ li a:hover {
   padding: 10px;
   border: 1px solid --card-border;
   text-align: center;
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 .transactions-grid tr:nth-child(even) {
