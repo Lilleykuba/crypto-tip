@@ -320,6 +320,24 @@ const Profile = () => {
       {/* User Profile Card */}
       <div className="card">
         <div className="profile-container">
+          <div className="profile-actions">
+            {!isOwner && (
+              <button className="favorite-btn" onClick={handleFavoriteToggle}>
+                <FontAwesomeIcon
+                  icon={isFavorite ? solidHeart : regularHeart}
+                  className="favorite-icon"
+                />
+              </button>
+            )}
+            {isOwner && (
+              <button
+                className="edit-profile-btn"
+                onClick={() => navigate(`/edit-profile`)}
+              >
+                Edit Profile
+              </button>
+            )}
+          </div>
           <div className="profile-header">
             <div className="profile-photo">
               {user.photoURL ? (
@@ -331,27 +349,6 @@ const Profile = () => {
             <div className="profile-info">
               <h1>{user.username}</h1>
               <p>{user.bio}</p>
-              <div className="profile-actions">
-                {!isOwner && (
-                  <button
-                    className="favorite-btn"
-                    onClick={handleFavoriteToggle}
-                  >
-                    <FontAwesomeIcon
-                      icon={isFavorite ? solidHeart : regularHeart}
-                      className="favorite-icon"
-                    />
-                  </button>
-                )}
-                {isOwner && (
-                  <button
-                    className="edit-profile-btn"
-                    onClick={() => navigate(`/edit-profile`)}
-                  >
-                    Edit Profile
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         </div>
