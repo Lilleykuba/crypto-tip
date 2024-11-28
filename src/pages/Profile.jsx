@@ -112,7 +112,7 @@ const Profile = () => {
             import.meta.env.VITE_APP_ETHERSCAN_API_KEY
           }`
         );
-        console.log("API URL:", apiUrl);
+        console.log("API URL:", import.meta.env.VITE_APP_ETHERSCAN_API_KEY);
         const data = await response.json();
 
         if (data.status === "1") {
