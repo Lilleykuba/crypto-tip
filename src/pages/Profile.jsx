@@ -29,8 +29,7 @@ import { useAuth } from "../services/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
-import { Bar } from "react-chartjs-2";
-import ChartJS from "../components/ChartSetup";
+import AnalyticsSection from "../components/AnalyticsSection"; // Adjust the path if necessary
 
 const Profile = () => {
   const { username } = useParams();
@@ -280,40 +279,6 @@ const Profile = () => {
     }
   };
 
-  const AnalyticsSection = ({ totalTips, transactionCount, topSupporters }) => {
-    // Prepare data for the chart
-    const chartData = {
-      labels: topSupporters.map((supporter) => supporter.address),
-      datasets: [
-        {
-          label: "Top Supporters",
-          data: topSupporters.map((supporter) => supporter.amount),
-          backgroundColor: "#ff9800",
-        },
-      ],
-    };
-
-    const options = {
-      responsive: true,
-      scales: {
-        x: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: "Supporters",
-          },
-        },
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: "Amount (ETH)",
-          },
-        },
-      },
-    };
-  };
-
   // Move early returns after all hooks
   // Show loader for profile loading
   if (loadingProfile) {
@@ -502,23 +467,11 @@ const Profile = () => {
           </table>
         )}
       </div>
-      {/* Analytics */}
-      <div className="analytics-section">
-        <h2>Analytics</h2>
-        <div className="analytics-cards">
-          <div className="analytics-card">
-            <h3>Total Tips</h3>
-            <p>{totalTips.toFixed(4)} ETH</p>
-          </div>
-          <div className="analytics-card">
-            <h3>Transactions</h3>
-            <p>{transactionCount}</p>
-          </div>
-        </div>
-        <div className="chart-container">
-          <Bar data={chartData} options={options} />
-        </div>
-      </div>
+      <AnalyticsSection
+        totalTips={totalTips}
+        transactionCount={transactionCount}
+        topSupporters={topSupporters}
+      />
       <div>
         <h3>Your Favorite Creators</h3>
         <ul className="fav-list">
