@@ -32,7 +32,7 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; /
 import { Bar } from "react-chartjs-2";
 import ChartJS from '../components/ChartSetup';
 
-const Profile = () => {
+export const Profile = () => {
   const { username } = useParams();
   const { user: authUser } = useAuth();
   const [user, setUser] = useState(null); // Fetched user
@@ -535,4 +535,3 @@ const Profile = () => {
   );
 };
 
-export default Profile;
