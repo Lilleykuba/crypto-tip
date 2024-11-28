@@ -11,7 +11,7 @@
 
 .navbar .nav-logo {
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: #00ffcc;
   text-decoration: none;
@@ -35,7 +35,7 @@
 
 .nav-logo {
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #00ffcc;
   text-decoration: none;
@@ -61,6 +61,7 @@
 
 .nav-left {
   flex: 1;
+  margin-left: 60px;
 }
 
 .nav-right {
@@ -194,6 +195,11 @@
 
 /* Show hamburger menu on mobile */
 @media (max-width: 768px) {
+  .nav-container {
+    position: relative;
+    width: 60%;
+  }
+
   .hamburger {
     display: flex;
   }
