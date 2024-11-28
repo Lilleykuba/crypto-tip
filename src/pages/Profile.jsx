@@ -438,38 +438,33 @@ const Profile = () => {
         {transactions.length === 0 ? (
           <p>No transactions found for this wallet.</p>
         ) : (
-          <table className="transactions-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>From</th>
-                <th>Amount (ETH)</th>
-                <th>Transaction</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.slice(0, 5).map((tx, index) => (
-                <tr key={index}>
-                  <td>
-                    {new Date(
-                      parseInt(tx.timeStamp) * 1000
-                    ).toLocaleDateString()}
-                  </td>
-                  <td>{tx.from}</td>
-                  <td>{(parseFloat(tx.value) / 10 ** 18).toFixed(4)}</td>
-                  <td>
-                    <a
-                      href={`https://etherscan.io/tx/${tx.hash}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="transactions-grid">
+            <div className="grid-header">Date</div>
+            <div className="grid-header">From</div>
+            <div className="grid-header">Amount (ETH)</div>
+            <div className="grid-header">Transaction</div>
+
+            {transactions.slice(0, 5).map((tx, index) => (
+              <React.Fragment key={index}>
+                <div className="grid-item">
+                  {new Date(parseInt(tx.timeStamp) * 1000).toLocaleDateString()}
+                </div>
+                <div className="grid-item">{tx.from}</div>
+                <div className="grid-item">
+                  {(parseFloat(tx.value) / 10 ** 18).toFixed(4)}
+                </div>
+                <div className="grid-item">
+                  <a
+                    href={`https://etherscan.io/tx/${tx.hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View
+                  </a>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         )}
       </div>
       <div className="analytics-section">
