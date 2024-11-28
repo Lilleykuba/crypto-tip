@@ -7,6 +7,7 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  max-height: 80px;
 }
 
 .navbar .nav-logo {
@@ -197,7 +198,6 @@
 @media (max-width: 768px) {
   .nav-container {
     position: relative;
-    width: 60%;
   }
 
   .hamburger {
@@ -223,6 +223,7 @@
 
   .nav-menu.open {
     display: flex;
+    width: 60%;
   }
 
   .nav-left,
