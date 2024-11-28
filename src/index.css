@@ -926,21 +926,11 @@ li a:hover {
     overflow-x: auto;
   }
 
-  .login-form input,
-  .signup-form input,
-  .edit-form input,
-  .login-form textarea,
-  .signup-form textarea,
-  .edit-form textarea,
-  .register-form textarea {
-    width: 100%;
-  }
-
   .login-form button,
   .signup-form button,
   .edit-form button,
   .register-form button {
-    width: 100%;
+    width: 80%;
   }
 
   .creators-grid {
