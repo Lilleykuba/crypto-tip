@@ -203,29 +203,34 @@
   }
 
   .nav-menu {
-    display: none;
+    display: none; /* Hide menu by default on mobile */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
   }
 
   .nav-menu.open {
     display: flex;
+  }
+
+  .nav-left,
+  .nav-right {
     flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: var(--card-bg);
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    align-items: flex-start;
   }
 
-  .nav-item.nav-item-right {
-    margin-left: 0;
+  .nav-right {
+    margin-top: 10px;
   }
 
-  .nav-menu.open .nav-item {
-    width: 100%;
-    margin-bottom: 10px;
+  .nav-item {
+    margin: 10px 0;
   }
 
   .nav-menu .nav-item:last-child {
