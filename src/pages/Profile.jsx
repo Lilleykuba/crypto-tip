@@ -30,25 +30,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
 import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale, // Import CategoryScale
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-// Register the components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import ChartJS from '../components/ChartSetup';
 
 const Profile = () => {
   const { username } = useParams();
