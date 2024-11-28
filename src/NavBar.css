@@ -220,7 +220,8 @@
   .nav-menu.open {
     display: flex;
     width: 40%;
-    top: 0;
+    top: 80;
+    right: 0;
     margin: 0;
     align-items: center;
   }
@@ -229,6 +230,7 @@
   .nav-right {
     flex-direction: column;
     align-items: flex-start;
+    margin: 0;
   }
 
   .nav-menu .nav-item:last-child {
