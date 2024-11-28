@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "./AnalyticsSection.css";
 
 // Register the components
 ChartJS.register(
