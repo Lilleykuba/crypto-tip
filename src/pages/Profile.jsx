@@ -110,7 +110,8 @@ const Profile = () => {
             user.wallet
           }&startblock=0&endblock=99999999&sort=desc&apikey=${
             import.meta.env.VITE_APP_ETHERSCAN_API_KEY
-          }`
+          }`;
+          console.log("API URL:", apiUrl);
         );
         const data = await response.json();
 
@@ -449,7 +450,11 @@ const Profile = () => {
             <tbody>
               {transactions.slice(0, 5).map((tx, index) => (
                 <tr key={index}>
-                  <td>{new Date(tx.timeStamp * 1000).toLocaleDateString()}</td>
+                  <td>
+                    {new Date(
+                      parseInt(tx.timeStamp) * 1000
+                    ).toLocaleDateString()}
+                  </td>
                   <td>{tx.from}</td>
                   <td>{(parseFloat(tx.value) / 10 ** 18).toFixed(4)}</td>
                   <td>
