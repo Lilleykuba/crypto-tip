@@ -223,11 +223,11 @@ const Profile = () => {
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
       const transaction = await signer.sendTransaction({
         to: user.wallet,
-        value: ethers.utils.parseEther(convertedAmount),
+        value: ethers.parseEther(convertedAmount),
       });
 
       toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
