@@ -198,7 +198,7 @@
 /* Show hamburger menu on mobile */
 @media (max-width: 768px) {
   .hamburger {
-    display: block;
+    display: flex;
   }
 
   button .hamburger.open {
