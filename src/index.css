@@ -633,24 +633,37 @@ li a:hover {
 }
 
 .transactions-grid {
+  width: 100%;
+  border-collapse: collapse;
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns for the headers */
   gap: 10px;
-  text-align: left; /* Adjust alignment as needed */
 }
-
 .grid-header {
+  background-color: var(--card-bg);
   font-weight: bold;
-  background-color: #f4f4f4;
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center; /* Center align headers */
+  text-align: center;
 }
 
+.grid-header,
 .grid-item {
   padding: 10px;
-  border: 1px solid #ddd;
-  overflow: hidden; /* Handle overflow gracefully */
+  border: 1px solid --card-border;
+  text-align: center;
+  overflow: hidden;
+}
+
+.transactions-grid tr:nth-child(even) {
+  background-color: var(--card-bg);
+}
+
+.transactions-grid a {
+  color: #ff9800;
+  text-decoration: none;
+}
+
+.transactions-grid a:hover {
+  text-decoration: underline;
 }
 
 /* Analytics Section */
@@ -908,7 +921,7 @@ li a:hover {
     width: 40%;
   }
 
-  .transactions-grid {
+  .transactions-table {
     overflow-x: auto;
   }
 
