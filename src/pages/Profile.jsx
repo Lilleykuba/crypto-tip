@@ -110,7 +110,7 @@ const Profile = () => {
             user.wallet
           }&startblock=0&endblock=99999999&sort=desc&apikey=${
             import.meta.env.VITE_APP_ETHERSCAN_API_KEY
-          }`;
+          }`
         );
         console.log("API URL:", apiUrl);
         const data = await response.json();
