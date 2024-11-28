@@ -469,7 +469,7 @@ li a:hover {
 .profile-info p {
   margin-top: 10px;
   font-size: 1.2rem;
-  color: #bbbbbb;
+  color: var(--text-color);
 }
 
 .profile-actions {
@@ -687,7 +687,7 @@ li a:hover {
 
 .analytics-card p {
   font-size: 1.2rem;
-  color: #bebebe;
+  color: var(--text-color);
 }
 
 .chart-container {
