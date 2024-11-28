@@ -946,3 +946,12 @@ li a:hover {
     max-width: 20%;
   }
 }
+
+@media screen {
+  max-width: 500px;
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
