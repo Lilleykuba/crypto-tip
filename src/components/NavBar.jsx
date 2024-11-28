@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
@@ -10,6 +10,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [username, setUsername] = useState("");
   const { user, logOut } = useAuth();
+  const menuRef = useRef(null);
 
   // Fetch username from Firestore when the user is logged in
   useEffect(() => {
@@ -45,6 +46,30 @@ const NavBar = () => {
     }
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -52,80 +77,83 @@ const NavBar = () => {
         <Link to="/" className="nav-logo">
           CrypTip
         </Link>
-
         {/* Hamburger Menu */}
         <button
           className={`hamburger ${isOpen ? "open" : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleMenu}
         >
           <span className="line"></span>
           <span className="line"></span>
           <span className="line"></span>
         </button>
-
         {/* Navigation Menu */}
-        <ul className={`nav-menu ${isOpen ? "open" : ""}`}>
-          {/* Left Aligned Items */}
-          <li className="nav-item nav-item-left">
-            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li className="nav-item nav-item-left">
-            <Link
-              to="/register"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Register
-            </Link>
-          </li>
-          {user && (
+        {isOpen && (
+          <ul className="nav-menu open" ref={menuRef}>
             <li className="nav-item nav-item-left">
               <Link
-                to={`/profile/${username || "myprofile"}`}
+                to="/"
                 className="nav-link"
                 onClick={() => setIsOpen(false)}
               >
-                Profile
+                Home
               </Link>
             </li>
-          )}
-
-          {/* Right Aligned Items */}
-          {!user && (
-            <>
-              <li className="nav-item nav-item-right">
-                <Link
-                  to="/login"
-                  className="nav-link"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item nav-item-right">
-                <Link
-                  to="/signup"
-                  className="nav-link"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Signup
-                </Link>
-              </li>
-            </>
-          )}
-          {user && (
-            <li className="nav-item nav-item-right">
-              <button className="nav-link logout-btn" onClick={handleLogout}>
-                Logout
-              </button>
+            <li className="nav-item nav-item-left">
+              <Link
+                to="/register"
+                className="nav-link"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
             </li>
-          )}
-          <li className="nav-item nav-item-right">
-            <ThemeToggle />
-          </li>
-        </ul>
+            {user && (
+              <li className="nav-item nav-item-left">
+                <Link
+                  to={`/profile/${username || "myprofile"}`}
+                  className="nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Profile
+                </Link>
+              </li>
+            )}
+
+            {/* Right Aligned Items */}
+            {!user && (
+              <>
+                <li className="nav-item nav-item-right">
+                  <Link
+                    to="/login"
+                    className="nav-link"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item nav-item-right">
+                  <Link
+                    to="/signup"
+                    className="nav-link"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
+            {user && (
+              <li className="nav-item nav-item-right">
+                <button className="nav-link logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            )}
+            <li className="nav-item nav-item-right">
+              <ThemeToggle />
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );
