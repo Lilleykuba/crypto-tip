@@ -495,20 +495,6 @@ const Profile = () => {
         <div className="chart-container">
           <Bar data={chartData} options={{ responsive: true }} />
         </div>
-
-        <h4>Top Supporters</h4>
-        <ul className="supp-list">
-          {topSupporters.map((supporter, index) => (
-            <li key={index}>
-              <p>
-                <strong>Address:</strong> {supporter.address}
-              </p>
-              <p>
-                <strong>Amount:</strong> {supporter.amount.toFixed(4)} ETH
-              </p>
-            </li>
-          ))}
-        </ul>
       </div>
       <div>
         <h3>Your Favorite Creators</h3>
