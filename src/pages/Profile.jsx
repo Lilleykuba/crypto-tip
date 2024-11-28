@@ -30,9 +30,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
 import { Bar } from "react-chartjs-2";
-import ChartJS from '../components/ChartSetup';
+import ChartJS from "../components/ChartSetup";
 
-export const Profile = () => {
+const Profile = () => {
   const { username } = useParams();
   const { user: authUser } = useAuth();
   const [user, setUser] = useState(null); // Fetched user
@@ -286,13 +286,13 @@ export const Profile = () => {
       labels: topSupporters.map((supporter) => supporter.address),
       datasets: [
         {
-          label: 'Top Supporters',
+          label: "Top Supporters",
           data: topSupporters.map((supporter) => supporter.amount),
-          backgroundColor: '#ff9800',
+          backgroundColor: "#ff9800",
         },
       ],
     };
-  
+
     const options = {
       responsive: true,
       scales: {
@@ -300,18 +300,19 @@ export const Profile = () => {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Supporters',
+            text: "Supporters",
           },
         },
         y: {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Amount (ETH)',
+            text: "Amount (ETH)",
           },
         },
       },
     };
+  };
 
   // Move early returns after all hooks
   // Show loader for profile loading
@@ -535,3 +536,4 @@ export const Profile = () => {
   );
 };
 
+export default Profile;
