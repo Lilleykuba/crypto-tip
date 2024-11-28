@@ -854,14 +854,15 @@ li a:hover {
 
   .tip-buttons {
     flex-direction: column;
-    max-width: 100%;
+    width: 100%;
     align-items: center;
   }
 
   .custom-tip {
     flex-direction: column;
     gap: 5px;
-    width: 100%;
+    width: 80%;
+    overflow: hidden;
   }
 
   .custom-tip input {
