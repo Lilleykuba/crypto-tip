@@ -450,8 +450,8 @@ li a:hover {
 .profile-photo img,
 .placeholder-photo {
   justify-self: flex-start;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -668,8 +668,8 @@ li a:hover {
 
 .analytics-card {
   flex: 1;
-  background-color: #ffffff;
-  border: 1px solid #eeeeee;
+  background-color: var(--card-bg);
+  border: 1px solid --card-border;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
@@ -682,7 +682,7 @@ li a:hover {
 
 .analytics-card p {
   font-size: 1.2rem;
-  color: #555555;
+  color: #bebebe;
 }
 
 .chart-container {
@@ -820,12 +820,20 @@ li a:hover {
     text-align: center;
   }
 
+  .profile-photo img,
+  .placeholder-photo {
+    width: 50px;
+    height: 50px;
+  }
+
   .analytics-cards {
     flex-direction: column;
   }
 
   .tip-buttons {
     flex-direction: column;
+    max-width: 70%;
+    justify-content: center;
   }
 
   .custom-tip {
