@@ -30,6 +30,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
 import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale, // Import CategoryScale
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register the components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Profile = () => {
   const { username } = useParams();
@@ -279,16 +298,38 @@ const Profile = () => {
     }
   };
 
-  const chartData = {
-    labels: topSupporters.map((supporter) => supporter.address),
-    datasets: [
-      {
-        label: "Top Supporters",
-        data: topSupporters.map((supporter) => supporter.amount),
-        backgroundColor: "#ff9800",
+  const AnalyticsSection = ({ totalTips, transactionCount, topSupporters }) => {
+    // Prepare data for the chart
+    const chartData = {
+      labels: topSupporters.map((supporter) => supporter.address),
+      datasets: [
+        {
+          label: 'Top Supporters',
+          data: topSupporters.map((supporter) => supporter.amount),
+          backgroundColor: '#ff9800',
+        },
+      ],
+    };
+  
+    const options = {
+      responsive: true,
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Supporters',
+          },
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Amount (ETH)',
+          },
+        },
       },
-    ],
-  };
+    };
 
   // Move early returns after all hooks
   // Show loader for profile loading
@@ -443,7 +484,6 @@ const Profile = () => {
       </div>
 
       {/* Tipping History */}
-      {/* Tipping History */}
       <div className="tipping-history">
         <h2>Tipping History</h2>
         {transactions.length === 0 ? (
@@ -493,7 +533,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="chart-container">
-          <Bar data={chartData} options={{ responsive: true }} />
+          <Bar data={chartData} options={options} />
         </div>
       </div>
       <div>
