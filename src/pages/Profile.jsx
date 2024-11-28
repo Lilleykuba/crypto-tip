@@ -29,6 +29,7 @@ import { useAuth } from "../services/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // Filled heart
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // Outline heart
+import { Bar } from "react-chartjs-2";
 
 const Profile = () => {
   const { username } = useParams();
@@ -278,6 +279,17 @@ const Profile = () => {
     }
   };
 
+  const chartData = {
+    labels: topSupporters.map((supporter) => supporter.address),
+    datasets: [
+      {
+        label: "Top Supporters",
+        data: topSupporters.map((supporter) => supporter.amount),
+        backgroundColor: "#ff9800",
+      },
+    ],
+  };
+
   // Move early returns after all hooks
   // Show loader for profile loading
   if (loadingProfile) {
@@ -431,45 +443,59 @@ const Profile = () => {
       </div>
 
       {/* Tipping History */}
-      <div className="card" style={{ marginTop: "20px" }}>
-        <h3>Tipping History</h3>
+      {/* Tipping History */}
+      <div className="tipping-history">
+        <h2>Tipping History</h2>
         {transactions.length === 0 ? (
           <p>No transactions found for this wallet.</p>
         ) : (
-          <ul className="card-list">
-            {transactions.slice(0, 5).map((tx, index) => (
-              <li key={index}>
-                <p>
-                  <strong>From:</strong> {tx.from}
-                </p>
-                <p>
-                  <strong>Amount:</strong>{" "}
-                  {(parseFloat(tx.value) / 10 ** 18).toFixed(4)} ETH
-                </p>
-                <p>
-                  <strong>Tx Hash:</strong>{" "}
-                  <a
-                    href={`https://etherscan.io/tx/${tx.hash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {tx.hash}
-                  </a>
-                </p>
-              </li>
-            ))}
-          </ul>
+          <table className="transactions-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>From</th>
+                <th>Amount (ETH)</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.slice(0, 5).map((tx, index) => (
+                <tr key={index}>
+                  <td>{new Date(tx.timeStamp * 1000).toLocaleDateString()}</td>
+                  <td>{tx.from}</td>
+                  <td>{(parseFloat(tx.value) / 10 ** 18).toFixed(4)}</td>
+                  <td>
+                    <a
+                      href={`https://etherscan.io/tx/${tx.hash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
       {/* Analytics */}
-      <div className="card" style={{ marginTop: "20px" }}>
-        <h3>Analytics</h3>
-        <p>
-          <strong>Total Tips:</strong> {totalTips.toFixed(4)} ETH
-        </p>
-        <p>
-          <strong>Number of Transactions:</strong> {transactionCount}
-        </p>
+      <div className="analytics-section">
+        <h2>Analytics</h2>
+        <div className="analytics-cards">
+          <div className="analytics-card">
+            <h3>Total Tips</h3>
+            <p>{totalTips.toFixed(4)} ETH</p>
+          </div>
+          <div className="analytics-card">
+            <h3>Transactions</h3>
+            <p>{transactionCount}</p>
+          </div>
+        </div>
+        <div className="chart-container">
+          <Bar data={chartData} options={{ responsive: true }} />
+        </div>
+
         <h4>Top Supporters</h4>
         <ul className="supp-list">
           {topSupporters.map((supporter, index) => (
