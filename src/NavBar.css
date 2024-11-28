@@ -182,7 +182,7 @@
 
 /* Transformations when menu is open */
 .hamburger.open .line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(7px, 6px);
 }
 
 .hamburger.open .line:nth-child(2) {
@@ -190,7 +190,7 @@
 }
 
 .hamburger.open .line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* Show hamburger menu on mobile */
