@@ -947,8 +947,7 @@ li a:hover {
   }
 }
 
-@media screen {
-  max-width: 500px;
+@media (max-width: 500px) {
   .hero-buttons {
     display: flex;
     flex-direction: column;
