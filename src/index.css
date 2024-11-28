@@ -204,6 +204,7 @@ textarea:focus {
   font-size: 1.5rem;
   margin-bottom: 40px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .hero-buttons .btn {
@@ -860,6 +861,7 @@ li a:hover {
   .custom-tip {
     flex-direction: column;
     gap: 5px;
+    width: 100%;
   }
 
   .custom-tip input {
@@ -911,6 +913,10 @@ li a:hover {
     margin-left: 0;
     margin-top: 10px;
     width: 40%;
+  }
+
+  .transactions-table {
+    overflow-x: auto;
   }
 
   .login-form input,
