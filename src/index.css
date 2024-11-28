@@ -350,7 +350,7 @@ textarea:focus {
 
 .creator-info p {
   margin: 0 0 15px 0;
-  color: #9f9f9f;
+  color: var(--text-color);
 }
 
 /* Card Hover Effects */
