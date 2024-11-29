@@ -37,8 +37,8 @@ body {
   --card-border: #ff69b4;
   --accent-color: #7b2cbf;
   --accent-hover: #ff1493;
-  --button-bg: linear-gradient(135deg, #bde0fe, #a2d2ff);
-  --button-hover-bg: linear-gradient(135deg, #ff1493, #db0066);
+  --button-bg: linear-gradient(135deg, #a2d2ff, #cdb4db);
+  --button-hover-bg: linear-gradient(135deg, #ffc8dd, #ffafcc);
   --input-bg: #fff0f5;
   --input-border: #ff69b4;
 }
