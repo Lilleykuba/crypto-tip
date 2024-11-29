@@ -128,6 +128,8 @@
 
 .theme-toggle-btn:hover {
   transform: scale(1.1); /* Add a zoom effect */
+  border: none;
+  box-shadow: none;
 }
 
 .theme-toggle-btn:focus {
