@@ -334,8 +334,8 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #4a0462;
-  color: white;
+  background-color: var(--accent-color);
+  color: var(--text-color);
   font-size: 3rem;
 }
 
@@ -586,8 +586,8 @@ li a:hover {
 
 .tip-button {
   padding: 10px 20px;
-  background-color: #ff9800;
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--text-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -613,7 +613,7 @@ li a:hover {
 .send-tip-btn {
   padding: 10px 20px;
   background-color: #4caf50;
-  color: white;
+  color: var(--text-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
