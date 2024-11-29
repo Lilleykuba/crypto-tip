@@ -32,10 +32,10 @@ body {
 [data-theme="bubblegum"] {
   /* Bubblegum Theme */
   --bg-color: #cdb4db;
-  --text-color: #ffafcc;
-  --card-bg: #bde0fe;
+  --text-color: #9d4edd;
+  --card-bg: #ffc8dd;
   --card-border: #ff69b4;
-  --accent-color: #a2d2ff;
+  --accent-color: #bde0fe;
   --accent-hover: #ff1493;
   --button-bg: linear-gradient(135deg, #ff69b4, #ff1493);
   --button-hover-bg: linear-gradient(135deg, #ff1493, #db0066);
