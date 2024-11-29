@@ -233,18 +233,21 @@ const Profile = () => {
       toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
     } catch (error) {
       console.error("Transaction error:", error);
-    
+
       switch (error.code) {
-        case 'INSUFFICIENT_FUNDS':
-          toast.error("You have insufficient funds to complete this transaction.");
+        case "INSUFFICIENT_FUNDS":
+          toast.error(
+            "You have insufficient funds to complete this transaction."
+          );
           break;
-        case 'ACTION_REJECTED':
+        case "ACTION_REJECTED":
           toast.warn("Transaction rejected by the user.");
           break;
         default:
           toast.error(`An error occurred: ${error.message}`);
       }
     }
+  };
 
   const handleFavoriteToggle = async () => {
     if (!authUser || !user) {
