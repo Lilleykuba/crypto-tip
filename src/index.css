@@ -31,11 +31,11 @@ body {
 
 [data-theme="bubblegum"] {
   /* Bubblegum Theme */
-  --bg-color: #d9b4b0;
-  --text-color: #4b0082;
-  --card-bg: #ffb6c1;
+  --bg-color: #ffc8dd;
+  --text-color: #a2d2ff;
+  --card-bg: #ffafcc;
   --card-border: #ff69b4;
-  --accent-color: #ff69b4;
+  --accent-color: #cdb4db;
   --accent-hover: #ff1493;
   --button-bg: linear-gradient(135deg, #ff69b4, #ff1493);
   --button-hover-bg: linear-gradient(135deg, #ff1493, #db0066);
