@@ -31,11 +31,11 @@ body {
 
 [data-theme="bubblegum"] {
   /* Bubblegum Theme */
-  --bg-color: #ffc8dd;
-  --text-color: #a2d2ff;
-  --card-bg: #ffafcc;
+  --bg-color: #cdb4db;
+  --text-color: #ffafcc;
+  --card-bg: #bde0fe;
   --card-border: #ff69b4;
-  --accent-color: #cdb4db;
+  --accent-color: #a2d2ff;
   --accent-hover: #ff1493;
   --button-bg: linear-gradient(135deg, #ff69b4, #ff1493);
   --button-hover-bg: linear-gradient(135deg, #ff1493, #db0066);
@@ -273,6 +273,10 @@ textarea:focus {
   font-size: 1rem;
   border: 1px solid #cccccc;
   border-radius: 5px;
+}
+
+.nav-item {
+  color: var(--text-color);
 }
 
 /* Creators Grid */
