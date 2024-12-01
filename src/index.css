@@ -288,8 +288,8 @@ textarea:focus {
 }
 
 .creator-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background-color: var(--bg-color);
+  border: 2px solid var(--accent-color);
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
