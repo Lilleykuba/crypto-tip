@@ -95,11 +95,10 @@ const Profile = () => {
         );
         const data = await response.json();
         const ethPrice = data.ethereum.usd;
-        const selectedCryptoPrice =
-          data[selectedCurrency.name.toLowerCase()].usd;
+        const selectedCryptoPrice = data[selectedCurrency.toLowerCase()].usd;
         setExchangeRate(selectedCryptoPrice / ethPrice);
         setUsdRate(selectedCryptoPrice);
-        setCzkRate(data[selectedCurrency.name.toLowerCase()].czk);
+        setCzkRate(data[selectedCurrency.toLowerCase()].czk);
       } catch (error) {
         console.error("Error fetching exchange rate:", error);
       }
