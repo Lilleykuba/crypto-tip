@@ -455,6 +455,8 @@ li a:hover {
   position: absolute;
   top: 0;
   left: 0;
+  margin-top: 40px;
+  margin-left: 20px;
 }
 
 .profile-photo img,
