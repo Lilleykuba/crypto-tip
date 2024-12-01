@@ -93,7 +93,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency.name.toLowerCase()}&vs_currencies=usd,czk`
+          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency.toLowerCase()}&vs_currencies=usd,czk`
         );
         const data = await response.json();
         const ethPrice = data.ethereum.usd;
