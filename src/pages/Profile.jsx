@@ -369,14 +369,14 @@ const Profile = () => {
               </button>
             )}
           </div>
+          <div className="profile-photo">
+            {user.photoURL ? (
+              <img src={user.photoURL} alt={`${user.username}'s profile`} />
+            ) : (
+              <div className="placeholder-photo"></div>
+            )}
+          </div>
           <div className="profile-header">
-            <div className="profile-photo">
-              {user.photoURL ? (
-                <img src={user.photoURL} alt={`${user.username}'s profile`} />
-              ) : (
-                <div className="placeholder-photo"></div>
-              )}
-            </div>
             <div className="profile-info">
               <h1>{user.username}</h1>
               <p>{user.bio}</p>

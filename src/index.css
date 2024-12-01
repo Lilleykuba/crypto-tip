@@ -451,6 +451,11 @@ li a:hover {
 .profile-header h1 {
   margin: 0;
 }
+.profile-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .profile-photo img,
 .placeholder-photo {
