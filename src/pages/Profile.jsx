@@ -89,7 +89,7 @@ const Profile = () => {
   // Fetch exchange rate
   useEffect(() => {
     const fetchRate = async () => {
-      setSelectedCurrency("ETH");
+      setSelectedCurrency("ethereum");
 
       try {
         const response = await fetch(
