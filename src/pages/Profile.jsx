@@ -311,38 +311,6 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    const estimateGas = async () => {
-      try {
-        if (!window.ethereum) return;
-
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-
-        let gasEstimate;
-        // Native currency transfer
-        const amountInWei = ethers.parseEther(amount || "0");
-        gasEstimate = await signer.estimateGas({
-          to: user.wallet,
-          value: amountInWei,
-        });
-
-        const gasPrice = await provider.getGasPrice();
-        const gasFeeInEth = ethers.formatEther(gasEstimate * gasPrice);
-        setGasFee(gasFeeInEth);
-      } catch (error) {
-        console.error("Error estimating gas:", error);
-        setGasFee(null);
-      }
-    };
-
-    if (amount && parseFloat(amount) > 0 && user.wallet) {
-      estimateGas();
-    } else {
-      setGasFee(null);
-    }
-  }, [amount, selectedCurrency, user.wallet]);
-
   // Move early returns after all hooks
   // Show loader for profile loading
   if (loadingProfile) {
