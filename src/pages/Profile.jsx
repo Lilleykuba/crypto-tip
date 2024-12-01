@@ -1,4 +1,3 @@
-// Profile.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
@@ -11,7 +10,7 @@ import {
   setDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "../firebase"; // Adjust path to your Firebase config
+import { db } from "../firebase";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet";
 import {
@@ -49,6 +48,10 @@ const Profile = () => {
   const [favorites, setFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
+  const [usdRate, setUsdRate] = useState(0);
+  const [czkRate, setCzkRate] = useState(0);
+  const [gasFee, setGasFee] = useState(null);
+  const [tipMessage, setTipMessage] = useState("");
 
   // Fetch user profile from Firestore
   useEffect(() => {
@@ -86,14 +89,19 @@ const Profile = () => {
   // Fetch exchange rate
   useEffect(() => {
     const fetchRate = async () => {
-      if (selectedCurrency !== "ETH") {
+      try {
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency}&vs_currencies=usd`
+          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency.name.toLowerCase()}&vs_currencies=usd,czk`
         );
         const data = await response.json();
-        setExchangeRate(data[selectedCurrency].usd / data.ethereum.usd);
-      } else {
-        setExchangeRate(1);
+        const ethPrice = data.ethereum.usd;
+        const selectedCryptoPrice =
+          data[selectedCurrency.name.toLowerCase()].usd;
+        setExchangeRate(selectedCryptoPrice / ethPrice);
+        setUsdRate(selectedCryptoPrice);
+        setCzkRate(data[selectedCurrency.name.toLowerCase()].czk);
+      } catch (error) {
+        console.error("Error fetching exchange rate:", error);
       }
     };
     fetchRate();
@@ -228,6 +236,17 @@ const Profile = () => {
       const transaction = await signer.sendTransaction({
         to: user.wallet,
         value: ethers.parseEther(convertedAmount),
+        data: ethers.toUtf8Bytes(tipMessage),
+      });
+
+      const tipsRef = collection(db, `profiles/${user.id}/tips`);
+      await addDoc(tipsRef, {
+        from: signer.address, // You may get this from the signer
+        amount: convertedAmount,
+        currency: selectedCurrency.symbol,
+        message: tipMessage,
+        txHash: transaction.hash,
+        timestamp: new Date(),
       });
 
       toast.success(`Transaction sent successfully! Hash: ${transaction.hash}`);
@@ -291,6 +310,38 @@ const Profile = () => {
       setIsFavorite(!isFavorite); // Revert state on error
     }
   };
+
+  useEffect(() => {
+    const estimateGas = async () => {
+      try {
+        if (!window.ethereum) return;
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        let gasEstimate;
+        // Native currency transfer
+        const amountInWei = ethers.parseEther(amount || "0");
+        gasEstimate = await signer.estimateGas({
+          to: user.wallet,
+          value: amountInWei,
+        });
+
+        const gasPrice = await provider.getGasPrice();
+        const gasFeeInEth = ethers.formatEther(gasEstimate * gasPrice);
+        setGasFee(gasFeeInEth);
+      } catch (error) {
+        console.error("Error estimating gas:", error);
+        setGasFee(null);
+      }
+    };
+
+    if (amount && parseFloat(amount) > 0 && user.wallet) {
+      estimateGas();
+    } else {
+      setGasFee(null);
+    }
+  }, [amount, selectedCurrency, user.wallet]);
 
   // Move early returns after all hooks
   // Show loader for profile loading
@@ -438,6 +489,27 @@ const Profile = () => {
           >
             {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
           </button>
+        </div>
+        {amount && parseFloat(amount) > 0 && (
+          <p className="exchange-rate">
+            {amount} {selectedCurrency.symbol} ≈ $
+            {(parseFloat(amount) * usdRate).toFixed(2)} USD /{" "}
+            {(parseFloat(amount) * czkRate).toFixed(2)} CZK
+          </p>
+        )}
+
+        {gasFee && (
+          <p className="gas-fee">
+            Estimated Gas Fee: {parseFloat(gasFee).toFixed(6)} ETH (~$
+            {(parseFloat(gasFee) * usdRate).toFixed(2)} USD)
+          </p>
+        )}
+        <div className="tip-message">
+          <textarea
+            placeholder="Enter a message (optional)"
+            value={tipMessage}
+            onChange={(e) => setTipMessage(e.target.value)}
+          />
         </div>
       </div>
 
