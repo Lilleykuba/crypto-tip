@@ -89,6 +89,8 @@ const Profile = () => {
   // Fetch exchange rate
   useEffect(() => {
     const fetchRate = async () => {
+      setSelectedCurrency("ETH");
+
       try {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${selectedCurrency.name.toLowerCase()}&vs_currencies=usd,czk`
