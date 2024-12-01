@@ -632,6 +632,10 @@ li a:hover {
   background-color: #43a047;
 }
 
+.tip-message {
+  margin-top: 20px;
+}
+
 /* Tipping History */
 .tipping-history {
   margin-top: 40px;
