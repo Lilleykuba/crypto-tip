@@ -9,6 +9,8 @@ import {
   doc,
   setDoc,
   deleteDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "../components/Loader";
@@ -57,20 +59,20 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "profiles"));
-        const profilesData = querySnapshot.docs.map((doc) => ({
-          id: doc.id, // Include Firestore document ID
-          ...doc.data(),
-        }));
-        const matchedUser = profilesData.find(
-          (user) => user.username === username
+        const q = query(
+          collection(db, "profiles"),
+          where("username", "==", username)
         );
+        const querySnapshot = await getDocs(q);
 
-        if (!matchedUser) {
+        let matchedUser = null;
+        if (!querySnapshot.empty) {
+          const docRef = querySnapshot.docs[0];
+          matchedUser = { id: docRef.id, ...docRef.data() };
+        } else {
           toast.error("Profile not found.");
-          setUser(null);
-          return;
         }
+
         setUser(matchedUser);
       } catch (error) {
         toast.error("Error fetching profile data.");
