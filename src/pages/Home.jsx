@@ -153,46 +153,6 @@ const Home = () => {
           </ul>
         )}
       </section>
-      <h2 id="creators">Explore creators</h2>
-      <div className="sorting-options">
-        <select onChange={(e) => handleSort(e.target.value)}>
-          <option value="default">Sort By</option>
-          <option value="popularity">Most Tipped</option>
-          <option value="recent">Recently Registered</option>
-        </select>
-      </div>
-      <ul className="creators-list">
-        {creators.map((creator) => (
-          <div key={creator.id} className="creator-card">
-            <Link to={`/profile/${creator.username}`} className="creator-link">
-              <div className="creator-photo">
-                {creator.photoURL ? (
-                  <img
-                    src={creator.photoURL}
-                    alt={`${creator.username}'s profile`}
-                  />
-                ) : (
-                  <div className="placeholder-photo">
-                    {creator.wallet ? (
-                      <QRCodeCanvas
-                        className="qr-code"
-                        value={creator.wallet}
-                        size={128}
-                      />
-                    ) : (
-                      <p>Wallet address not available</p>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="creator-info">
-                <h3>{creator.username}</h3>
-                <p>{creator.bio}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </ul>
     </div>
   );
 };
