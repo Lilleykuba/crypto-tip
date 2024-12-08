@@ -847,7 +847,7 @@ li a:hover {
 
 .role-option.selected {
   border-color: var(--input-border);
-  background-color: var(--bg-color);
+  background-color: var(--card-bg);
 }
 
 .role-option input[type="radio"] {
@@ -873,7 +873,7 @@ li a:hover {
 }
 
 .role-option.selected::before {
-  background-color: var(--accent-color);
+  background-color: var(--accent-hover);
   border-color: var(--accent-color);
 }
 
