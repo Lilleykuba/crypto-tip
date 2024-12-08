@@ -90,15 +90,6 @@ const NavBar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/register"
-                className="nav-link"
-                onClick={() => setIsOpen(false)}
-              >
-                Register
-              </Link>
-            </li>
             {user && (
               <li className="nav-item">
                 <Link
