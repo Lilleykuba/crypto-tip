@@ -497,7 +497,7 @@ li a:hover {
 
 .favorite-btn,
 .edit-profile-btn {
-  padding: 10px 20px;
+  padding: 15px 30px;
   background-color: var(--button-bg);
   color: var(--bg-color);
   border: none;
