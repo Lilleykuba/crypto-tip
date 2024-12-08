@@ -132,7 +132,8 @@
   transform: scale(1.1); /* Add a zoom effect */
   border: none;
   box-shadow: none;
-  background-color: rgba(0, 255, 204, 0.2);
+  background-color: rgba(0, 255, 204, 0.2); !important
+  color: #00ffcc;
 }
 
 .theme-toggle-btn:focus {
