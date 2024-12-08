@@ -103,24 +103,33 @@ const Signup = () => {
         />
 
         {/* Role Selection */}
-        <div>
-          <label>
+        <div className="role-selection">
+          <label
+            className={`role-option ${
+              selectedRole === "user" ? "selected" : ""
+            }`}
+          >
             <input
               type="radio"
               value="user"
               checked={selectedRole === "user"}
               onChange={(e) => setSelectedRole(e.target.value)}
             />
-            Regular User
+            <span>Regular User</span>
           </label>
-          <label>
+
+          <label
+            className={`role-option ${
+              selectedRole === "creator" ? "selected" : ""
+            }`}
+          >
             <input
               type="radio"
               value="creator"
               checked={selectedRole === "creator"}
               onChange={(e) => setSelectedRole(e.target.value)}
             />
-            Creator
+            <span>Creator</span>
           </label>
         </div>
 
