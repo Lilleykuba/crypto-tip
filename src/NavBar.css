@@ -81,6 +81,8 @@
 .nav-item:hover {
   box-shadow: none;
   border: none;
+  background-color: rgba(0, 255, 204, 0.2);
+  color: #00ffcc;
 }
 
 .nav-link {
