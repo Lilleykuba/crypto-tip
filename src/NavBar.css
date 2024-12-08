@@ -114,7 +114,7 @@
 }
 
 .logout-btn:hover {
-  background-color: linear-gradient(135deg, #b71c1c, #d32f2f);
+  background-color: rgba(0, 255, 204, 0.2);
   transform: scale(1.1);
 }
 
@@ -130,6 +130,7 @@
   transform: scale(1.1); /* Add a zoom effect */
   border: none;
   box-shadow: none;
+  background-color: rgba(0, 255, 204, 0.2);
 }
 
 .theme-toggle-btn:focus {
