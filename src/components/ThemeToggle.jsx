@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../NavBar.css";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(
