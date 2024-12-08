@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -49,7 +49,14 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email, password, username, role) => {
+  const signUp = async (
+    email,
+    password,
+    username,
+    role,
+    bio = "",
+    wallet = ""
+  ) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -61,9 +68,12 @@ const AuthProvider = ({ children }) => {
       // Create a profile document in Firestore
       await setDoc(doc(db, "profiles", newUser.uid), {
         username,
-        bio: "",
-        wallet: "",
+        bio: bio, // if user is just a user, bio might be empty string
+        wallet: wallet, // if user is just a user, wallet might be empty string
         role,
+        email: newUser.email,
+        registrationDate: serverTimestamp(),
+        totalTips: 0,
       });
 
       setUser(newUser);

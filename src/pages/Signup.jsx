@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../services/AuthContext";
 import { toast } from "react-toastify";
-import { db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
   const { signUp } = useAuth();
@@ -12,8 +10,14 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Role and creator-specific fields
   const [selectedRole, setSelectedRole] = useState("user");
   const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+  const [wallet, setWallet] = useState("");
+
+  const isCreator = selectedRole === "creator";
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -23,12 +27,39 @@ const Signup = () => {
       return;
     }
 
+    // If user is creator, ensure wallet and username are provided.
+    if (isCreator) {
+      if (!wallet.trim()) {
+        toast.error("Wallet address is required for creators.");
+        return;
+      }
+      if (!username.trim()) {
+        toast.error("Username is required for creators.");
+        return;
+      }
+    } else {
+      // For user role, username might still be required if your logic demands it.
+      // If not, remove the required attribute in the input fields above.
+      if (!username.trim()) {
+        toast.error("Username is required.");
+        return;
+      }
+    }
+
     try {
       setLoading(true);
-      await signUp(email, password, username, selectedRole);
+      await signUp(
+        email,
+        password,
+        username.trim(),
+        selectedRole,
+        isCreator ? bio.trim() : "",
+        isCreator ? wallet.trim() : ""
+      );
       toast.success("Sign up successful! Redirecting...");
-      navigate("/"); // Redirect to homepage or dashboard
+      navigate("/");
     } catch (error) {
+      console.error("Sign up error:", error);
       toast.error("Failed to sign up. Please try again.");
     } finally {
       setLoading(false);
@@ -46,6 +77,7 @@ const Signup = () => {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+
         <input
           type="email"
           placeholder="Email"
@@ -53,6 +85,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <input
           type="password"
           placeholder="Password"
@@ -60,6 +93,7 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
         <input
           type="password"
           placeholder="Confirm Password"
@@ -67,6 +101,7 @@ const Signup = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
+
         {/* Role Selection */}
         <div>
           <label>
@@ -88,6 +123,25 @@ const Signup = () => {
             Creator
           </label>
         </div>
+
+        {/* Conditional Creator Fields */}
+        {isCreator && (
+          <>
+            <textarea
+              placeholder="Short Bio (optional)"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Wallet Address"
+              value={wallet}
+              onChange={(e) => setWallet(e.target.value)}
+              required
+            />
+          </>
+        )}
+
         <button type="submit" disabled={loading}>
           {loading ? "Signing up..." : "Sign Up"}
         </button>

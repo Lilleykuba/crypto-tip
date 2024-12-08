@@ -82,11 +82,6 @@ const Home = () => {
                 Get Started
               </Link>
             )}
-            {user && (
-              <Link to="/register" className="btn primary-btn">
-                Become a Creator Now
-              </Link>
-            )}
             <a href="#creators" className="btn secondary-btn">
               Explore Creators
             </a>
