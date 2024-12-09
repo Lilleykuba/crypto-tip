@@ -245,7 +245,7 @@
     margin: 0;
   }
   
-  .nav-left {
+  .nav-menu.open .nav-left {
     margin-bottom: 10px;
   }
 
