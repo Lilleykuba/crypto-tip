@@ -236,6 +236,10 @@
     margin: 0;
   }
 
+  .nav-link {
+    padding: 0;
+  }
+
   .logout-btn {
     margin: 0;
   }
