@@ -249,7 +249,7 @@
   .nav-right {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0;
     padding: 0;
   }
@@ -257,7 +257,7 @@
   .nav-right .nav-item {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0;
     padding: 6px 12px;
   }

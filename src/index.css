@@ -908,6 +908,10 @@ li a:hover {
     text-align: center;
   }
 
+  .profile-photo {
+    position: relative;
+  }
+
   .profile-photo img,
   .placeholder-photo {
     width: 50px;
