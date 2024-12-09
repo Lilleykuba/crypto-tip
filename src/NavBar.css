@@ -244,6 +244,10 @@
   .logout-btn {
     margin: 0;
   }
+  
+  .nav-left {
+    margin-bottom: 10px;
+  }
 
   .nav-left,
   .nav-right {
