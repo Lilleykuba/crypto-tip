@@ -81,7 +81,7 @@
 .nav-item:hover {
   box-shadow: none;
   border: none;
-  background-color: var(--accent-hover);
+  background-color: var(--button-hover-bg);
   color: var(--text-color);
 }
 
@@ -98,7 +98,7 @@
 }
 
 .nav-link:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--button-hover-bg);
   color: var(--text-color);
 }
 
@@ -114,7 +114,7 @@
 }
 
 .logout-btn:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--button-hover-bg);
   transform: scale(1.1);
 }
 
@@ -130,7 +130,7 @@
   transform: scale(1.1); /* Add a zoom effect */
   border: none;
   box-shadow: none;
-  background-color: var(--accent-hover); !important
+  background-color: var(--button-hover-bg); !important
 }
 
 .theme-toggle-btn:focus {

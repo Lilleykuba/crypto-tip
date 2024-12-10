@@ -24,7 +24,7 @@ body {
   --accent-color: #00ffcc;
   --accent-hover: #00ffff;
   --button-bg: linear-gradient(135deg, #1e88e5, #2196f3);
-  --button-hover-bg: linear-gradient(135deg, #1565c0, #1976d2);
+  --button-hover-bg: linear-gradient(135deg, #216fc7, #1976d2);
   --input-bg: #1d1d1d;
   --input-border: #333;
 }
