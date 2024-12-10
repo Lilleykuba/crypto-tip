@@ -176,6 +176,7 @@ textarea:focus {
   animation: fadeIn 0.8s ease-in-out forwards;
   transform-origin: top;
   margin-top: 32px;
+  opacity: 0.6;
 }
 
 .card:hover {
