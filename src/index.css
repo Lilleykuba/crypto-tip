@@ -818,6 +818,7 @@ li a:hover {
 
 .share-btn:hover {
   transform: translateY(-2px);
+  background: none;
 }
 
 /* Icon Styles */
