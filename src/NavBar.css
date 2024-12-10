@@ -2,7 +2,7 @@
 .navbar {
   background-color: var(--card-bg);
   color: var(--text-color);
-  padding: 24px 12px;
+  padding: 8px 32px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -265,13 +265,13 @@
     margin-bottom: 12px;
   }
 
-  .nav-right .nav-item {
+  /* .nav-right .nav-item {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     margin: 0;
     padding: 6px 12px;
-  }
+  } */
 
   .nav-menu .nav-item:last-child {
     margin-bottom: 0;
