@@ -2,7 +2,7 @@
 .navbar {
   background-color: var(--card-bg);
   color: var(--text-color);
-  padding: 10px 20px;
+  padding: 12px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -14,7 +14,7 @@
   font-family: "Orbitron", Arial, sans-serif;
   font-size: 1.6rem;
   font-weight: bold;
-  color: #00ffcc;
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -38,13 +38,13 @@
   font-family: "Orbitron", Arial, sans-serif;
   font-size: 1.4rem;
   font-weight: bold;
-  color: #00ffcc;
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nav-logo:hover {
-  color: #00ffff;
+  color: var(--accent-hover);
 }
 
 .nav-menu {
@@ -82,7 +82,7 @@
   box-shadow: none;
   border: none;
   background-color: rgba(0, 255, 204, 0.2);
-  color: #00ffcc;
+  color: var(--text-color);
 }
 
 .nav-link {
@@ -99,11 +99,11 @@
 
 .nav-link:hover {
   background-color: rgba(0, 255, 204, 0.2);
-  color: #00ffcc;
+  color: var(--text-color);
 }
 
 .logout-btn {
-  background: #fa18365d;
+  background: #fa18369b;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -146,14 +146,14 @@
   top: 60px;
   right: 20px;
   background-color: var(--card-bg);
-  padding: 15px;
+  padding: 16px;
   border-radius: 5px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
 .nav-menu.open .nav-item {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .nav-menu.open .nav-item:last-child {
@@ -170,8 +170,8 @@
   display: none; /* Hidden by default; shown on mobile via media query */
   flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 22px;
+  width: 32px;
+  height: 24px;
   cursor: pointer;
   background: none;
   border: none;
@@ -219,7 +219,7 @@
     top: 60px;
     right: 0;
     background-color: var(--card-bg);
-    padding: 15px;
+    padding: 16px;
     border-radius: 5px;
     z-index: 1000;
   }
@@ -246,7 +246,7 @@
   }
 
   .theme-toggle-btn {
-    margin-left: 5px;
+    margin-left: 6px;
     font-size: 0.6rem;
   }
   
@@ -261,7 +261,7 @@
   }
   
   .nav-left {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .nav-right .nav-item {
