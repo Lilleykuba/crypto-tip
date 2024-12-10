@@ -122,6 +122,7 @@
 .theme-toggle-btn {
   background: none;
   border: none;
+  box-shadow: none;
   font-size: 0.6rem; /* Adjust size of the icon */
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -162,7 +163,6 @@
 
 .logout-btn {
   margin: 0;
-  margin-right: 40px;
 }
 
 /* Hamburger Menu Icon */
