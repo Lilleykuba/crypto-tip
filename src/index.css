@@ -970,6 +970,10 @@ li a:hover {
     max-width: 90%;
   }
 
+  .favorites-section {
+    max-width: 90%;
+  }
+
   .profile-actions {
     flex-direction: column;
     align-items: center;
@@ -1119,5 +1123,13 @@ li a:hover {
     flex-direction: column;
     justify-content: center;
     gap: 20px;
+  }
+
+  .card {
+    max-width: 90%;
+  }
+
+  .container {
+    padding: 8px;
   }
 }
