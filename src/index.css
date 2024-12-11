@@ -963,7 +963,7 @@ li a:hover {
   }
 
   .card {
-    max-width: 90%;
+    width: 90%;
   }
 
   .filter-list {
@@ -971,7 +971,7 @@ li a:hover {
   }
 
   .favorites-section {
-    max-width: 90%;
+    width: 90%;
   }
 
   .profile-actions {
