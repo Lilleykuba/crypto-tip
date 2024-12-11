@@ -410,7 +410,7 @@ const Profile = () => {
               </div>
             )}
           </div>
-          <>
+          <div className="wallet-details">
             {user.wallet ? (
               <QRCodeCanvas
                 className="qr-code"
@@ -435,7 +435,7 @@ const Profile = () => {
                 </button>
               </p>
             </div>
-          </>
+          </div>
         </div>
         {/* Tip Section */}
         <div className="tip-section">
