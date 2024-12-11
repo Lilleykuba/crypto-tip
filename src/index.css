@@ -124,7 +124,7 @@ a:hover {
 }
 
 /* Buttons */
-button:not(.theme-toggle-btn, .logout-btn, .hamburger) {
+button:not(.theme-toggle-btn, .logout-btn, .hamburger, .share-btn) {
   font-family: "Orbitron", Arial, sans-serif;
   font-size: 0.9rem;
   letter-spacing: 1px;
@@ -137,14 +137,26 @@ button:not(.theme-toggle-btn, .logout-btn, .hamburger) {
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button:not(.theme-toggle-btn, .logout-btn, .hamburger, .favorite-btn):hover {
+button:not(
+    .theme-toggle-btn,
+    .logout-btn,
+    .hamburger,
+    .favorite-btn,
+    .share-btn
+  ):hover {
   background: var(--button-hover-bg);
   transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Focus States */
-button:not(.theme-toggle-btn, .logout-btn, .hamburger, .favorite-btn):focus,
+button:not(
+    .theme-toggle-btn,
+    .logout-btn,
+    .hamburger,
+    .favorite-btn,
+    .share-btn
+  ):focus,
 input:focus,
 textarea:focus {
   outline: none;
