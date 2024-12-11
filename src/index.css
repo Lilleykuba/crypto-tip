@@ -941,7 +941,7 @@ li a:hover {
 
   .tip-buttons {
     flex-direction: column;
-    width: 100%;
+    width: 60%;
     align-items: center;
   }
 
@@ -978,7 +978,7 @@ li a:hover {
   input,
   button {
     font-size: 14px;
-    width: 80%;
+    max-width: 80%;
   }
 
   .wallet-address {
