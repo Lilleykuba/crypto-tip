@@ -190,7 +190,7 @@ textarea:focus {
 
 /* Containers */
 .container {
-  max-width: 800px;
+  max-width: 1600px;
   margin: 20px auto;
   padding: 20px;
   text-align: center;
@@ -201,7 +201,7 @@ textarea:focus {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
