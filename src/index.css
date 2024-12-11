@@ -963,7 +963,7 @@ li a:hover {
   }
 
   .card {
-    width: 90%;
+    width: 86%;
   }
 
   .filter-list {
@@ -971,7 +971,7 @@ li a:hover {
   }
 
   .favorites-section {
-    width: 90%;
+    width: 86%;
   }
 
   .profile-actions {
@@ -1132,7 +1132,7 @@ li a:hover {
   }
 
   .card {
-    width: 90%;
+    width: 88%;
   }
 
   .container {
@@ -1140,15 +1140,15 @@ li a:hover {
   }
 
   .filter-list {
-    width: 90%;
+    width: 88%;
     align-items: center;
   }
 
   .favorites-section {
-    width: 90%;
+    width: 88%;
   }
 
   .creator-card {
-    width: 90%;
+    width: 88%;
   }
 }
