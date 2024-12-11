@@ -118,7 +118,7 @@ button:not(.theme-toggle-btn, .logout-btn, .hamburger) {
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button:not(.theme-toggle-btn .logout-btn, .hamburger):hover {
+button:not(.theme-toggle-btn, .logout-btn, .hamburger):hover {
   background: var(--button-hover-bg);
   transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
