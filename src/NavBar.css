@@ -170,7 +170,7 @@
   display: none; /* Hidden by default; shown on mobile via media query */
   flex-direction: column;
   justify-content: space-between;
-  width: 32px;
+  width: 30px;
   height: 24px;
   cursor: pointer;
   background: none;
