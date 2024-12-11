@@ -825,6 +825,10 @@ li a:hover {
   margin-top: 80px;
 }
 
+.favorites-section {
+  max-width: 800px;
+}
+
 /* Register Link */
 .register-link {
   display: inline-block;
