@@ -11,6 +11,7 @@ const NavBar = () => {
   const [username, setUsername] = useState("");
   const { user, logOut } = useAuth();
   const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   // Fetch username from Firestore when the user is logged in
   useEffect(() => {
@@ -56,7 +57,9 @@ const NavBar = () => {
       if (
         isOpen &&
         menuRef.current &&
-        !menuRef.current.contains(event.target)
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
       ) {
         setIsOpen(false);
       }
@@ -65,7 +68,6 @@ const NavBar = () => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
@@ -140,6 +142,7 @@ const NavBar = () => {
         </ul>
         {/* Hamburger Menu */}
         <button
+          ref={buttonRef}
           className={`hamburger ${isOpen ? "open" : ""}`}
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"
