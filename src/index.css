@@ -988,6 +988,10 @@ li a:hover {
     width: 86%;
   }
 
+  .profile-card {
+    flex-direction: column;
+  }
+
   .profile-actions {
     flex-direction: column;
     align-items: center;
