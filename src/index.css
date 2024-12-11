@@ -320,7 +320,7 @@ textarea:focus {
 .filter-list {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-content: center;
 }
 
