@@ -177,6 +177,12 @@ textarea:focus {
   transform-origin: top;
   margin-top: 32px;
   opacity: 0.6;
+  background: rgba(228, 212, 212, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.9px);
+  -webkit-backdrop-filter: blur(5.9px);
+  border: 1px solid rgba(228, 212, 212, 1);
 }
 
 .card:hover {
