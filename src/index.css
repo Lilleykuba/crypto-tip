@@ -608,7 +608,7 @@ li a:hover {
 }
 
 .tip-button:hover {
-  background-color: #e68900;
+  background-color: var(--button-hover-bg);
 }
 
 .custom-tip {
@@ -937,6 +937,7 @@ li a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
   .tip-buttons {
@@ -948,16 +949,16 @@ li a:hover {
   .custom-tip {
     flex-direction: column;
     gap: 8px;
-    width: 80%;
+    width: 100%;
     overflow: hidden;
   }
 
   .custom-tip input {
-    width: 100%;
+    width: 60%;
   }
 
   .send-tip-btn {
-    width: 100%;
+    width: 40%;
   }
 
   .social-share {
@@ -973,12 +974,6 @@ li a:hover {
   .qr-code {
     width: 100px;
     height: 100px;
-  }
-
-  input,
-  button {
-    font-size: 14px;
-    max-width: 80%;
   }
 
   .wallet-address {
@@ -1011,7 +1006,7 @@ li a:hover {
   .signup-form button,
   .edit-form button,
   .register-form button {
-    width: 80%;
+    width: 72%;
   }
 
   .creators-grid {
@@ -1032,7 +1027,7 @@ li a:hover {
   }
 
   .search-bar .search-btn {
-    max-width: 20%;
+    max-width: 28%;
   }
 }
 
