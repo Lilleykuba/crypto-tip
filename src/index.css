@@ -160,7 +160,7 @@ textarea:focus {
 /* Containers */
 .container {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 20px;
   text-align: center;
 }
