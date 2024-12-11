@@ -385,53 +385,58 @@ const Profile = () => {
                 <p>{user.bio}</p>
               </div>
             </div>
-          </div>
+            {isOwner && (
+              <div className="social-share">
+                <FacebookShareButton
+                  url={window.location.href}
+                  className="share-btn"
+                >
+                  <FacebookIcon size={40} round className="share-icon" />
+                </FacebookShareButton>
 
-          {user.wallet ? (
-            <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
-          ) : (
-            <p>Wallet address not available</p>
-          )}
-          <div className="wallet-address">
-            <p className="wallet-container">
-              <strong className="wallet-address-text">Wallet Address:</strong>
-              <span className="address-text">{user.wallet}</span>
-              <button
-                className="copy-btn"
-                onClick={() => {
-                  navigator.clipboard.writeText(user.wallet);
-                  toast.success("Wallet address copied!");
-                }}
-              >
-                Copy
-              </button>
-            </p>
+                <TwitterShareButton
+                  url={window.location.href}
+                  className="share-btn"
+                >
+                  <TwitterIcon size={40} round className="share-icon" />
+                </TwitterShareButton>
+
+                <LinkedinShareButton
+                  url={window.location.href}
+                  className="share-btn"
+                >
+                  <LinkedinIcon size={40} round className="share-icon" />
+                </LinkedinShareButton>
+              </div>
+            )}
           </div>
+          <>
+            {user.wallet ? (
+              <QRCodeCanvas
+                className="qr-code"
+                value={user.wallet}
+                size={128}
+              />
+            ) : (
+              <p>Wallet address not available</p>
+            )}
+            <div className="wallet-address">
+              <p className="wallet-container">
+                <strong className="wallet-address-text">Wallet Address:</strong>
+                <span className="address-text">{user.wallet}</span>
+                <button
+                  className="copy-btn"
+                  onClick={() => {
+                    navigator.clipboard.writeText(user.wallet);
+                    toast.success("Wallet address copied!");
+                  }}
+                >
+                  Copy
+                </button>
+              </p>
+            </div>
+          </>
         </div>
-        {isOwner && (
-          <div className="social-share">
-            <FacebookShareButton
-              url={window.location.href}
-              className="share-btn"
-            >
-              <FacebookIcon size={40} round className="share-icon" />
-            </FacebookShareButton>
-
-            <TwitterShareButton
-              url={window.location.href}
-              className="share-btn"
-            >
-              <TwitterIcon size={40} round className="share-icon" />
-            </TwitterShareButton>
-
-            <LinkedinShareButton
-              url={window.location.href}
-              className="share-btn"
-            >
-              <LinkedinIcon size={40} round className="share-icon" />
-            </LinkedinShareButton>
-          </div>
-        )}
         {/* Tip Section */}
         <div className="tip-section">
           <h2>Support {user.username}</h2>
