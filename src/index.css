@@ -804,6 +804,10 @@ li a:hover {
   margin-bottom: 40px;
 }
 
+.favorites-section {
+  margin-top: 60px;
+}
+
 /* Register Link */
 .register-link {
   display: inline-block;

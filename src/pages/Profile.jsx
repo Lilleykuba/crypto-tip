@@ -432,98 +432,104 @@ const Profile = () => {
         )}
       </div>
       {/* Tip Section */}
-      <div className="tip-section">
-        <h2>Support {user.username}</h2>
-        <div className="tip-buttons">
-          {[0.01, 0.05, 0.1].map((tipAmount) => (
+      <div className="card">
+        <div className="tip-section">
+          <h2>Support {user.username}</h2>
+          <div className="tip-buttons">
+            {[0.01, 0.05, 0.1].map((tipAmount) => (
+              <button
+                key={tipAmount}
+                className="tip-button"
+                onClick={() => setAmount(tipAmount.toString())}
+              >
+                {tipAmount} ETH
+              </button>
+            ))}
+          </div>
+          <div className="custom-tip">
+            <input
+              type="number"
+              placeholder="Custom amount in ETH"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
             <button
-              key={tipAmount}
-              className="tip-button"
-              onClick={() => setAmount(tipAmount.toString())}
+              className="send-tip-btn"
+              onClick={sendTip}
+              disabled={
+                !metaMaskAvailable || !amount || parseFloat(amount) <= 0
+              }
             >
-              {tipAmount} ETH
+              {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
             </button>
-          ))}
-        </div>
-        <div className="custom-tip">
-          <input
-            type="number"
-            placeholder="Custom amount in ETH"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <button
-            className="send-tip-btn"
-            onClick={sendTip}
-            disabled={!metaMaskAvailable || !amount || parseFloat(amount) <= 0}
-          >
-            {metaMaskAvailable ? "Send Tip" : "MetaMask Required"}
-          </button>
-        </div>
-        {amount && parseFloat(amount) > 0 && (
-          <p className="exchange-rate">
-            {amount} {selectedCurrency.symbol} ≈ $
-            {(parseFloat(amount) * usdRate).toFixed(2)} USD /{" "}
-            {(parseFloat(amount) * czkRate).toFixed(2)} CZK
-          </p>
-        )}
-
-        {gasFee && (
-          <p className="gas-fee">
-            Estimated Gas Fee: {parseFloat(gasFee).toFixed(6)} ETH (~$
-            {(parseFloat(gasFee) * usdRate).toFixed(2)} USD)
-          </p>
-        )}
-        <div className="tip-message">
-          <textarea
-            placeholder="Enter a message (optional)"
-            value={tipMessage}
-            onChange={(e) => setTipMessage(e.target.value)}
-          />
+          </div>
+          {amount && parseFloat(amount) > 0 && (
+            <p className="exchange-rate">
+              {amount} {selectedCurrency.symbol} ≈ $
+              {(parseFloat(amount) * usdRate).toFixed(2)} USD /{" "}
+              {(parseFloat(amount) * czkRate).toFixed(2)} CZK
+            </p>
+          )}
+          {gasFee && (
+            <p className="gas-fee">
+              Estimated Gas Fee: {parseFloat(gasFee).toFixed(6)} ETH (~$
+              {(parseFloat(gasFee) * usdRate).toFixed(2)} USD)
+            </p>
+          )}
+          <div className="tip-message">
+            <textarea
+              placeholder="Enter a message (optional)"
+              value={tipMessage}
+              onChange={(e) => setTipMessage(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 
       {/* Tipping History */}
-      <div className="tipping-history">
-        <h2>Tipping History</h2>
-        {transactions.length === 0 ? (
-          <p>No transactions found for this wallet.</p>
-        ) : (
-          <div className="transactions-grid">
-            <div className="grid-header">Date</div>
-            <div className="grid-header">From</div>
-            <div className="grid-header">Amount (ETH)</div>
-            <div className="grid-header">Transaction</div>
-
-            {transactions.slice(0, 5).map((tx, index) => (
-              <React.Fragment key={index}>
-                <div className="grid-item">
-                  {new Date(parseInt(tx.timeStamp) * 1000).toLocaleDateString()}
-                </div>
-                <div className="grid-item">{tx.from}</div>
-                <div className="grid-item">
-                  {(parseFloat(tx.value) / 10 ** 18).toFixed(4)}
-                </div>
-                <div className="grid-item">
-                  <a
-                    href={`https://etherscan.io/tx/${tx.hash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View
-                  </a>
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="analytics-section">
-        <AnalyticsSection
-          totalTips={totalTips}
-          transactionCount={transactionCount}
-          topSupporters={topSupporters}
-        />
+      <div className="card">
+        <div className="tipping-history">
+          <h2>Tipping History</h2>
+          {transactions.length === 0 ? (
+            <p>No transactions found for this wallet.</p>
+          ) : (
+            <div className="transactions-grid">
+              <div className="grid-header">Date</div>
+              <div className="grid-header">From</div>
+              <div className="grid-header">Amount (ETH)</div>
+              <div className="grid-header">Transaction</div>
+              {transactions.slice(0, 5).map((tx, index) => (
+                <React.Fragment key={index}>
+                  <div className="grid-item">
+                    {new Date(
+                      parseInt(tx.timeStamp) * 1000
+                    ).toLocaleDateString()}
+                  </div>
+                  <div className="grid-item">{tx.from}</div>
+                  <div className="grid-item">
+                    {(parseFloat(tx.value) / 10 ** 18).toFixed(4)}
+                  </div>
+                  <div className="grid-item">
+                    <a
+                      href={`https://etherscan.io/tx/${tx.hash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View
+                    </a>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="analytics-section">
+          <AnalyticsSection
+            totalTips={totalTips}
+            transactionCount={transactionCount}
+            topSupporters={topSupporters}
+          />
+        </div>
       </div>
       <div className="favorites-section">
         <h3>Your Favorite Creators</h3>
