@@ -351,7 +351,7 @@ const Profile = () => {
       {/* Show loader for transactions */}
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
-      <div className="card">
+      <div className="card profile-card">
         <div className="profile-actions">
           {!isOwner && (
             <button className="favorite-btn" onClick={handleFavoriteToggle}>
@@ -370,41 +370,43 @@ const Profile = () => {
             </button>
           )}
         </div>
-        <div className="profile-container">
-          <div className="profile-photo">
-            {user.photoURL ? (
-              <img src={user.photoURL} alt={`${user.username}'s profile`} />
-            ) : (
-              <div className="placeholder-photo"></div>
-            )}
-          </div>
-          <div className="profile-header">
-            <div className="profile-info">
-              <h1>{user.username}</h1>
-              <p>{user.bio}</p>
+        <div className="profile-row-1">
+          <div className="profile-container">
+            <div className="profile-photo">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt={`${user.username}'s profile`} />
+              ) : (
+                <div className="placeholder-photo"></div>
+              )}
+            </div>
+            <div className="profile-header">
+              <div className="profile-info">
+                <h1>{user.username}</h1>
+                <p>{user.bio}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {user.wallet ? (
-          <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
-        ) : (
-          <p>Wallet address not available</p>
-        )}
-        <div className="wallet-address">
-          <p className="wallet-container">
-            <strong className="wallet-address-text">Wallet Address:</strong>
-            <span className="address-text">{user.wallet}</span>
-            <button
-              className="copy-btn"
-              onClick={() => {
-                navigator.clipboard.writeText(user.wallet);
-                toast.success("Wallet address copied!");
-              }}
-            >
-              Copy
-            </button>
-          </p>
+          {user.wallet ? (
+            <QRCodeCanvas className="qr-code" value={user.wallet} size={128} />
+          ) : (
+            <p>Wallet address not available</p>
+          )}
+          <div className="wallet-address">
+            <p className="wallet-container">
+              <strong className="wallet-address-text">Wallet Address:</strong>
+              <span className="address-text">{user.wallet}</span>
+              <button
+                className="copy-btn"
+                onClick={() => {
+                  navigator.clipboard.writeText(user.wallet);
+                  toast.success("Wallet address copied!");
+                }}
+              >
+                Copy
+              </button>
+            </p>
+          </div>
         </div>
         {isOwner && (
           <div className="social-share">

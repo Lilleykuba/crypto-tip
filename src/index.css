@@ -214,6 +214,19 @@ textarea:focus {
   width: 95%;
 }
 
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-row-1 {
+  display: flex;
+  align-items: space-evenly;
+  justify-content: center;
+}
+
 .card:hover {
   box-shadow: 0px 10px 25px rgba(0, 255, 204, 0.3);
 }
