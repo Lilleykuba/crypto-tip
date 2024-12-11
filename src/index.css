@@ -16,31 +16,33 @@ body {
 
 /* Theme Variables */
 :root {
-  /* Cryptobro Theme */
-  --bg-color: #05040f;
-  --text-color: #e0e0e0;
-  --card-bg: #1a1a1a;
-  --card-border: #333;
-  --accent-color: #00ffcc;
-  --accent-hover: #00ffff;
-  --button-bg: linear-gradient(135deg, #1e88e5, #2196f3);
-  --button-hover-bg: linear-gradient(135deg, #216fc7, #1976d2);
-  --input-bg: #1d1d1d;
-  --input-border: #333;
+  --bg-color: #0a0b10; /* Slightly softer */
+  --text-color: #d1d1d1; /* Softer white */
+  --card-bg: #121217; /* Add depth to cards */
+  --card-border: #24242a; /* Complement card-bg */
+  --accent-color: #00e0b5; /* Softer neon green */
+  --accent-hover: #00f2e1; /* Aqua tone */
+  --button-bg: linear-gradient(
+    135deg,
+    #267cfb,
+    #3584ff
+  ); /* Slightly muted gradient */
+  --button-hover-bg: linear-gradient(135deg, #2266d9, #1e5bbd);
+  --input-bg: #1a1a1f; /* Darker input */
+  --input-border: #3b3b45; /* Softer border */
 }
 
 [data-theme="bubblegum"] {
-  /* Bubblegum Theme */
-  --bg-color: #cdb4db;
-  --text-color: #9d4edd;
-  --card-bg: #ffc8dd;
-  --card-border: #ff69b4;
-  --accent-color: #7b2cbf;
-  --accent-hover: #ff1493;
-  --button-hover-bg: linear-gradient(135deg, #ffc8dd, #ffafcc);
-  --button-bg: linear-gradient(135deg, #e5a2ff, #e448ba);
-  --input-bg: #fff0f5;
-  --input-border: #ff69b4;
+  --bg-color: #dbc2df; /* Muted lavender */
+  --text-color: #7a2db7; /* Deeper purple */
+  --card-bg: #f8d6e7; /* Subtle pink */
+  --card-border: #ec8ccd; /* Softened border */
+  --accent-color: #9e46cf; /* Balanced purple */
+  --accent-hover: #ff69a1; /* Lighter pink hover */
+  --button-bg: linear-gradient(135deg, #d599ff, #db74cf); /* Softer gradient */
+  --button-hover-bg: linear-gradient(135deg, #bf5fff, #c058bd);
+  --input-bg: #fde6f1; /* Muted light pink */
+  --input-border: #e48db2; /* Softer input border */
 }
 
 [data-theme="light"] {
