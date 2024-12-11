@@ -1115,6 +1115,12 @@ li a:hover {
   .search-bar .search-btn {
     max-width: 28%;
   }
+
+  .search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 500px) {
