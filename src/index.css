@@ -535,7 +535,7 @@ li a:hover {
 }
 
 .profile-actions button:hover {
-  background: none;
+  background-color: #f44336;
   border: none;
   box-shadow: none;
 }
@@ -567,10 +567,6 @@ li a:hover {
   margin: 20px auto;
   border-radius: 10px;
   padding: 12px;
-}
-
-.qr-code-home:hover {
-  box-shadow: 0px 0px 25px rgba(0, 255, 204, 0.6);
 }
 
 /* Wallet Address */
@@ -606,7 +602,6 @@ li a:hover {
 
 .copy-btn:hover {
   background: linear-gradient(135deg, #388e3c, #2e7d32);
-  transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
