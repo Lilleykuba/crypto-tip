@@ -272,6 +272,7 @@ textarea:focus {
 .search-section {
   padding: 52px 20px;
   text-align: center;
+  width: 100%;
 }
 
 .search-bar {
