@@ -614,7 +614,7 @@ li a:hover {
 .custom-tip {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .custom-tip input {
@@ -657,7 +657,7 @@ li a:hover {
   border-collapse: collapse;
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns for the headers */
-  gap: 12px;
+  gap: 16px;
 }
 .grid-header {
   background-color: var(--card-bg);
