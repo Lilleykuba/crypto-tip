@@ -946,11 +946,17 @@ li a:hover {
     align-items: center;
   }
 
+  .tip-button {
+    width: 100%;
+  }
+
   .custom-tip {
     flex-direction: column;
     gap: 8px;
     width: 100%;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
   }
 
   .custom-tip input {
