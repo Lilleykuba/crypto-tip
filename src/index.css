@@ -1126,10 +1126,18 @@ li a:hover {
   }
 
   .card {
-    max-width: 90%;
+    width: 90%;
   }
 
   .container {
     padding: 8px;
+  }
+
+  .filter-list {
+    width: 90%;
+  }
+
+  .favorites-section {
+    width: 90%;
   }
 }
