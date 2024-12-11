@@ -720,7 +720,7 @@ li a:hover {
 
 /* Analytics Section */
 .analytics-section {
-  margin-top: 40px;
+  margin-top: 80px;
 }
 
 .analytics-cards {
@@ -865,6 +865,7 @@ li a:hover {
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+  background: none;
 }
 
 .role-selection {
