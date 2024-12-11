@@ -16,33 +16,50 @@ body {
 
 /* Theme Variables */
 :root {
-  --bg-color: #0a0b10; /* Slightly softer */
-  --text-color: #d1d1d1; /* Softer white */
-  --card-bg: #121217; /* Add depth to cards */
-  --card-border: #24242a; /* Complement card-bg */
-  --accent-color: #00e0b5; /* Softer neon green */
-  --accent-hover: #00f2e1; /* Aqua tone */
+  --bg-color: rgba(10, 11, 16, 0.95); /* Slightly softer with transparency */
+  --text-color: rgba(209, 209, 209, 1); /* No transparency for text */
+  --card-bg: rgba(18, 18, 23, 0.9); /* Transparent card background */
+  --card-border: rgba(36, 36, 42, 0.8); /* Slightly transparent border */
+  --accent-color: rgba(0, 224, 181, 0.8); /* Transparent neon green */
+  --accent-hover: rgba(
+    0,
+    242,
+    225,
+    0.9
+  ); /* Aqua tone with slight transparency */
   --button-bg: linear-gradient(
     135deg,
-    #267cfb,
-    #3584ff
-  ); /* Slightly muted gradient */
-  --button-hover-bg: linear-gradient(135deg, #2266d9, #1e5bbd);
-  --input-bg: #1a1a1f; /* Darker input */
-  --input-border: #3b3b45; /* Softer border */
+    rgba(38, 124, 251, 0.9),
+    rgba(53, 132, 255, 0.8)
+  ); /* Transparent gradient */
+  --button-hover-bg: linear-gradient(
+    135deg,
+    rgba(34, 102, 217, 0.9),
+    rgba(30, 91, 189, 0.8)
+  ); /* Transparent hover gradient */
+  --input-bg: rgba(26, 26, 31, 0.9); /* Transparent input background */
+  --input-border: rgba(59, 59, 69, 0.6); /* Softer and transparent border */
 }
 
 [data-theme="bubblegum"] {
-  --bg-color: #dbc2df; /* Muted lavender */
-  --text-color: #7a2db7; /* Deeper purple */
-  --card-bg: #f8d6e7; /* Subtle pink */
-  --card-border: #ec8ccd; /* Softened border */
-  --accent-color: #9e46cf; /* Balanced purple */
-  --accent-hover: #ff69a1; /* Lighter pink hover */
-  --button-bg: linear-gradient(135deg, #d599ff, #db74cf); /* Softer gradient */
-  --button-hover-bg: linear-gradient(135deg, #bf5fff, #c058bd);
-  --input-bg: #fde6f1; /* Muted light pink */
-  --input-border: #e48db2; /* Softer input border */
+  --bg-color: rgba(219, 194, 223, 0.95); /* Muted lavender with transparency */
+  --text-color: rgba(122, 45, 183, 1); /* No transparency for text */
+  --card-bg: rgba(248, 214, 231, 0.9); /* Transparent card background */
+  --card-border: rgba(236, 140, 205, 0.8); /* Softer transparent border */
+  --accent-color: rgba(158, 70, 207, 0.8); /* Transparent balanced purple */
+  --accent-hover: rgba(255, 105, 161, 0.9); /* Slightly transparent hover */
+  --button-bg: linear-gradient(
+    135deg,
+    rgba(213, 153, 255, 0.9),
+    rgba(219, 116, 207, 0.8)
+  ); /* Transparent gradient */
+  --button-hover-bg: linear-gradient(
+    135deg,
+    rgba(191, 95, 255, 0.9),
+    rgba(192, 88, 189, 0.8)
+  ); /* Transparent hover gradient */
+  --input-bg: rgba(253, 230, 241, 0.9); /* Transparent muted light pink */
+  --input-border: rgba(228, 141, 178, 0.6); /* Softer transparent border */
 }
 
 [data-theme="light"] {
@@ -171,6 +188,7 @@ textarea:focus {
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -178,7 +196,7 @@ textarea:focus {
   animation: fadeIn 0.8s ease-in-out forwards;
   transform-origin: top;
   margin-top: 20px;
-  opacity: 60%;
+  opacity: 80%;
 }
 
 .card:hover {
