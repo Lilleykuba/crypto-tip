@@ -472,13 +472,13 @@ li a:hover {
 .profile-header h1 {
   margin: 0;
 }
-.profile-photo {
+/* .profile-photo {
   position: absolute;
   top: 0;
   left: 0;
   margin-top: 40px;
   margin-left: 20px;
-}
+} */
 
 .profile-photo img,
 .placeholder-photo {
@@ -800,12 +800,12 @@ li a:hover {
 .tipping-history,
 .analytics-section,
 .favorites-section {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
-.favorites-section {
-  margin-top: 60px;
+.analytics-section {
+  margin-top: 80px;
 }
 
 /* Register Link */
