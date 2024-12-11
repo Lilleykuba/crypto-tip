@@ -16,7 +16,11 @@ body {
 
 /* Theme Variables */
 :root {
-  --bg-color: rgba(10, 11, 16, 0.95); /* Slightly softer with transparency */
+  --bg-color: linear-gradient(
+    135deg,
+    #00ffcc,
+    #8000ff
+  ); /* Slightly softer with transparency */
   --text-color: rgba(209, 209, 209, 1); /* No transparency for text */
   --card-bg: rgba(18, 18, 23, 0.9); /* Transparent card background */
   --card-border: rgba(36, 36, 42, 0.8); /* Slightly transparent border */
