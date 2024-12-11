@@ -1135,9 +1135,14 @@ li a:hover {
 
   .filter-list {
     width: 90%;
+    align-items: center;
   }
 
   .favorites-section {
+    width: 90%;
+  }
+
+  .creator-card {
     width: 90%;
   }
 }
