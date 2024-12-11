@@ -328,6 +328,7 @@ textarea:focus {
   margin-bottom: 20px;
   animation: fadeIn 0.8s ease-in-out forwards;
   transform-origin: top;
+  max-width: 800px;
 }
 
 #creators:target:before {
