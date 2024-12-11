@@ -644,6 +644,7 @@ li a:hover {
 
 .tip-message {
   margin-top: 20px;
+  width: 100%;
 }
 
 /* Tipping History */
