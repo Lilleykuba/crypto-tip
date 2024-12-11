@@ -133,7 +133,7 @@ const Home = () => {
                       <div className="placeholder-photo">
                         {creator.wallet ? (
                           <QRCodeCanvas
-                            className="qr-code"
+                            className="qr-code-home"
                             value={creator.wallet}
                             size={128}
                           />
