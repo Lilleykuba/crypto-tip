@@ -962,6 +962,14 @@ li a:hover {
     padding: 12px;
   }
 
+  .card {
+    max-width: 90%;
+  }
+
+  .filter-list {
+    max-width: 90%;
+  }
+
   .profile-actions {
     flex-direction: column;
     align-items: center;
