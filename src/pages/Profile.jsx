@@ -352,25 +352,25 @@ const Profile = () => {
       {loadingTransactions && <Loader />}
       {/* User Profile Card */}
       <div className="card">
+        <div className="profile-actions">
+          {!isOwner && (
+            <button className="favorite-btn" onClick={handleFavoriteToggle}>
+              <FontAwesomeIcon
+                icon={isFavorite ? solidHeart : regularHeart}
+                className="favorite-icon"
+              />
+            </button>
+          )}
+          {isOwner && (
+            <button
+              className="edit-profile-btn"
+              onClick={() => navigate(`/edit-profile`)}
+            >
+              Edit Profile
+            </button>
+          )}
+        </div>
         <div className="profile-container">
-          <div className="profile-actions">
-            {!isOwner && (
-              <button className="favorite-btn" onClick={handleFavoriteToggle}>
-                <FontAwesomeIcon
-                  icon={isFavorite ? solidHeart : regularHeart}
-                  className="favorite-icon"
-                />
-              </button>
-            )}
-            {isOwner && (
-              <button
-                className="edit-profile-btn"
-                onClick={() => navigate(`/edit-profile`)}
-              >
-                Edit Profile
-              </button>
-            )}
-          </div>
           <div className="profile-photo">
             {user.photoURL ? (
               <img src={user.photoURL} alt={`${user.username}'s profile`} />
@@ -430,9 +430,7 @@ const Profile = () => {
             </LinkedinShareButton>
           </div>
         )}
-      </div>
-      {/* Tip Section */}
-      <div className="card">
+        {/* Tip Section */}
         <div className="tip-section">
           <h2>Support {user.username}</h2>
           <div className="tip-buttons">
