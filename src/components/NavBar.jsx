@@ -47,7 +47,7 @@ const NavBar = () => {
   };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prevState) => !prevState);
   };
 
   // Close menu when clicking outside
