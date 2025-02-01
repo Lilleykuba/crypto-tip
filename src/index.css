@@ -539,6 +539,13 @@ li a:hover {
   object-fit: cover;
 }
 
+.profile-bio {
+  margin-top: 12px;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
 .profile-info {
   margin-left: 20px;
   justify-self: center;

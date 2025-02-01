@@ -378,13 +378,13 @@ const Profile = () => {
               ) : (
                 <div className="placeholder-photo"></div>
               )}
-              <p>{user.bio}</p>
             </div>
             <div className="profile-header">
               <div className="profile-info">
                 <h1>{user.username}</h1>
               </div>
             </div>
+            <p className="profile-bio">{user.bio}</p>
             {isOwner && (
               <div className="social-share">
                 <FacebookShareButton
