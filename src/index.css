@@ -502,8 +502,8 @@ li a:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 20px;
 }
 /* Profile Header */
 .profile-header {
@@ -527,6 +527,7 @@ li a:hover {
 
 .profile-photo {
   justify-self: flex-start;
+  align-self: flex-start;
 }
 
 .profile-photo img,
