@@ -382,9 +382,9 @@ const Profile = () => {
             <div className="profile-header">
               <div className="profile-info">
                 <h1>{user.username}</h1>
-                <p>{user.bio}</p>
               </div>
             </div>
+            <p>{user.bio}</p>
             {isOwner && (
               <div className="social-share">
                 <FacebookShareButton
