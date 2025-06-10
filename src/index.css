@@ -509,6 +509,7 @@ li a:hover {
 /* Profile Header */
 .profile-header {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   position: relative;
   margin-bottom: 20px;
