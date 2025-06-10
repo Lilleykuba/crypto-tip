@@ -224,6 +224,7 @@ textarea:focus {
 
 .profile-row-1 {
   display: flex;
+  flex-direction: column;
   align-items: space-evenly;
   justify-content: center;
 }
